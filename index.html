@@ -1,36 +1,9 @@
 <!DOCTYPE html>
 <html lang="it">
 <head>
-  <hr class="divider">
   <meta charset="UTF-8">
   <title>Pagamento con PayPal</title>
   <style>
-    @media (max-width: 600px) {
-  .container {
-    padding: 15px;
-    margin: 20px;
-h1 {
-  font-size: 2.5rem; /* aumenta il titolo */
-}
-
-label[for="durata"] {
-  font-size: 1.3rem; /* ingrandisce "Durata" */
-  display: block;
-  margin: 20px 0 10px;
-
-select {
-  padding: 14px 20px;
-  font-size: 18px; /* più grande */
-  border: 2px solid #ff0000;
-  border-radius: 8px;
-  background-color: #1c1c1c;
-  color: #fff;
-  outline: none;
-  cursor: pointer;
-  transition: all 0.3s ease;
-  box-shadow: 0 0 10px rgb(150, 0, 0);
-}
-  
     body {
       font-family: Arial, sans-serif;
       background: url('sfondo.png') no-repeat center center fixed;
@@ -42,14 +15,6 @@ select {
       animation: fadePage 2s ease forwards;
       opacity: 0;
     }
-    .divider {
-  border: 0;
-  height: 2px;
-  margin: 40px 0;
-  background: linear-gradient(to right, red, darkred, red);
-  box-shadow: 0 0 10px red;
-}
-
 
     @keyframes fadePage {
       to {
@@ -58,8 +23,8 @@ select {
     }
 
     .container {
-       background-color: rgba(0, 0, 0, 0.966);
-       backdrop-filter: blur(10px);
+      background-color: rgba(0, 0, 0, 0.966);
+      backdrop-filter: blur(10px);
       padding: 30px;
       border-radius: 15px;
       max-width: 600px;
@@ -67,17 +32,16 @@ select {
       box-shadow: 0 0 30px rgba(145, 1, 1, 0.322);
     }
 
-   img.logo {
-  max-width: 150px;
-  margin-bottom: 20px;
-  border-radius: 50%;
-  box-shadow: 0 0 10px rgb(194, 1, 1), 0 0 20px rgb(196, 0, 0), 0 0 30px rgb(194, 1, 1);
-}
-
+    img.logo {
+      max-width: 150px;
+      margin-bottom: 20px;
+      border-radius: 50%;
+      box-shadow: 0 0 10px red, 0 0 20px red, 0 0 30px red;
+    }
 
     h1#typing-title {
       margin-top: 0;
-      font-size: 26px;
+      font-size: 32px;
       min-height: 30px;
       white-space: nowrap;
       overflow: hidden;
@@ -103,9 +67,15 @@ select {
       100% { opacity: 1; transform: translateY(0); }
     }
 
+    label[for="durata"] {
+      font-size: 1.4rem;
+      display: block;
+      margin: 20px 0 10px;
+    }
+
     select {
-      padding: 12px 16px;
-      font-size: 16px;
+      padding: 14px 20px;
+      font-size: 18px;
       border: 2px solid #ff0000;
       border-radius: 8px;
       background-color: #1c1c1c;
@@ -143,6 +113,7 @@ select {
     .servizi li {
       padding: 10px;
       border-bottom: 1px solid #ccc;
+      font-size: 18px;
     }
 
     .contatti {
@@ -162,6 +133,30 @@ select {
 
     .contatti a:hover {
       color: #ffffff;
+    }
+
+    /* Responsive per mobile */
+    @media (max-width: 600px) {
+      h1#typing-title {
+        font-size: 28px;
+      }
+
+      label[for="durata"] {
+        font-size: 1.2rem;
+      }
+
+      select {
+        font-size: 16px;
+        padding: 12px 18px;
+      }
+
+      .servizi li {
+        font-size: 14px;
+      }
+
+      .fade-in {
+        font-size: 16px;
+      }
     }
   </style>
 </head>
@@ -207,7 +202,7 @@ select {
     <div class="contatti">
       <h2>Contattami o seguimi</h2>
       <p>
-        📧 <a href="LcFitnessTrainingPt@gmail.com">Scrivimi</a><br>
+        📧 <a href="mailto:LcFitnessTrainingPt@gmail.com">Scrivimi</a><br>
         📱 <a href="https://www.instagram.com/luka_cupo/" target="_blank">Instagram</a><br>
         💬 <a href="https://www.facebook.com/luca.cupo.1232/" target="_blank">Facebook</a>
       </p>
@@ -241,7 +236,3 @@ select {
 
 </body>
 </html>
-
-
-
-
