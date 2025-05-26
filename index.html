@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Pagamento con PayPal</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: url('sfondo.png') no-repeat center center fixed; /* Cambia con la tua immagine */
+      background-size: cover;
+      color: #fff;
+      text-align: center;
+      margin: 0;
+      padding: 0;
+    }
+
+    .container {
+      background-color: rgba(12, 1, 1, 0.932);
+      padding: 30px;
+      border-radius: 15px;
+      max-width: 600px;
+      margin: 60px auto;
+    }
+
+    img.logo {
+      display: block;
+      margin: 0 auto 20px auto;
+      max-width: 150px;
+      border-radius: 50%;
+      box-shadow: 0 0 15px rgba(255, 0, 0, 0.6);
+    }
+
+    #titolo {
+      margin-top: 0;
+      font-size: 28px;
+    }
+
+    select {
+      padding: 12px 16px;
+      font-size: 16px;
+      border: 2px solid #ff0000;
+      border-radius: 8px;
+      background-color: #1c1c1c;
+      color: #fff;
+      outline: none;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      box-shadow: 0 0 10px rgb(150, 0, 0);
+    }
+
+    select:hover {
+      background-color: #2a2a2a;
+      box-shadow: 0 0 15px rgb(255, 0, 0);
+    }
+
+    #paypal-button-container {
+      margin: 20px auto;
+      transition: transform 0.3s ease;
+    }
+
+    #paypal-button-container:hover {
+      transform: scale(1.02);
+    }
+
+    #messaggio-successo {
+      display: none;
+      margin-top: 20px;
+      padding: 20px;
+      background-color: #0f0;
+      color: #000;
+      border-radius: 8px;
+      font-weight: bold;
+    }
+
+    .servizi {
+      margin-top: 40px;
+      text-align: left;
+    }
+
+    .servizi h2 {
+      text-align: center;
+      color: #fff;
+    }
+
+    .servizi ul {
+      list-style: none;
+      padding: 0;
+    }
+
+    .servizi li {
+      padding: 10px;
+      border-bottom: 1px solid #ccc;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="container">
+
+    <!-- LOGO -->
+    <img src="logo.jpg" alt="Logo" class="logo"> <!-- Cambia con il nome corretto del tuo file -->
+
+    <!-- TITOLO con effetto typing -->
+    <h1 id="titolo"></h1>
+
+    <!-- Menu durata abbonamento -->
+    <label for="durata">Durata:</label>
+    <select id="durata">
+      <option value="63">1 mese - €63</option>
+      <option value="115">2 mesi - €115</option>
+      <option value="155">3 mesi - €155</option>
+    </select>
+
+    <!-- Bottone PayPal -->
+    <div id="paypal-button-container"></div>
+
+    <!-- Messaggio successo -->
+    <div id="messaggio-successo">
+      ✅ Pagamento completato con successo!<br>📩 Ti contatterò a breve oppure scrivimi su <a href="https://www.instagram.com/tuo_profilo" target="_blank">Instagram</a>.
+    </div>
+
+    <!-- Elenco servizi -->
+    <div class="servizi">
+      <h2>I miei servizi</h2>
+      <ul>
+        <li>✅ Allenamenti Personalizzati</li>
+        <li>✅ Alimentazione ed integrazione sportiva</li>
+        <li>✅ Check periodici con Plicometria e/o misurazioni metriche</li>
+        <li>✅ Abbonamento all'app L.C.Fitness Training</li>
+        <li>✅ Abbonamento all'app Coach Plus</li>
+        <li>✅ Il tuo Coach ti garantirà una reperibilità h24 e 7/7 per monitorare al meglio i tuoi progressi e risolvere eventuali problematiche</li>
+      </ul>
+    </div>
+
+  </div>
+
+  <!-- SDK PayPal -->
+  <script src="https://www.paypal.com/sdk/js?client-id=AQY44jd2y1IUT-RpjuU79wngDCQGzJ7FXeESa7pJjKIQNRi2-z0jABKr-kLgQtqI6h3etMYdEKaa8_qT&currency=EUR"></script>
+
+  <script>
+    // Effetto typing nel titolo
+    const testo = "Scegli il tuo abbonamento";
+    const h1 = document.getElementById("titolo");
+    let i = 0;
+
+    function digitaTesto() {
+      if (i < testo.length) {
+        h1.textContent += testo.charAt(i);
+        i++;
+        setTimeout(digitaTesto, 70);
+      }
+    }
+
+    digitaTesto();
+
+    // PayPal
+    let selectedPrice = document.getElementById('durata').value;
+
+    document.getElementById('durata').addEventListener('change', function () {
+      selectedPrice = this.value;
+    });
+
+    paypal.Buttons({
+      createOrder: function (data, actions) {
+        return actions.order.create({
+          purchase_units: [{
+            amount: {
+              value: selectedPrice
+            }
+          }]
+        });
+      },
+      onApprove: function (data, actions) {
+        return actions.order.capture().then(function (details) {
+          document.getElementById('messaggio-successo').style.display = 'block';
+        });
+      }
+    }).render('#paypal-button-container');
+  </script>
+
+</body>
+</html>
+
+
+
