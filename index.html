@@ -14,7 +14,6 @@
       padding: 0;
       animation: fadePage 2s ease forwards;
       opacity: 0;
-      scroll-behavior: smooth;
     }
 
     @keyframes fadePage {
@@ -38,14 +37,14 @@
       box-shadow: 0 0 10px red, 0 0 20px red, 0 0 30px red;
     }
 
-    h1#typing-title {
+    h1.typing {
       margin-top: 0;
       font-size: 2.9rem;
-      min-height: 30px;
       white-space: nowrap;
       overflow: hidden;
+      border-right: 2px solid white;
       width: 0;
-      animation: typing 4s steps(30, end) forwards;
+      animation: typing 3s steps(40, end) forwards;
     }
 
     @keyframes typing {
@@ -101,9 +100,16 @@
       font-size: 0.85rem;
     }
 
-    .servizi h2 {
-      text-align: center;
-      color: #fff;
+    .servizi h2,
+    .contatti h2 {
+      font-size: 1.5rem;
+      min-height: 30px;
+      white-space: nowrap;
+      overflow: hidden;
+      border-right: 2px solid white;
+      width: 0;
+      margin: 0 auto 15px;
+      animation: typing 3s steps(40, end) forwards;
     }
 
     .servizi ul {
@@ -114,9 +120,6 @@
     .servizi li {
       padding: 8px;
       border-bottom: 1px solid #ccc;
-      opacity: 0;
-      white-space: nowrap;
-      overflow: hidden;
     }
 
     .contatti {
@@ -156,7 +159,9 @@
 
   <div class="container">
     <img src="logo.jpg" alt="Logo" class="logo">
-    <h1 id="typing-title">Scegli il tuo abbonamento</h1>
+
+    <h1 id="typing-title" class="typing">Scegli il tuo abbonamento</h1>
+
     <p id="motivazionale" class="fade-in">
       Supera i tuoi obiettivi e porta il tuo corpo sopra ogni limite.
     </p>
@@ -169,24 +174,25 @@
     </select>
 
     <div id="paypal-button-container" class="fade-in"></div>
+
     <div class="success-message" id="success-message">
       Pagamento completato con successo! Ti contatteremo al più presto.
     </div>
 
-    <div class="servizi" id="servizi">
-      <h2>I miei servizi</h2>
+    <div class="servizi">
+      <h2 id="typing-servizi" class="typing">I miei servizi</h2>
       <ul>
-        <li data-text="✅ Allenamenti Personalizzati"></li>
-        <li data-text="✅ Alimentazione ed integrazione sportiva"></li>
-        <li data-text="✅ Check periodici con Plicometria e/o misurazioni metriche"></li>
-        <li data-text="✅ Abbonamento all'app L.C.Fitness Training"></li>
-        <li data-text="✅ Abbonamento all'app Coach Plus"></li>
-        <li data-text="✅ Supporto h24 e 7/7 per monitorare i tuoi progressi"></li>
+        <li>✅ Allenamenti Personalizzati</li>
+        <li>✅ Alimentazione ed integrazione sportiva</li>
+        <li>✅ Check periodici con Plicometria e/o misurazioni metriche</li>
+        <li>✅ Abbonamento all'app L.C.Fitness Training</li>
+        <li>✅ Abbonamento all'app Coach Plus</li>
+        <li>✅ Supporto h24 e 7/7 per monitorare i tuoi progressi</li>
       </ul>
     </div>
 
     <div class="contatti">
-      <h2>Contattami o seguimi</h2>
+      <h2 id="typing-contatti" class="typing">Contattami o seguimi</h2>
       <p>
         📧 <a href="mailto:LcFitnessTrainingPt@gmail.com">Scrivimi</a><br>
         📱 <a href="https://www.instagram.com/luka_cupo/" target="_blank">Instagram</a><br>
@@ -200,49 +206,26 @@
   <script>
     let selectedPrice = document.getElementById('durata').value;
 
-    document.getElementById('durata').addEventListener('change', function () {
+    document.getElementById('durata').addEventListener('change', function() {
       selectedPrice = this.value;
     });
 
     paypal.Buttons({
-      createOrder: function (data, actions) {
+      createOrder: function(data, actions) {
         return actions.order.create({
           purchase_units: [{
-            amount: { value: selectedPrice }
+            amount: {
+              value: selectedPrice
+            }
           }]
         });
       },
-      onApprove: function (data, actions) {
-        return actions.order.capture().then(function (details) {
+      onApprove: function(data, actions) {
+        return actions.order.capture().then(function(details) {
           document.getElementById('success-message').style.display = 'block';
         });
       }
     }).render('#paypal-button-container');
-
-    // Typing animation for servizi
-    const observer = new IntersectionObserver(entries => {
-      entries.forEach(entry => {
-        if (entry.isIntersecting) {
-          const items = document.querySelectorAll('.servizi li');
-          items.forEach((li, index) => {
-            const text = li.getAttribute('data-text');
-            li.style.opacity = '1';
-            li.innerHTML = '';
-            let i = 0;
-            setTimeout(() => {
-              const interval = setInterval(() => {
-                li.textContent += text.charAt(i);
-                i++;
-                if (i >= text.length) clearInterval(interval);
-              }, 25);
-            }, index * 400);
-          });
-          observer.disconnect(); // Run once
-        }
-      });
-    }, { threshold: 0.4 });
-
-    observer.observe(document.querySelector('#servizi'));
   </script>
 
 </body>
