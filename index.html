@@ -103,6 +103,12 @@
     .servizi h2 {
       text-align: center;
       color: #fff;
+      font-size: 1.8rem;
+      white-space: nowrap;
+      overflow: hidden;
+      width: 0;
+      animation: typing 4s steps(30, end) forwards;
+      animation-delay: 1s;
     }
 
     .servizi ul {
@@ -123,6 +129,15 @@
       border-radius: 12px;
     }
 
+    .contatti h2 {
+      font-size: 1.8rem;
+      white-space: nowrap;
+      overflow: hidden;
+      width: 0;
+      animation: typing 4s steps(30, end) forwards;
+      animation-delay: 2s;
+    }
+
     .contatti a {
       text-decoration: none;
       font-weight: bold;
@@ -136,15 +151,32 @@
 
     .success-message {
       margin-top: 30px;
-      background-color: #0f0f0f;
+      background: linear-gradient(135deg, #0f0f0f, #1b1b1b);
       border: 2px solid #28a745;
-      color: #28a745;
-      padding: 15px;
-      font-size: 1.1rem;
-      border-radius: 10px;
-      box-shadow: 0 0 10px #28a745;
+      color: #fff;
+      padding: 20px;
+      font-size: 1.2rem;
+      border-radius: 15px;
+      box-shadow: 0 0 15px #28a745, 0 0 30px #28a74555;
       display: none;
       animation: fadeIn 1s ease-in-out forwards;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .success-message::before {
+      content: '✔';
+      position: absolute;
+      top: 10px;
+      left: 20px;
+      font-size: 2rem;
+      color: #28a745;
+      animation: pop 0.5s ease-out forwards;
+    }
+
+    @keyframes pop {
+      0% { transform: scale(0); opacity: 0; }
+      100% { transform: scale(1); opacity: 1; }
     }
   </style>
 </head>
@@ -169,11 +201,11 @@
     <div id="paypal-button-container" class="fade-in"></div>
 
     <div class="success-message" id="success-message">
-      Pagamento completato con successo! Ti contatteremo al più presto.
+      Pagamento completato con successo!<br>Verrai contattato al più presto per iniziare il tuo percorso personalizzato.
     </div>
 
     <div class="servizi">
-      <h2>I miei servizi</h2>
+      <h2>Servizi</h2>
       <ul>
         <li>✅ Allenamenti Personalizzati</li>
         <li>✅ Alimentazione ed integrazione sportiva</li>
@@ -185,7 +217,7 @@
     </div>
 
     <div class="contatti">
-      <h2>Contattami o seguimi</h2>
+      <h2>Contatti</h2>
       <p>
         📧 <a href="mailto:LcFitnessTrainingPt@gmail.com">Scrivimi</a><br>
         📱 <a href="https://www.instagram.com/luka_cupo/" target="_blank">Instagram</a><br>
