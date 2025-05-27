@@ -3,31 +3,24 @@
 <head>
   <meta charset="UTF-8">
   <title>Pagamento con PayPal</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <style>
     body {
       font-family: Arial, sans-serif;
       background: url('sfondo.png') no-repeat center center fixed;
       background-size: cover;
       color: #fff;
-      text-align: center;
       margin: 0;
       padding: 0;
-      animation: fadePage 2s ease forwards;
-      opacity: 0;
-    }
-
-    @keyframes fadePage {
-      to { opacity: 1; }
+      text-align: center;
     }
 
     .container {
-      background-color: rgba(0, 0, 0, 0.9);
-      backdrop-filter: blur(10px);
+      background-color: rgba(12, 1, 1, 0.932);
       padding: 30px;
       border-radius: 15px;
       max-width: 600px;
       margin: 60px auto;
-      box-shadow: 0 0 30px rgba(255, 0, 0, 0.3);
     }
 
     img.logo {
@@ -37,146 +30,105 @@
       box-shadow: 0 0 10px red, 0 0 20px red, 0 0 30px red;
     }
 
-    h1#typing-title {
-      margin-top: 0;
-      font-size: 2.2rem;
-      min-height: 30px;
-      white-space: nowrap;
-      overflow: hidden;
-      width: 0;
-      animation: typing 4s steps(30, end) forwards;
-    }
+ h1.typing {
+  font-size: 1.8rem;
+  white-space: nowrap;
+  overflow: hidden;
+  margin: 0 auto 20px;
+  width: 100%;
+  animation: typing 3s steps(30, end);
+}
+
 
     @keyframes typing {
-      from { width: 0; }
-      to { width: 100%; }
+      from { width: 0 }
+      to { width: 100% }
     }
 
-    .fade-in {
-      opacity: 0;
-      animation: fadeIn ease 3s forwards;
-      font-size: 18px;
-      margin-top: 10px;
-      color: #ffdddd;
-    }
 
-    @keyframes fadeIn {
-      0% { opacity: 0; transform: translateY(10px); }
-      100% { opacity: 1; transform: translateY(0); }
-    }
-
-    label[for="durata"] {
-      font-size: 0.9rem;
-      margin: 10px 0;
+    label {
+      font-size: 1rem;
       display: block;
+      margin-bottom: 8px;
+      text-align: left;
+      color: #fff;
     }
 
     select {
-      padding: 16px 20px;
-      font-size: 20px;
-      border: 2px solid #ff0000;
-      border-radius: 8px;
+      appearance: none;
+      -webkit-appearance: none;
+      width: 100%;
+      max-width: 100%;
+      padding: 14px 20px;
+      font-size: 1.1rem;
       background-color: #1c1c1c;
       color: #fff;
-      outline: none;
-      cursor: pointer;
-      transition: all 0.3s ease;
-      box-shadow: 0 0 12px #ff0000, 0 0 20px #ff5555;
+      border: 2px solid red;
+      border-radius: 8px;
+      box-shadow: 0 0 10px red;
       margin-bottom: 20px;
+      cursor: pointer;
     }
 
     select:hover {
       background-color: #2a2a2a;
-      box-shadow: 0 0 15px #ff0000;
+      box-shadow: 0 0 15px red;
     }
 
     #paypal-button-container {
       margin: 20px auto;
     }
 
-    .servizi {
-      margin-top: 30px;
-      text-align: left;
-      font-size: 0.85rem;
-    }
-
     .servizi h2 {
-      text-align: center;
-      color: #fff;
-      font-size: 1.8rem;
-      white-space: nowrap;
-      overflow: hidden;
-      width: 0;
-      animation: typing 4s steps(30, end) forwards;
-      animation-delay: 1s;
+      margin-top: 40px;
+      font-size: 1.5rem;
     }
 
-    .servizi ul {
+    ul#servizi-list {
       list-style: none;
       padding: 0;
+      text-align: left;
     }
 
-    .servizi li {
-      padding: 8px;
+    ul#servizi-list li {
+      opacity: 0;
+      transition: opacity 0.5s ease;
+      padding: 10px;
       border-bottom: 1px solid #ccc;
+      font-size: 1rem;
     }
 
-    .contatti {
-      margin-top: 40px;
-      text-align: center;
-      background-color: rgba(255, 255, 255, 0.05);
-      padding: 20px;
-      border-radius: 12px;
+    .visible {
+      opacity: 1 !important;
     }
 
-    .contatti h2 {
-      font-size: 1.8rem;
-      white-space: nowrap;
-      overflow: hidden;
-      width: 0;
-      animation: typing 4s steps(30, end) forwards;
-      animation-delay: 2s;
-    }
+    @media (max-width: 600px) {
+      .container {
+        padding: 15px;
+        margin: 20px;
+      }
 
-    .contatti a {
-      text-decoration: none;
-      font-weight: bold;
-      color: #ffffff;
-      transition: color 0.3s;
-    }
+      h1.typing {
+        font-size: 1.4rem;
+      }
 
-    .contatti a:hover {
-      color: #ffffff;
-    }
+      select {
+        font-size: 1.2rem;
+        padding: 16px;
+      }
 
-    .success-message {
-      margin-top: 30px;
-      background: linear-gradient(135deg, #0f0f0f, #1b1b1b);
-      border: 2px solid #28a745;
-      color: #fff;
-      padding: 20px;
-      font-size: 1.2rem;
-      border-radius: 15px;
-      box-shadow: 0 0 15px #28a745, 0 0 30px #28a74555;
-      display: none;
-      animation: fadeIn 1s ease-in-out forwards;
-      position: relative;
-      overflow: hidden;
-    }
+      label {
+        font-size: 1.1rem;
+      }
 
-    .success-message::before {
-      content: '✔';
-      position: absolute;
-      top: 10px;
-      left: 20px;
-      font-size: 2rem;
-      color: #28a745;
-      animation: pop 0.5s ease-out forwards;
-    }
+      ul#servizi-list li {
+        font-size: 0.95rem;
+        padding: 8px;
+      }
 
-    @keyframes pop {
-      0% { transform: scale(0); opacity: 0; }
-      100% { transform: scale(1); opacity: 1; }
+      img.logo {
+        max-width: 120px;
+      }
     }
   </style>
 </head>
@@ -185,48 +137,45 @@
   <div class="container">
     <img src="logo.jpg" alt="Logo" class="logo">
 
-    <h1 id="typing-title">Scegli il tuo abbonamento</h1>
+    <h1 class="typing">Scegli il tuo abbonamento</h1>
 
-    <p id="motivazionale" class="fade-in">
-      Supera i tuoi obiettivi e porta il tuo corpo sopra ogni limite.
-    </p>
+    <p>Scegli i tuoi obiettivi e porta il tuo corpo sopra ogni limite.</p>
 
     <label for="durata">Durata:</label>
     <select id="durata">
+      <option value="33">Single Workout - €33</option>
       <option value="63">1 mese - €63</option>
       <option value="115">2 mesi - €115</option>
       <option value="155">3 mesi - €155</option>
+      <option value="270">6 mesi - €270</option>
+      <option value="50">1 Lezione Coaching One to One - €50</option>
+      <option value="400">10 Lezioni Coaching One to One - €400</option>
+      <option value="600">20 Lezioni Coaching One to One - €600</option>
     </select>
 
-    <div id="paypal-button-container" class="fade-in"></div>
-
-    <div class="success-message" id="success-message">
-      Pagamento completato con successo!<br>Verrai contattato al più presto per iniziare il tuo percorso personalizzato.
-    </div>
+    <div id="paypal-button-container"></div>
 
     <div class="servizi">
-      <h2>Servizi</h2>
-      <ul>
+      <h2>I miei servizi</h2>
+      <ul id="servizi-list">
         <li>✅ Allenamenti Personalizzati</li>
         <li>✅ Alimentazione ed integrazione sportiva</li>
         <li>✅ Check periodici con Plicometria e/o misurazioni metriche</li>
-        <li>✅ Abbonamento all'app L.C.Fitness Training</li>
-        <li>✅ Abbonamento all'app Coach Plus</li>
-        <li>✅ Supporto h24 e 7/7 per monitorare i tuoi progressi</li>
+        <li>✅ Abbonamento all’app L.C.Fitness Training</li>
+        <li>✅ Abbonamento all’app Coach Plus</li>
+        <li>✅ Supporto del Coach h24 e 7/7 per monitorare i tuoi progressi</li>
       </ul>
     </div>
 
-    <div class="contatti">
-      <h2>Contatti</h2>
-      <p>
-        📧 <a href="mailto:LcFitnessTrainingPt@gmail.com">Scrivimi</a><br>
-        📱 <a href="https://www.instagram.com/luka_cupo/" target="_blank">Instagram</a><br>
-        💬 <a href="https://www.facebook.com/luca.cupo.1232/" target="_blank">Facebook</a>
-      </p>
+    <div class="contatti" style="margin-top: 30px;">
+      <h3>Contatti</h3>
+      <p>📨 <a href="#">Scrivimi</a><br>
+         📸 <a href="#">Instagram</a><br>
+         📘 <a href="#">Facebook</a></p>
     </div>
   </div>
 
-  <!-- PayPal SDK -->
+  <!-- SDK PayPal -->
   <script src="https://www.paypal.com/sdk/js?client-id=AQY44jd2y1IUT-RpjuU79wngDCQGzJ7FXeESa7pJjKIQNRi2-z0jABKr-kLgQtqI6h3etMYdEKaa8_qT&currency=EUR"></script>
   <script>
     let selectedPrice = document.getElementById('durata').value;
@@ -247,11 +196,18 @@
       },
       onApprove: function(data, actions) {
         return actions.order.capture().then(function(details) {
-          document.getElementById('success-message').style.display = 'block';
+          alert('Pagamento completato da: ' + details.payer.name.given_name);
         });
       }
     }).render('#paypal-button-container');
-  </script>
 
+    // Effetto typing sui servizi
+    const servizi = document.querySelectorAll('#servizi-list li');
+    servizi.forEach((item, index) => {
+      setTimeout(() => {
+        item.classList.add('visible');
+      }, 1500 + index * 500); // inizia dopo il titolo
+    });
+  </script>
 </body>
 </html>
