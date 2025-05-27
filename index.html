@@ -14,6 +14,25 @@
       padding: 0;
       text-align: center;
     }
+.contatti ul {
+  list-style: none;
+  padding: 0;
+}
+
+.contatti li {
+  margin: 10px 0;
+}
+
+.contatti a {
+  color: #faf7f7;
+  text-decoration: none;
+  font-weight: bold;
+  transition: color 0.3s;
+}
+
+.contatti a:hover {
+  color: #ff0000;
+}
 
     .container {
       background-color: rgba(12, 1, 1, 0.932);
@@ -142,7 +161,7 @@
     <p>Scegli i tuoi obiettivi e porta il tuo corpo sopra ogni limite.</p>
 
     <label for="durata">Durata:</label>
-    <select id="durata"> 
+    <select id="durata">
       <option value="63">1 mese - €63</option>
       <option value="115">2 mesi - €115</option>
       <option value="155">3 mesi - €155</option>
@@ -167,13 +186,18 @@
       </ul>
     </div>
 
-    <div class="contatti" style="margin-top: 30px;">
-      <h3>Contatti</h3>
-      <p>📨 <a href="#">Scrivimi</a><br>
-         📸 <a href="#">Instagram</a><br>
-         📘 <a href="#">Facebook</a></p>
-    </div>
-  </div>
+    <!-- Contatti -->
+<div class="contatti">
+  <h2>Contatti</h2>
+  <ul>
+    <li><a href="mailto:LcFitnessTrainingPt@gmail.com">📧 Email</a></li>
+    <li><a href="https://www.instagram.com/luka_cupo/" target="_blank">📸 Instagram</a></li>
+    <li><a href="https://www.facebook.com/luca.cupo.1232/" target="_blank">📘 Facebook</a></li>
+  </ul>
+</div>
+
+
+
 
   <!-- SDK PayPal -->
   <script src="https://www.paypal.com/sdk/js?client-id=AQY44jd2y1IUT-RpjuU79wngDCQGzJ7FXeESa7pJjKIQNRi2-z0jABKr-kLgQtqI6h3etMYdEKaa8_qT&currency=EUR"></script>
