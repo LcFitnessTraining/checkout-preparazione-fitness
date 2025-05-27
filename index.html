@@ -51,11 +51,6 @@
       to { width: 100% }
     }
 
-    p {
-      font-size: 1rem;
-      margin-bottom: 20px;
-    }
-
     label {
       font-size: 1rem;
       display: block;
@@ -65,8 +60,6 @@
     }
 
     select {
-      appearance: none;
-      -webkit-appearance: none;
       width: 100%;
       padding: 14px 20px;
       font-size: 1.1rem;
@@ -116,46 +109,37 @@
       list-style: none;
       padding: 0;
       text-align: left;
+      margin-top: 20px;
     }
 
     ul#servizi-list li {
+      position: relative;
       opacity: 0;
       transition: opacity 0.5s ease;
-      padding: 10px;
+      padding: 10px 10px 10px 30px;
       border-bottom: 1px solid #ccc;
       font-size: 1rem;
-      position: relative;
     }
 
-    ul#servizi-list li::before {
-  content: '\f00c';
-  font-family: "Font Awesome 5 Free";
-  font-weight: 900;
-  position: absolute;
-  left: -25px;
-  color: red;
-  transform: scale(0);
-  opacity: 0;
-}
+    ul#servizi-list li.visible {
+      opacity: 1;
+    }
 
-ul#servizi-list li.visible::before {
-  animation: bounceIn 0.6s ease forwards;
-}
-
-@keyframes bounceIn {
-  0% { transform: scale(0); opacity: 0; }
-  60% { transform: scale(1.4); opacity: 1; }
-  100% { transform: scale(1); opacity: 1; }
-}
+    ul#servizi-list li.visible::before {
+      content: '\f00c';
+      font-family: "Font Awesome 5 Free";
+      font-weight: 900;
+      position: absolute;
+      left: 0;
+      top: 12px;
+      color: red;
+      animation: bounceIn 0.4s ease;
+    }
 
     @keyframes bounceIn {
       0% { transform: scale(0); opacity: 0; }
-      60% { transform: scale(1.2); opacity: 1; }
-      100% { transform: scale(1); }
-    }
-
-    .visible {
-      opacity: 1 !important;
+      50% { transform: scale(1.4); opacity: 1; }
+      100% { transform: scale(1); opacity: 1; }
     }
 
     .contatti ul {
@@ -199,7 +183,7 @@ ul#servizi-list li.visible::before {
 
       ul#servizi-list li {
         font-size: 0.95rem;
-        padding: 8px 10px;
+        padding-left: 30px;
       }
 
       img.logo {
@@ -214,7 +198,6 @@ ul#servizi-list li.visible::before {
     <img src="logo.jpg" alt="Logo" class="logo">
 
     <h1 class="typing">Scegli il tuo abbonamento</h1>
-
     <p>Scegli i tuoi obiettivi e porta il tuo corpo sopra ogni limite.</p>
 
     <label for="durata">Durata:</label>
@@ -283,12 +266,12 @@ ul#servizi-list li.visible::before {
       }
     }).render('#paypal-button-container');
 
-    // Effetto typing sui servizi
+    // Mostra servizi uno alla volta con spunta animata
     const servizi = document.querySelectorAll('#servizi-list li');
     servizi.forEach((item, index) => {
       setTimeout(() => {
         item.classList.add('visible');
-      }, 1500 + index * 500);
+      }, 1000 + index * 400);
     });
   </script>
 </body>
