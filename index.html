@@ -128,15 +128,25 @@
     }
 
     ul#servizi-list li::before {
-      content: '\f00c';
-      font-family: "Font Awesome 5 Free";
-      font-weight: 900;
-      position: absolute;
-      left: -25px;
-      color: red;
-      transform: scale(0);
-      animation: bounceIn 0.6s ease forwards;
-    }
+  content: '\f00c';
+  font-family: "Font Awesome 5 Free";
+  font-weight: 900;
+  position: absolute;
+  left: -25px;
+  color: red;
+  transform: scale(0);
+  opacity: 0;
+}
+
+ul#servizi-list li.visible::before {
+  animation: bounceIn 0.6s ease forwards;
+}
+
+@keyframes bounceIn {
+  0% { transform: scale(0); opacity: 0; }
+  60% { transform: scale(1.4); opacity: 1; }
+  100% { transform: scale(1); opacity: 1; }
+}
 
     @keyframes bounceIn {
       0% { transform: scale(0); opacity: 0; }
