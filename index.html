@@ -4,35 +4,21 @@
   <meta charset="UTF-8">
   <title>Pagamento con PayPal</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <!-- Font & Icon -->
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap" rel="stylesheet">
+  <script src="https://kit.fontawesome.com/a2e0a6a0c9.js" crossorigin="anonymous"></script>
+
   <style>
     body {
-      font-family: Arial, sans-serif;
-      background: url('sfondo.png') no-repeat center center fixed;
+      font-family: 'Montserrat', sans-serif;
+      background: linear-gradient(rgba(0,0,0,0.8), rgba(0,0,0,0.8)), url('sfondo.png') no-repeat center center fixed;
       background-size: cover;
       color: #fff;
       margin: 0;
       padding: 0;
       text-align: center;
     }
-.contatti ul {
-  list-style: none;
-  padding: 0;
-}
-
-.contatti li {
-  margin: 10px 0;
-}
-
-.contatti a {
-  color: #faf7f7;
-  text-decoration: none;
-  font-weight: bold;
-  transition: color 0.3s;
-}
-
-.contatti a:hover {
-  color: #ff0000;
-}
 
     .container {
       background-color: rgba(12, 1, 1, 0.932);
@@ -40,6 +26,7 @@
       border-radius: 15px;
       max-width: 600px;
       margin: 60px auto;
+      box-shadow: 0 0 20px red;
     }
 
     img.logo {
@@ -49,21 +36,24 @@
       box-shadow: 0 0 10px red, 0 0 20px red, 0 0 30px red;
     }
 
- h1.typing {
-  font-size: 1.8rem;
-  white-space: nowrap;
-  overflow: hidden;
-  margin: 0 auto 20px;
-  width: 100%;
-  animation: typing 3s steps(30, end);
-}
-
+    h1.typing {
+      font-size: 1.8rem;
+      white-space: nowrap;
+      overflow: hidden;
+      margin: 0 auto 20px;
+      width: 100%;
+      animation: typing 3s steps(30, end);
+    }
 
     @keyframes typing {
       from { width: 0 }
       to { width: 100% }
     }
 
+    p {
+      font-size: 1rem;
+      margin-bottom: 20px;
+    }
 
     label {
       font-size: 1rem;
@@ -87,6 +77,7 @@
       box-shadow: 0 0 10px red;
       margin-bottom: 20px;
       cursor: pointer;
+      transition: all 0.3s ease;
     }
 
     select:hover {
@@ -96,6 +87,24 @@
 
     #paypal-button-container {
       margin: 20px auto;
+      transition: transform 0.3s ease;
+    }
+
+    #paypal-button-container:hover {
+      transform: scale(1.03);
+    }
+
+    .separator {
+      width: 100px;
+      height: 4px;
+      background: red;
+      margin: 30px auto;
+      animation: pulse 2s infinite;
+    }
+
+    @keyframes pulse {
+      0%, 100% { transform: scaleX(1); }
+      50% { transform: scaleX(1.5); }
     }
 
     .servizi h2 {
@@ -117,8 +126,36 @@
       font-size: 1rem;
     }
 
+    ul#servizi-list li::before {
+      content: '\f00c';
+      font-family: "Font Awesome 5 Free";
+      font-weight: 900;
+      margin-right: 10px;
+      color: red;
+    }
+
     .visible {
       opacity: 1 !important;
+    }
+
+    .contatti ul {
+      list-style: none;
+      padding: 0;
+    }
+
+    .contatti li {
+      margin: 10px 0;
+    }
+
+    .contatti a {
+      color: #faf7f7;
+      text-decoration: none;
+      font-weight: bold;
+      transition: color 0.3s;
+    }
+
+    .contatti a:hover {
+      color: #ff0000;
     }
 
     @media (max-width: 600px) {
@@ -174,30 +211,32 @@
 
     <div id="paypal-button-container"></div>
 
+    <div class="separator"></div>
+
     <div class="servizi">
       <h2>I miei servizi</h2>
       <ul id="servizi-list">
-        <li>✅ Allenamenti Personalizzati</li>
-        <li>✅ Alimentazione ed integrazione sportiva</li>
-        <li>✅ Check periodici con Plicometria e/o misurazioni metriche</li>
-        <li>✅ Abbonamento all’app L.C.Fitness Training</li>
-        <li>✅ Abbonamento all’app Coach Plus</li>
-        <li>✅ Supporto del Coach h24 e 7/7 per monitorare i tuoi progressi</li>
+        <li>Allenamenti Personalizzati</li>
+        <li>Alimentazione ed integrazione sportiva</li>
+        <li>Check periodici con Plicometria e/o misurazioni metriche</li>
+        <li>Abbonamento all’app L.C.Fitness Training</li>
+        <li>Abbonamento all’app Coach Plus</li>
+        <li>Supporto del Coach h24 e 7/7 per monitorare i tuoi progressi</li>
       </ul>
     </div>
 
-    <!-- Contatti -->
-<div class="contatti">
-  <h2>Contatti</h2>
-  <ul>
-    <li><a href="mailto:LcFitnessTrainingPt@gmail.com">📧 Email</a></li>
-    <li><a href="https://www.instagram.com/luka_cupo/" target="_blank">📸 Instagram</a></li>
-    <li><a href="https://www.facebook.com/luca.cupo.1232/" target="_blank">📘 Facebook</a></li>
-  </ul>
-</div>
+    <div class="separator"></div>
 
+    <div class="contatti">
+      <h2>Contatti</h2>
+      <ul>
+        <li><a href="mailto:LcFitnessTrainingPt@gmail.com">📧 Email</a></li>
+        <li><a href="https://www.instagram.com/luka_cupo/" target="_blank">📸 Instagram</a></li>
+        <li><a href="https://www.facebook.com/luca.cupo.1232/" target="_blank">📘 Facebook</a></li>
+      </ul>
+    </div>
 
-
+  </div>
 
   <!-- SDK PayPal -->
   <script src="https://www.paypal.com/sdk/js?client-id=AQY44jd2y1IUT-RpjuU79wngDCQGzJ7FXeESa7pJjKIQNRi2-z0jABKr-kLgQtqI6h3etMYdEKaa8_qT&currency=EUR"></script>
@@ -220,7 +259,7 @@
       },
       onApprove: function(data, actions) {
         return actions.order.capture().then(function(details) {
-          alert('Pagamento completato da: ' + details.payer.name.given_name);
+          alert('Grazie per il pagamento, ' + details.payer.name.given_name + '! Il tuo coach ti contatterà a breve.');
         });
       }
     }).render('#paypal-button-container');
@@ -230,7 +269,7 @@
     servizi.forEach((item, index) => {
       setTimeout(() => {
         item.classList.add('visible');
-      }, 1500 + index * 500); // inizia dopo il titolo
+      }, 1500 + index * 500);
     });
   </script>
 </body>
