@@ -4,215 +4,91 @@
   <meta charset="UTF-8">
   <title>Pagamento con PayPal</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <!-- Font & Favicon -->
   <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap" rel="stylesheet">
-  <link rel="icon" href="favicon.ico" type="image/x-icon">
-
+  <link rel="icon" href="favicon.ico">
   <style>
     body {
+      margin: 0; padding: 0; text-align: center;
       font-family: 'Montserrat', sans-serif;
-      background: linear-gradient(rgba(0,0,0,0.8), rgba(0,0,0,0.8)), url('sfondo.png') no-repeat center center fixed;
-      background-size: cover;
-      color: #fff;
-      margin: 0;
-      padding: 0;
-      text-align: center;
+      background: #000; color: #fff;
       scroll-behavior: smooth;
     }
-
+    .radial-glow, .fog-layer {
+      position: fixed; top: 0; left: 0; width: 100vw; height: 100vh;
+      pointer-events: none; z-index: 0;
+      background: radial-gradient(circle at center, rgba(255, 0, 0, 0.2) 0%, transparent 60%),
+                  radial-gradient(circle at 30% 30%, rgba(255, 100, 0, 0.1) 0%, transparent 70%),
+                  radial-gradient(circle at 70% 70%, rgba(255, 50, 0, 0.15) 0%, transparent 60%);
+      animation: pulseRadial 10s ease-in-out infinite;
+    }
     .fog-layer {
-      position: fixed;
-      top: 0; left: 0;
-      width: 100%; height: 100%;
       background: radial-gradient(circle, rgba(255,0,0,0.1) 0%, transparent 70%);
-      animation: moveFog 30s infinite linear;
-      pointer-events: none;
-      z-index: 0;
+      animation: moveFog 30s linear infinite;
     }
-
-    @keyframes moveFog {
-      0% { transform: translateX(0); }
-      100% { transform: translateX(-200px); }
-    }
-
+    @keyframes pulseRadial { 0%,100%{transform:scale(1);opacity:.5} 50%{transform:scale(1.1);opacity:.8} }
+    @keyframes moveFog { 0%{transform:translateX(0)} 100%{transform:translateX(-200px)} }
     .container {
-      background-color: rgba(12, 1, 1, 0.932);
-      padding: 30px;
-      border-radius: 15px;
-      max-width: 600px;
-      margin: 60px auto;
-      box-shadow: 0 0 20px red;
-      position: relative;
-      z-index: 1;
+      max-width: 600px; margin: 60px auto; padding: 30px;
+      background: rgba(12,1,1,0.93); border-radius: 15px;
+      box-shadow: 0 0 20px red; position: relative; z-index: 1;
     }
-  
-
-    img.logo {
-      max-width: 150px;
-      margin-bottom: 20px;
-      border-radius: 50%;
+    .logo {
+      max-width: 150px; margin-bottom: 20px; border-radius: 50%;
       animation: firePulse 2s infinite;
     }
-
     @keyframes firePulse {
-      0% { box-shadow: 0 0 10px red, 0 0 20px orange; }
-      50% { box-shadow: 0 0 20px red, 0 0 30px orange; }
-      100% { box-shadow: 0 0 10px red, 0 0 20px orange; }
+      0%,100%{box-shadow:0 0 10px red,0 0 20px orange}
+      50%{box-shadow:0 0 20px red,0 0 30px orange}
     }
-
     h1.typing {
-      font-size: 1.8rem;
-      white-space: nowrap;
-      overflow: hidden;
-      margin: 0 auto 20px;
-      width: 100%;
-      animation: typing 3s steps(30, end), pulseGlow 2s infinite alternate;
-      text-shadow: 0 0 8px rgba(255, 0, 0, 0.8);
-      letter-spacing: 1.2px;
+      font-size: 1.8rem; margin: 0 auto 20px; white-space: nowrap;
+      overflow: hidden; width: 100%; letter-spacing: 1.2px;
+      animation: typing 3s steps(30,end), pulseGlow 2s alternate infinite;
+      text-shadow: 0 0 8px rgba(255,0,0,.8);
     }
- 
-
-    @keyframes pulseGlow {
-      from { text-shadow: 0 0 8px red; }
-      to   { text-shadow: 0 0 20px red; }
-    }
-
-    h2 {
-      text-shadow: 0 0 8px rgba(255, 0, 0, 0.8);
-      letter-spacing: 1.2px;
-    }
-
-    @keyframes typing {
-      from { width: 0 }
-      to { width: 100% }
-    }
-
-    label, select {
-      display: block;
-      margin-bottom: 20px;
-      font-size: 1rem;
+    @keyframes typing { from{width:0} to{width:100%} }
+    @keyframes pulseGlow { from{text-shadow:0 0 8px red} to{text-shadow:0 0 20px red} }
+    select, label {
+      display: block; width: 100%;
+      font-size: 1rem; margin-bottom: 20px;
       text-align: left;
     }
-
     select {
-      width: 100%;
-      padding: 14px;
-      font-size: 1.1rem;
-      background: #1c1c1c;
-      color: #fff;
-      border: 2px solid red;
-      border-radius: 8px;
+      padding: 14px; background: #1c1c1c; color: #fff;
+      border: 2px solid red; border-radius: 8px;
       box-shadow: 0 0 10px red;
     }
-
-    #paypal-button-container {
-      margin: 20px auto;
-    }
-
     .separator {
-      width: 100px;
-      height: 4px;
-      background: red;
-      margin: 30px auto;
-      animation: pulse 2s infinite;
+      width: 100px; height: 4px; background: red;
+      margin: 30px auto; animation: pulse 2s infinite;
     }
-
-    @keyframes pulse {
-      0%, 100% { transform: scaleX(1); }
-      50% { transform: scaleX(1.5); }
-    }
-
-    .servizi, .titoli, .contatti {
-      margin-top: 40px;
-    }
-
-    .servizi h2, .titoli h2, .contatti h2 {
-      font-size: 1.5rem;
-    }
-
-    ul {
-      list-style: none;
-      padding: 0;
-      text-align: left;
-    }
-
+    @keyframes pulse { 0%,100%{transform:scaleX(1)} 50%{transform:scaleX(1.5)} }
+    h2 { text-shadow: 0 0 8px rgba(255, 0, 0, 0.8); letter-spacing: 1.2px; font-size: 1.5rem; }
+    ul { list-style: none; padding: 0; text-align: left; }
     ul li {
-      opacity: 0;
-      transition: all 0.5s ease;
-      padding: 10px;
-      border-bottom: 1px solid #ccc;
-      font-size: 1rem;
-      transform: translateX(-20px);
+      opacity: 0; transition: 0.5s; padding: 10px;
+      transform: translateX(-20px); border-bottom: 1px solid #ccc;
     }
-
-    ul li.visible {
-      opacity: 1;
-      transform: translateX(0);
+    ul li.visible { opacity: 1; transform: translateX(0); }
+    .contatti ul, .contatti ul li {
+      text-align: center; border: none; transform: none; opacity: 1;
     }
-
-    .contatti ul {
-      list-style: none;
-      padding: 0;
-      text-align: center;
-    }
-
-    .contatti ul li {
-      border: none;
-      padding: 8px 0;
-      transform: translateX(0);
-      opacity: 1;
-      font-size: 1.1rem;
-      transition: none;
-    }
-
     .contatti a {
-      position: relative;
-      color: #faf7f7;
-      text-decoration: none;
-      font-weight: bold;
+      color: #faf7f7; text-decoration: none; font-weight: bold;
       transition: color 0.3s ease;
-      display: inline-block;
     }
-
-    .contatti a:hover {
-      color: #ff0000;
-    }
-
-    .contatti a::after {
-      display: none;
-    }
-
-    @media (max-width: 600px) {
-      .container {
-        padding: 15px;
-        margin: 20px;
-      }
-
-      h1.typing {
-        font-size: 1.4rem;
-      }
-
-      select {
-        font-size: 1.2rem;
-        padding: 16px;
-      }
-
-      label {
-        font-size: 1.1rem;
-      }
-
-      ul li {
-        font-size: 0.95rem;
-        padding: 8px;
-      }
-
-      img.logo {
-        max-width: 120px;
-      }
+    .contatti a:hover { color: #ff0000; }
+    @media (max-width:600px) {
+      .container { padding: 15px; margin: 20px; }
+      .logo { max-width: 120px; }
+      h1.typing { font-size: 1.4rem; }
+      select, label { font-size: 1.1rem; padding: 16px; }
+      ul li { font-size: 0.95rem; padding: 8px; }
     }
   </style>
 </head>
 <body>
+  <div class="radial-glow"></div>
   <div class="fog-layer"></div>
   <div class="container">
     <img src="logo.jpg" alt="Logo" class="logo">
@@ -224,10 +100,10 @@
       <option value="115">2 mesi - €115</option>
       <option value="155">3 mesi - €155</option>
       <option value="270">6 mesi - €270</option>
-      <option value="50">1 Lezione Coaching One to One - €50</option>
-      <option value="400">10 Lezioni Coaching One to One - €400</option>
-      <option value="600">20 Lezioni Coaching One to One - €600</option>
-      <option value="33">Single Workout - €33</option>
+      <option value="50">1 Lezione Coaching - €50</option>
+      <option value="400">10 Lezioni - €400</option>
+      <option value="600">20 Lezioni - €600</option>
+      <option value="33">Workout Singolo - €33</option>
     </select>
     <div id="paypal-button-container"></div>
     <div class="separator"></div>
@@ -235,20 +111,20 @@
       <h2>I miei servizi</h2>
       <ul id="servizi-list">
         <li>⭕️ Allenamenti Personalizzati</li>
-        <li>⭕️ Alimentazione ed integrazione sportiva</li>
-        <li>⭕️ Check periodici con Plicometria e/o misurazioni metriche</li>
-        <li>⭕️ Abbonamento all’app L.C.Fitness Training</li>
-        <li>⭕️ Abbonamento all’app Coach Plus</li>
-        <li>⭕️ Supporto del Coach h24 e 7/7 per monitorare i tuoi progressi</li>
+        <li>⭕️ Alimentazione & integrazione</li>
+        <li>⭕️ Check metrici/plicometria</li>
+        <li>⭕️ App L.C.Fitness Training</li>
+        <li>⭕️ App Coach Plus</li>
+        <li>⭕️ Supporto h24 7/7</li>
       </ul>
     </div>
     <div class="separator"></div>
     <div class="titoli">
       <h2>Titoli vinti</h2>
       <ul id="titoli-list">
-        <li>🥈 Istruttore Fitness e Powerlifting specializzato nella ricomposizione corporea</li>
-        <li>🏆 1' Italian Championship NAC ITALY</li>
-        <li>🥇 8' World Championship Warsaw NAC INTERNATIONAL</li>
+        <li>🥈 Istruttore Powerlifting & Ricomposizione</li>
+        <li>🏆 1° NAC ITALY Championship</li>
+        <li>🥇 8° NAC World Championship</li>
       </ul>
     </div>
     <div class="separator"></div>
@@ -265,70 +141,42 @@
     <source src="musica.mp3" type="audio/mpeg">
     Il tuo browser non supporta l'audio HTML5.
   </audio>
-
   <script src="https://www.paypal.com/sdk/js?client-id=AQY44jd2y1IUT-RpjuU79wngDCQGzJ7FXeESa7pJjKIQNRi2-z0jABKr-kLgQtqI6h3etMYdEKaa8_qT&currency=EUR"></script>
   <script>
     let selectedPrice = document.getElementById('durata').value;
-    document.getElementById('durata').addEventListener('change', function () {
-      selectedPrice = this.value;
-    });
+    document.getElementById('durata').addEventListener('change', e => selectedPrice = e.target.value);
+
     paypal.Buttons({
-      style: {
-        color: 'gold',
-        shape: 'rect',
-        label: 'paypal'
-      },
-      createOrder: function (data, actions) {
-        return actions.order.create({
-          purchase_units: [{ amount: { value: selectedPrice } }]
-        });
-      },
-      onApprove: function (data, actions) {
-        return actions.order.capture().then(function (details) {
-          alert('Grazie per il pagamento, ' + details.payer.name.given_name + '!');
-        });
-      }
+      style: { color: 'gold', shape: 'rect', label: 'paypal' },
+      createOrder: (data, actions) => actions.order.create({
+        purchase_units: [{ amount: { value: selectedPrice } }]
+      }),
+      onApprove: (data, actions) => actions.order.capture().then(details =>
+        alert(`Grazie per il pagamento, ${details.payer.name.given_name}!`)
+      )
     }).render('#paypal-button-container');
 
-    const listaAnimata = document.querySelectorAll('#servizi-list li, #titoli-list li, .contatti ul li');
-    listaAnimata.forEach((item, index) => {
-      setTimeout(() => {
-        item.classList.add('visible');
-      }, 1000 + index * 300);
-    });
+    document.querySelectorAll('#servizi-list li, #titoli-list li, .contatti ul li')
+      .forEach((item, i) => setTimeout(() => item.classList.add('visible'), 1000 + i * 300));
 
     document.addEventListener("DOMContentLoaded", () => {
       const music = document.getElementById("bg-music");
-
       const fadeInMusic = () => {
-        let volume = 0.0;
-        const step = 0.01;
-        const interval = setInterval(() => {
-          if (volume < 1.0) {
-            volume += step;
-            music.volume = Math.min(volume, 1.0);
-          } else {
-            clearInterval(interval);
-          }
+        let volume = 0, step = 0.01;
+        const fade = setInterval(() => {
+          if (volume < 1) music.volume = volume += step;
+          else clearInterval(fade);
         }, 200);
       };
-
       const enableAudio = () => {
-        const playPromise = music.play();
-        if (playPromise !== undefined) {
-          playPromise.then(() => {
-            fadeInMusic();
-          }).catch(error => {
-            console.log("Errore audio:", error);
-          });
-        }
+        music.play().then(fadeInMusic).catch(console.log);
         document.removeEventListener("click", enableAudio);
         document.removeEventListener("touchstart", enableAudio);
       };
-
       document.addEventListener("click", enableAudio, { once: true });
       document.addEventListener("touchstart", enableAudio, { once: true });
     });
   </script>
 </body>
 </html>
+
