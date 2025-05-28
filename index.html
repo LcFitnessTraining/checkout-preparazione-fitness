@@ -1,100 +1,50 @@
-<!DOCTYPE html>
-<html lang="it">
+<!DOCTYPE html><html lang="it">
 <head>
   <meta charset="UTF-8">
-  <title>Pagamento con PayPal</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Scegli il tuo piano</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
   <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap" rel="stylesheet">
-  <link rel="icon" href="favicon.ico">
   <style>
+    * {margin:0;padding:0;box-sizing:border-box}
     body {
-      margin: 0; padding: 0; text-align: center;
-      font-family: 'Montserrat', sans-serif;
-      background: #000; color: #fff;
-      scroll-behavior: smooth;
+      font-family:'Montserrat',sans-serif;
+      background:#000;color:#fff;text-align:center;
+      background:radial-gradient(circle at center,rgba(255,0,0,.2) 0%,transparent 60%),
+                 radial-gradient(circle at 30% 30%,rgba(255,100,0,.1) 0%,transparent 70%),
+                 radial-gradient(circle at 70% 70%,rgba(255,50,0,.15) 0%,transparent 60%);
+      animation:pulseRadial 10s ease-in-out infinite;
     }
-    .radial-glow, .fog-layer {
-      position: fixed; top: 0; left: 0; width: 100vw; height: 100vh;
-      pointer-events: none; z-index: 0;
-      background: radial-gradient(circle at center, rgba(255, 0, 0, 0.2) 0%, transparent 60%),
-                  radial-gradient(circle at 30% 30%, rgba(255, 100, 0, 0.1) 0%, transparent 70%),
-                  radial-gradient(circle at 70% 70%, rgba(255, 50, 0, 0.15) 0%, transparent 60%);
-      animation: pulseRadial 10s ease-in-out infinite;
-    }
-    .fog-layer {
-      background: radial-gradient(circle, rgba(255,0,0,0.1) 0%, transparent 70%);
-      animation: moveFog 30s linear infinite;
-    }
-    @keyframes pulseRadial { 0%,100%{transform:scale(1);opacity:.5} 50%{transform:scale(1.1);opacity:.8} }
-    @keyframes moveFog { 0%{transform:translateX(0)} 100%{transform:translateX(-200px)} }
+    @keyframes pulseRadial {0%,100%{opacity:.5}50%{opacity:.8}}
     .container {
-      max-width: 600px; margin: 60px auto; padding: 30px;
-      background: rgba(12,1,1,0.93); border-radius: 15px;
-      box-shadow: 0 0 20px red; position: relative; z-index: 1;
+      max-width:600px;margin:50px auto;padding:20px;
+      background:rgba(0,0,0,.9);border-radius:10px;box-shadow:0 0 20px red;
     }
-    .logo {
-      max-width: 150px; margin-bottom: 20px; border-radius: 50%;
-      animation: firePulse 2s infinite;
+    .logo {max-width:100px;border-radius:50%;animation:firePulse 2s infinite}
+    @keyframes firePulse {0%,100%{box-shadow:0 0 10px red,0 0 20px orange}50%{box-shadow:0 0 20px red,0 0 30px orange}}
+    h1 {
+      font-size:1.4rem;margin:20px 0;text-shadow:0 0 8px red;
+      animation:typing 3s steps(30,end), pulseGlow 2s alternate infinite;
     }
-    @keyframes firePulse {
-      0%,100%{box-shadow:0 0 10px red,0 0 20px orange}
-      50%{box-shadow:0 0 20px red,0 0 30px orange}
-    }
-    h1.typing {
-      font-size: 1.8rem; margin: 0 auto 20px; white-space: nowrap;
-      overflow: hidden; width: 100%; letter-spacing: 1.2px;
-      animation: typing 3s steps(30,end), pulseGlow 2s alternate infinite;
-      text-shadow: 0 0 8px rgba(255,0,0,.8);
-    }
-    @keyframes typing { from{width:0} to{width:100%} }
-    @keyframes pulseGlow { from{text-shadow:0 0 8px red} to{text-shadow:0 0 20px red} }
-    select, label {
-      display: block; width: 100%;
-      font-size: 1rem; margin-bottom: 20px;
-      text-align: left;
-    }
+    @keyframes typing {from{width:0}to{width:100%}}
+    @keyframes pulseGlow {from{text-shadow:0 0 8px red}to{text-shadow:0 0 20px red}}
     select {
-      padding: 14px; background: #1c1c1c; color: #fff;
-      border: 2px solid red; border-radius: 8px;
-      box-shadow: 0 0 10px red;
+      width:100%;padding:12px;margin:20px 0;
+      background:#1c1c1c;color:#fff;border:2px solid red;border-radius:8px;
     }
-    .separator {
-      width: 100px; height: 4px; background: red;
-      margin: 30px auto; animation: pulse 2s infinite;
-    }
-    @keyframes pulse { 0%,100%{transform:scaleX(1)} 50%{transform:scaleX(1.5)} }
-    h2 { text-shadow: 0 0 8px rgba(255, 0, 0, 0.8); letter-spacing: 1.2px; font-size: 1.5rem; }
-    ul { list-style: none; padding: 0; text-align: left; }
-    ul li {
-      opacity: 0; transition: 0.5s; padding: 10px;
-      transform: translateX(-20px); border-bottom: 1px solid #ccc;
-    }
-    ul li.visible { opacity: 1; transform: translateX(0); }
-    .contatti ul, .contatti ul li {
-      text-align: center; border: none; transform: none; opacity: 1;
-    }
-    .contatti a {
-      color: #faf7f7; text-decoration: none; font-weight: bold;
-      transition: color 0.3s ease;
-    }
-    .contatti a:hover { color: #ff0000; }
-    @media (max-width:600px) {
-      .container { padding: 15px; margin: 20px; }
-      .logo { max-width: 120px; }
-      h1.typing { font-size: 1.4rem; }
-      select, label { font-size: 1.1rem; padding: 16px; }
-      ul li { font-size: 0.95rem; padding: 8px; }
-    }
+    .section {margin:30px 0}
+    h2 {font-size:1.2rem;text-shadow:0 0 8px red}
+    ul {list-style:none;padding:0}
+    li {margin:8px 0;border-bottom:1px solid #444;padding:5px 0}
+    a {color:#fff;text-decoration:none;font-weight:bold}
+    a:hover {color:red}
+    audio {display:none}
   </style>
 </head>
 <body>
-  <div class="radial-glow"></div>
-  <div class="fog-layer"></div>
   <div class="container">
-    <img src="logo.jpg" alt="Logo" class="logo">
-    <h1 class="typing">Scegli il tuo piano</h1>
+    <img src="logo.jpg" class="logo" alt="Logo">
+    <h1>Scegli il tuo piano</h1>
     <p>Scegli i tuoi obiettivi e porta il tuo corpo sopra ogni limite.</p>
-    <label for="durata">Durata:</label>
     <select id="durata">
       <option value="63">1 mese - €63</option>
       <option value="115">2 mesi - €115</option>
@@ -105,94 +55,62 @@
       <option value="600">20 Lezioni - €600</option>
       <option value="33">Workout Singolo - €33</option>
     </select>
-    <div id="paypal-button-container"></div>
-    <div class="separator"></div>
-    <div class="servizi">
-      <h2>I miei servizi</h2>
-      <ul id="servizi-list">
-        <li>⭕️ Workout Personalizzati</li>
-        <li>⭕️ Alimentazione & integrazione Personalizzata</li>
-        <li>⭕️ Check periodici metrici e/o plicometrici</li>
-        <li>⭕️ App L.C.Fitness Training per Workout</li>
-        <li>⭕️ App Coach Plus Per Piani alimentari</li>
-        <li>⭕️ Il tuo Coach ti garantirà un supporto h24 7/7 per monitorare i progressi</li>
-      </ul>
-    </div>
-    <div class="separator"></div>
-    <div class="titoli">
-      <h2>Titoli vinti</h2>
-      <ul id="titoli-list">
-        <li>🥈 Istruttore Powerlifting & Ricomposizione</li>
-        <li>🏆 1° NAC ITALY Championship</li>
-        <li>🥇 8° NAC World Championship</li>
-      </ul>
-    </div>
-    <div class="separator"></div>
-    <div class="contatti">
-      <h2>Contatti</h2>
-      <ul>
-        <li><a href="mailto:LcFitnessTrainingPt@gmail.com">📧 Email</a></li>
-        <li><a href="https://www.instagram.com/luka_cupo/" target="_blank">📸 Instagram</a></li>
-        <li><a href="https://www.facebook.com/luca.cupo.1232/" target="_blank">📘 Facebook</a></li>
-      </ul>
-    </div>
-  </div>
-  <audio id="bg-music" loop preload="auto">
-    <source src="musica.mp3" type="audio/mpeg">
-    Il tuo browser non supporta l'audio HTML5.
-  </audio>
-  <script src="https://www.paypal.com/sdk/js?client-id=AQY44jd2y1IUT-RpjuU79wngDCQGzJ7FXeESa7pJjKIQNRi2-z0jABKr-kLgQtqI6h3etMYdEKaa8_qT&currency=EUR"></script>
-  <script>
-    let selectedPrice = document.getElementById('durata').value;
-    document.getElementById('durata').addEventListener('change', e => selectedPrice = e.target.value);
+    <div id="paypal-button-container"></div><div class="section">
+  <h2>Servizi</h2>
+  <ul>
+    <li>Workout Personalizzati</li>
+    <li>Piani Alimentari & Integrazione</li>
+    <li>Check metrici/plicometrici</li>
+    <li>App L.C. Fitness & Coach Plus</li>
+    <li>Supporto del tuo Coach h24 7/7</li>
+  </ul>
+</div>
 
+<div class="section">
+  <h2>Titoli vinti</h2>
+  <ul>
+    <li>Istruttore Powerlifting e Fitness</li>
+    <li>1° NAC ITALY Championship</li>
+    <li>8° NAC WORLD Championship</li>
+  </ul>
+</div>
+
+<div class="section">
+  <h2>Contatti</h2>
+  <ul>
+    <li><a href="mailto:LcFitnessTrainingPt@gmail.com">📧 Email</a></li>
+    <li><a href="https://www.instagram.com/luka_cupo/" target="_blank">📸 Instagram</a></li>
+    <li><a href="https://www.facebook.com/luca.cupo.1232/" target="_blank">📘 Facebook</a></li>
+  </ul>
+</div>
+
+  </div>  <audio id="bg-music" loop preload="auto">
+    <source src="musica.mp3" type="audio/mpeg">
+  </audio>  <script src="https://www.paypal.com/sdk/js?client-id=AQY44jd2y1IUT-RpjuU79wngDCQGzJ7FXeESa7pJjKIQNRi2-z0jABKr-kLgQtqI6h3etMYdEKaa8_qT&currency=EUR"></script>  <script>
+    let price = document.getElementById('durata').value;
+    document.getElementById('durata').onchange = e => price = e.target.value;
     paypal.Buttons({
-      style: { color: 'gold', shape: 'rect', label: 'paypal' },
+      style: { color:'gold', shape:'rect', label:'paypal' },
       createOrder: (data, actions) => actions.order.create({
-        purchase_units: [{ amount: { value: selectedPrice } }]
+        purchase_units: [{ amount: { value: price } }]
       }),
-      onApprove: (data, actions) => actions.order.capture().then(details =>
-        alert(`Grazie per il pagamento, ${details.payer.name.given_name}!`)
-      )
+      onApprove: (data, actions) => actions.order.capture().then(d =>
+        alert(`Grazie per il pagamento, ${d.payer.name.given_name}!`))
     }).render('#paypal-button-container');
 
-    document.querySelectorAll('#servizi-list li, #titoli-list li, .contatti ul li')
-      .forEach((item, i) => setTimeout(() => item.classList.add('visible'), 1000 + i * 300));
-
-document.addEventListener("DOMContentLoaded", () => {
-  const music = document.getElementById("bg-music");
-
-  const enableAudio = () => {
-    const playPromise = music.play();
-    if (playPromise !== undefined) {
-      playPromise.then(() => {
-        // Fai un fade-in del volume
-        let volume = 0.0;
-        music.volume = 0;
+    const audio = document.getElementById("bg-music");
+    const enableAudio = () => {
+      audio.play().then(() => {
+        let v = 0; audio.volume = 0;
         const fade = setInterval(() => {
-          if (volume < 1.0) {
-            volume += 0.02;
-            music.volume = Math.min(volume, 1.0);
-          } else {
-            clearInterval(fade);
-          }
+          v += 0.02; audio.volume = Math.min(v, 1);
+          if (v >= 1) clearInterval(fade);
         }, 150);
-      }).catch(error => {
-        console.log("Errore nella riproduzione:", error);
-      });
-    }
-
-    // Rimuove i listener dopo la prima interazione
-    document.removeEventListener("click", enableAudio);
-    document.removeEventListener("touchstart", enableAudio);
-  };
-
-  // Attiva alla primissima interazione utente
-  document.addEventListener("click", enableAudio, { once: true });
-  document.addEventListener("touchstart", enableAudio, { once: true });
-});
-</script>
-
-</body>
+      }).catch(()=>{});
+      ["click","touchstart"].forEach(e=>
+        document.removeEventListener(e, enableAudio))
+    };
+    ["click","touchstart"].forEach(e=>
+      document.addEventListener(e, enableAudio, {once:true}))
+  </script></body>
 </html>
-
