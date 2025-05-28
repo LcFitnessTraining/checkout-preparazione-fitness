@@ -244,59 +244,76 @@
   <audio id="bg-music" autoplay loop>
     <source src="musica.mp3" type="audio/mpeg">
     Il tuo browser non supporta l'audio HTML5.
+   
   </audio>
 
   <!-- SDK PayPal -->
   <script src="https://www.paypal.com/sdk/js?client-id=AQY44jd2y1IUT-RpjuU79wngDCQGzJ7FXeESa7pJjKIQNRi2-z0jABKr-kLgQtqI6h3etMYdEKaa8_qT&currency=EUR"></script>
   <script>
-    let selectedPrice = document.getElementById('durata').value;
+  let selectedPrice = document.getElementById('durata').value;
 
-    document.getElementById('durata').addEventListener('change', function() {
-      selectedPrice = this.value;
-    });
+  document.getElementById('durata').addEventListener('change', function() {
+    selectedPrice = this.value;
+  });
 
-    paypal.Buttons({
-      createOrder: function(data, actions) {
-        return actions.order.create({
-          purchase_units: [{
-            amount: {
-              value: selectedPrice
-            }
-          }]
-        });
-      },
-      onApprove: function(data, actions) {
-        return actions.order.capture().then(function(details) {
-          alert('Grazie per il pagamento, ' + details.payer.name.given_name + '! Il tuo coach ti contatterà a breve.');
-        });
+  paypal.Buttons({
+    style: {
+      color: 'gold', // Forza il colore giallo PayPal
+      shape: 'rect',
+      label: 'paypal'
+    },
+    createOrder: function(data, actions) {
+      return actions.order.create({
+        purchase_units: [{
+          amount: { value: selectedPrice }
+        }]
+      });
+    },
+    onApprove: function(data, actions) {
+      return actions.order.capture().then(function(details) {
+        alert('Grazie per il pagamento, ' + details.payer.name.given_name + '!');
+      });
+    }
+  }).render('#paypal-button-container');
+
+  // Effetto slide-in servizi
+  const servizi = document.querySelectorAll('#servizi-list li');
+  servizi.forEach((item, index) => {
+    setTimeout(() => {
+      item.classList.add('visible');
+    }, 1000 + index * 300);
+  });
+
+  // Audio con volume crescente (fade-in)
+  const music = document.getElementById("bg-music");
+  music.volume = 0.0; // Volume iniziale a 0
+
+  window.addEventListener("load", () => {
+    const playAttempt = music.play();
+    if (playAttempt !== undefined) {
+      playAttempt.catch(() => {
+        const resumeAudio = () => {
+          music.play();
+          document.removeEventListener('click', resumeAudio);
+          document.removeEventListener('touchstart', resumeAudio);
+        };
+        document.addEventListener('click', resumeAudio);
+        document.addEventListener('touchstart', resumeAudio);
+      });
+    }
+
+    // Effetto fade-in del volume da 0 a 1
+    let vol = 0.0;
+    const fadeIn = setInterval(() => {
+      if (vol < 1.0) {
+        vol += 0.05;
+        music.volume = Math.min(vol, 1.0);
+      } else {
+        clearInterval(fadeIn);
       }
-    }).render('#paypal-button-container');
+    }, 250); // aumenta ogni 250ms per 5 secondi circa
+  });
+</script>
 
-    // Effetto slide-in sui servizi
-    const servizi = document.querySelectorAll('#servizi-list li');
-    servizi.forEach((item, index) => {
-      setTimeout(() => {
-        item.classList.add('visible');
-      }, 1000 + index * 300);
-    });
-
-    // Autoplay musica dopo primo tocco/click se necessario
-    const music = document.getElementById("bg-music");
-
-    window.addEventListener("load", () => {
-      const playAttempt = music.play();
-      if (playAttempt !== undefined) {
-        playAttempt.catch(() => {
-          const resumeAudio = () => {
-            music.play();
-            document.removeEventListener('click', resumeAudio);
-            document.removeEventListener('touchstart', resumeAudio);
-          };
-          document.addEventListener('click', resumeAudio);
-          document.addEventListener('touchstart', resumeAudio);
-        });
-      }
-    });
-  </script>
 </body>
 </html>
