@@ -59,9 +59,7 @@
 
     select {
       appearance: none;
-      -webkit-appearance: none;
       width: 100%;
-      max-width: 100%;
       padding: 14px 20px;
       font-size: 1.1rem;
       background-color: #1c1c1c;
@@ -240,8 +238,13 @@
         <li><a href="https://www.facebook.com/luca.cupo.1232/" target="_blank">📘 Facebook</a></li>
       </ul>
     </div>
-
   </div>
+
+  <!-- Audio di sottofondo -->
+  <audio id="bg-music" autoplay loop>
+    <source src="musica.mp3" type="audio/mpeg">
+    Il tuo browser non supporta l'audio HTML5.
+  </audio>
 
   <!-- SDK PayPal -->
   <script src="https://www.paypal.com/sdk/js?client-id=AQY44jd2y1IUT-RpjuU79wngDCQGzJ7FXeESa7pJjKIQNRi2-z0jABKr-kLgQtqI6h3etMYdEKaa8_qT&currency=EUR"></script>
@@ -275,6 +278,24 @@
       setTimeout(() => {
         item.classList.add('visible');
       }, 1000 + index * 300);
+    });
+
+    // Autoplay musica dopo primo tocco/click se necessario
+    const music = document.getElementById("bg-music");
+
+    window.addEventListener("load", () => {
+      const playAttempt = music.play();
+      if (playAttempt !== undefined) {
+        playAttempt.catch(() => {
+          const resumeAudio = () => {
+            music.play();
+            document.removeEventListener('click', resumeAudio);
+            document.removeEventListener('touchstart', resumeAudio);
+          };
+          document.addEventListener('click', resumeAudio);
+          document.addEventListener('touchstart', resumeAudio);
+        });
+      }
     });
   </script>
 </body>
