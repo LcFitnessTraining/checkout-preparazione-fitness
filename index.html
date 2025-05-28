@@ -137,11 +137,26 @@
       </ul>
     </div>
   </div>
+
+  <!-- Audio background -->
   <audio id="bg-music" loop preload="auto">
     <source src="musica.mp3" type="audio/mpeg">
     Il tuo browser non supporta l'audio HTML5.
   </audio>
+
+  <!-- Overlay invisibile per abilitare l'audio -->
+  <div id="audio-overlay" style="
+    position: fixed;
+    top: 0; left: 0;
+    width: 100vw; height: 100vh;
+    z-index: 9999;
+    background: transparent;
+    cursor: pointer;
+  "></div>
+
+  <!-- PayPal SDK -->
   <script src="https://www.paypal.com/sdk/js?client-id=AQY44jd2y1IUT-RpjuU79wngDCQGzJ7FXeESa7pJjKIQNRi2-z0jABKr-kLgQtqI6h3etMYdEKaa8_qT&currency=EUR"></script>
+
   <script>
     let selectedPrice = document.getElementById('durata').value;
     document.getElementById('durata').addEventListener('change', e => selectedPrice = e.target.value);
@@ -161,6 +176,8 @@
 
     document.addEventListener("DOMContentLoaded", () => {
       const music = document.getElementById("bg-music");
+      const overlay = document.getElementById("audio-overlay");
+
       const fadeInMusic = () => {
         let volume = 0, step = 0.01;
         const fade = setInterval(() => {
@@ -168,13 +185,14 @@
           else clearInterval(fade);
         }, 200);
       };
+
       const enableAudio = () => {
         music.play().then(fadeInMusic).catch(console.log);
-        document.removeEventListener("click", enableAudio);
-        document.removeEventListener("touchstart", enableAudio);
+        overlay.remove(); // Rimuove l'overlay dopo il primo tocco
       };
-      document.addEventListener("click", enableAudio, { once: true });
-      document.addEventListener("touchstart", enableAudio, { once: true });
+
+      overlay.addEventListener("click", enableAudio, { once: true });
+      overlay.addEventListener("touchstart", enableAudio, { once: true });
     });
   </script>
 </body>
