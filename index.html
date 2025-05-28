@@ -4,11 +4,9 @@
   <meta charset="UTF-8">
   <title>Pagamento con PayPal</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
+  
   <!-- Font & Icon -->
   <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap" rel="stylesheet">
-  <script src="https://kit.fontawesome.com/a2e0a6a0c9.js" crossorigin="anonymous"></script>
-
   <style>
     body {
       font-family: 'Montserrat', sans-serif;
@@ -60,7 +58,10 @@
     }
 
     select {
+      appearance: none;
+      -webkit-appearance: none;
       width: 100%;
+      max-width: 100%;
       padding: 14px 20px;
       font-size: 1.1rem;
       background-color: #1c1c1c;
@@ -80,11 +81,26 @@
 
     #paypal-button-container {
       margin: 20px auto;
-      transition: transform 0.3s ease;
+      position: relative;
+      overflow: hidden;
+      border-radius: 10px;
     }
 
-    #paypal-button-container:hover {
-      transform: scale(1.03);
+    #paypal-button-container::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: -100%;
+      width: 100%;
+      height: 100%;
+      background: rgba(255, 0, 0, 0.2);
+      transform: skewX(-45deg);
+      animation: wave 2s infinite linear;
+    }
+
+    @keyframes wave {
+      0% { left: -100%; }
+      100% { left: 100%; }
     }
 
     .separator {
@@ -109,33 +125,20 @@
       list-style: none;
       padding: 0;
       text-align: left;
-      margin-top: 20px;
     }
 
     ul#servizi-list li {
-      position: relative;
       opacity: 0;
-      transition: opacity 0.5s ease;
-      padding: 10px 10px 10px 30px;
+      transition: all 0.5s ease;
+      padding: 10px;
       border-bottom: 1px solid #ccc;
       font-size: 1rem;
+      transform: translateX(-20px);
     }
 
     ul#servizi-list li.visible {
       opacity: 1;
-}
-
-      
-ul#servizi-list li::before {
-  content: '⭕️';
-  margin-right: 10px;
-  font-size: 1.2rem;
-  color: red;
-}
-    @keyframes bounceIn {
-      0% { transform: scale(0); opacity: 0; }
-      50% { transform: scale(1.4); opacity: 1; }
-      100% { transform: scale(1); opacity: 1; }
+      transform: translateX(0);
     }
 
     .contatti ul {
@@ -151,10 +154,12 @@ ul#servizi-list li::before {
       color: #faf7f7;
       text-decoration: none;
       font-weight: bold;
-      transition: color 0.3s;
+      transition: transform 0.3s ease, color 0.3s ease;
+      display: inline-block;
     }
 
     .contatti a:hover {
+      transform: scale(1.2) rotate(-2deg);
       color: #ff0000;
     }
 
@@ -179,7 +184,7 @@ ul#servizi-list li::before {
 
       ul#servizi-list li {
         font-size: 0.95rem;
-        padding-left: 30px;
+        padding: 8px;
       }
 
       img.logo {
@@ -194,6 +199,7 @@ ul#servizi-list li::before {
     <img src="logo.jpg" alt="Logo" class="logo">
 
     <h1 class="typing">Scegli il tuo abbonamento</h1>
+
     <p>Scegli i tuoi obiettivi e porta il tuo corpo sopra ogni limite.</p>
 
     <label for="durata">Durata:</label>
@@ -215,12 +221,12 @@ ul#servizi-list li::before {
     <div class="servizi">
       <h2>I miei servizi</h2>
       <ul id="servizi-list">
-        <li>Allenamenti Personalizzati</li>
-        <li>Alimentazione ed integrazione sportiva</li>
-        <li>Check periodici con Plicometria e/o misurazioni metriche</li>
-        <li>Abbonamento all’app L.C.Fitness Training</li>
-        <li>Abbonamento all’app Coach Plus</li>
-        <li>Supporto del Coach h24 e 7/7 per monitorare i tuoi progressi</li>
+        <li>⭕️ Allenamenti Personalizzati</li>
+        <li>⭕️ Alimentazione ed integrazione sportiva</li>
+        <li>⭕️ Check periodici con Plicometria e/o misurazioni metriche</li>
+        <li>⭕️ Abbonamento all’app L.C.Fitness Training</li>
+        <li>⭕️ Abbonamento all’app Coach Plus</li>
+        <li>⭕️ Supporto del Coach h24 e 7/7 per monitorare i tuoi progressi</li>
       </ul>
     </div>
 
@@ -234,6 +240,7 @@ ul#servizi-list li::before {
         <li><a href="https://www.facebook.com/luca.cupo.1232/" target="_blank">📘 Facebook</a></li>
       </ul>
     </div>
+
   </div>
 
   <!-- SDK PayPal -->
@@ -262,12 +269,12 @@ ul#servizi-list li::before {
       }
     }).render('#paypal-button-container');
 
-    // Mostra servizi uno alla volta con spunta animata
+    // Effetto slide-in sui servizi
     const servizi = document.querySelectorAll('#servizi-list li');
     servizi.forEach((item, index) => {
       setTimeout(() => {
         item.classList.add('visible');
-      }, 1000 + index * 400);
+      }, 1000 + index * 300);
     });
   </script>
 </body>
