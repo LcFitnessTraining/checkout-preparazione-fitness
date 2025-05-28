@@ -45,6 +45,7 @@
       position: relative;
       z-index: 1;
     }
+  
 
     img.logo {
       max-width: 150px;
@@ -69,6 +70,7 @@
       text-shadow: 0 0 8px rgba(255, 0, 0, 0.8);
       letter-spacing: 1.2px;
     }
+ 
 
     @keyframes pulseGlow {
       from { text-shadow: 0 0 8px red; }
@@ -153,6 +155,7 @@
       padding: 0;
       text-align: center;
     }
+
     .contatti ul li {
       border: none;
       padding: 8px 0;
@@ -161,30 +164,22 @@
       font-size: 1.1rem;
       transition: none;
     }
+
     .contatti a {
       position: relative;
       color: #faf7f7;
       text-decoration: none;
       font-weight: bold;
-      transition: transform 0.3s ease, color 0.3s ease;
+      transition: color 0.3s ease;
       display: inline-block;
     }
+
     .contatti a:hover {
-      transform: scale(1.2) rotate(-2deg);
       color: #ff0000;
     }
+
     .contatti a::after {
-      content: "";
-      position: absolute;
-      top: 0; left: -100%;
-      width: 100%;
-      height: 100%;
-      background: linear-gradient(120deg, transparent, rgba(255,255,255,0.4), transparent);
-      transform: skewX(-20deg);
-      transition: all 0.5s;
-    }
-    .contatti a:hover::after {
-      left: 100%;
+      display: none;
     }
 
     @media (max-width: 600px) {
@@ -270,6 +265,7 @@
     <source src="musica.mp3" type="audio/mpeg">
     Il tuo browser non supporta l'audio HTML5.
   </audio>
+
   <script src="https://www.paypal.com/sdk/js?client-id=AQY44jd2y1IUT-RpjuU79wngDCQGzJ7FXeESa7pJjKIQNRi2-z0jABKr-kLgQtqI6h3etMYdEKaa8_qT&currency=EUR"></script>
   <script>
     let selectedPrice = document.getElementById('durata').value;
@@ -293,35 +289,46 @@
         });
       }
     }).render('#paypal-button-container');
+
     const listaAnimata = document.querySelectorAll('#servizi-list li, #titoli-list li, .contatti ul li');
     listaAnimata.forEach((item, index) => {
       setTimeout(() => {
         item.classList.add('visible');
       }, 1000 + index * 300);
     });
-    const music = document.getElementById("bg-music");
-    music.volume = 0.0;
-    const fadeInMusic = () => {
-      let volume = 0.0;
-      const step = 0.01;
-      const interval = setInterval(() => {
-        if (volume < 1.0) {
-          volume += step;
-          music.volume = Math.min(volume, 1.0);
-        } else {
-          clearInterval(interval);
+
+    document.addEventListener("DOMContentLoaded", () => {
+      const music = document.getElementById("bg-music");
+
+      const fadeInMusic = () => {
+        let volume = 0.0;
+        const step = 0.01;
+        const interval = setInterval(() => {
+          if (volume < 1.0) {
+            volume += step;
+            music.volume = Math.min(volume, 1.0);
+          } else {
+            clearInterval(interval);
+          }
+        }, 200);
+      };
+
+      const enableAudio = () => {
+        const playPromise = music.play();
+        if (playPromise !== undefined) {
+          playPromise.then(() => {
+            fadeInMusic();
+          }).catch(error => {
+            console.log("Errore audio:", error);
+          });
         }
-      }, 200);
-    };
-    const enableAudio = () => {
-      music.play().then(() => {
-        fadeInMusic();
-      });
-      document.removeEventListener("click", enableAudio);
-      document.removeEventListener("touchstart", enableAudio);
-    };
-    document.addEventListener("click", enableAudio);
-    document.addEventListener("touchstart", enableAudio);
+        document.removeEventListener("click", enableAudio);
+        document.removeEventListener("touchstart", enableAudio);
+      };
+
+      document.addEventListener("click", enableAudio, { once: true });
+      document.addEventListener("touchstart", enableAudio, { once: true });
+    });
   </script>
 </body>
 </html>
