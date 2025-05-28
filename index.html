@@ -110,12 +110,12 @@
     <div class="servizi">
       <h2>I miei servizi</h2>
       <ul id="servizi-list">
-        <li>⭕️ Allenamenti Personalizzati</li>
-        <li>⭕️ Alimentazione & integrazione</li>
-        <li>⭕️ Check metrici/plicometria</li>
-        <li>⭕️ App L.C.Fitness Training</li>
-        <li>⭕️ App Coach Plus</li>
-        <li>⭕️ Supporto h24 7/7</li>
+        <li>⭕️ Workout Personalizzati</li>
+        <li>⭕️ Alimentazione & integrazione Personalizzata</li>
+        <li>⭕️ Check periodici metrici e/o plicometrici</li>
+        <li>⭕️ App L.C.Fitness Training per Workout</li>
+        <li>⭕️ App Coach Plus Per Piani alimentari</li>
+        <li>⭕️ Il tuo Coach ti garantirà un supporto h24 7/7 per monitorare i progressi</li>
       </ul>
     </div>
     <div class="separator"></div>
@@ -159,24 +159,40 @@
     document.querySelectorAll('#servizi-list li, #titoli-list li, .contatti ul li')
       .forEach((item, i) => setTimeout(() => item.classList.add('visible'), 1000 + i * 300));
 
-    document.addEventListener("DOMContentLoaded", () => {
-      const music = document.getElementById("bg-music");
-      const fadeInMusic = () => {
-        let volume = 0, step = 0.01;
+document.addEventListener("DOMContentLoaded", () => {
+  const music = document.getElementById("bg-music");
+
+  const enableAudio = () => {
+    const playPromise = music.play();
+    if (playPromise !== undefined) {
+      playPromise.then(() => {
+        // Fai un fade-in del volume
+        let volume = 0.0;
+        music.volume = 0;
         const fade = setInterval(() => {
-          if (volume < 1) music.volume = volume += step;
-          else clearInterval(fade);
-        }, 200);
-      };
-      const enableAudio = () => {
-        music.play().then(fadeInMusic).catch(console.log);
-        document.removeEventListener("click", enableAudio);
-        document.removeEventListener("touchstart", enableAudio);
-      };
-      document.addEventListener("click", enableAudio, { once: true });
-      document.addEventListener("touchstart", enableAudio, { once: true });
-    });
-  </script>
+          if (volume < 1.0) {
+            volume += 0.02;
+            music.volume = Math.min(volume, 1.0);
+          } else {
+            clearInterval(fade);
+          }
+        }, 150);
+      }).catch(error => {
+        console.log("Errore nella riproduzione:", error);
+      });
+    }
+
+    // Rimuove i listener dopo la prima interazione
+    document.removeEventListener("click", enableAudio);
+    document.removeEventListener("touchstart", enableAudio);
+  };
+
+  // Attiva alla primissima interazione utente
+  document.addEventListener("click", enableAudio, { once: true });
+  document.addEventListener("touchstart", enableAudio, { once: true });
+});
+</script>
+
 </body>
 </html>
 
