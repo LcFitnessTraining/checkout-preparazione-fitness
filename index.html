@@ -5,7 +5,6 @@
   <title>Pagamento con PayPal</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap" rel="stylesheet">
-  <link rel="icon" href="favicon.ico">
   <style>
     body {
       margin: 0; padding: 0; text-align: center;
@@ -68,8 +67,61 @@
     ul li {
       opacity: 0; transition: 0.5s; padding: 10px;
       transform: translateX(-20px); border-bottom: 1px solid #ccc;
+      position: relative; cursor: pointer;
+    }
+    ul#servizi-list li::after {
+      content: " 🔍 per saperne di più ";
+      position: absolute;
+      right: 10px;
+      top: 50%;
+      transform: translateY(-50%);
+      font-size: 0.8rem;
+      color: #f99;
     }
     ul li.visible { opacity: 1; transform: translateX(0); }
+    .popup {
+  display: none;
+  position: fixed;
+  z-index: 9999;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background: rgba(0, 0, 0, 0.85);
+  justify-content: center;
+  align-items: center;
+  animation: fadeIn 0.5s ease forwards;
+}
+.popup-content {
+  background: #1c1c1c;
+  border: 2px solid red;
+  padding: 25px;
+  border-radius: 12px;
+  max-width: 500px;
+  text-align: left;
+  color: white;
+  box-shadow: 0 0 20px 5px rgba(255, 0, 0, 0.6); /* alone rosso sfocato */
+}
+
+
+    @keyframes popupZoom {
+      to { transform: scale(1) rotate(0); opacity: 1; }
+    }
+    @keyframes fadeIn {
+      from { opacity: 0; } to { opacity: 1; }
+    }
+    @keyframes glowPulse {
+      0%, 100% { box-shadow: 0 0 20px red; }
+      50% { box-shadow: 0 0 30px orange; }
+    }
+    @keyframes sway {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-5px); }
+    }
+    .close-btn {
+      float: right; font-size: 1.3rem;
+      cursor: pointer; color: red;
+    }
     .contatti ul, .contatti ul li {
       text-align: center; border: none; transform: none; opacity: 1;
     }
@@ -107,20 +159,22 @@
     </select>
     <div id="paypal-button-container"></div>
     <div class="separator"></div>
+
     <div class="servizi">
       <h2>I miei servizi</h2>
       <ul id="servizi-list">
-        <li>⭕️ Workout Personalizzati</li>
-        <li>⭕️ Alimentazione & integrazione</li>
-        <li>⭕️ Check metrici/plicometrici</li>
-        <li>⭕️ App L.C.Fitness Training per Workout</li>
-        <li>⭕️ App Coach Plus Per piani Alimentari</li>
-        <li>⭕️ Supporto del tuo Coach h24 7/7</li>
+        <li data-desc="La stesura di una scheda di allenamento personalizzata consiste nell’elaborazione di un protocollo di esercizi strutturato in base a parametri individuali quali obiettivi specifici, livello di fitness, anamnesi motoria, composizione corporea e disponibilità temporale, al fine di massimizzare l’efficacia del programma e minimizzare il rischio di infortuni.">⭕️ Workout Personalizzati</li>
+        <li data-desc="La formulazione di un piano alimentare personalizzato prevede la definizione di un regime nutrizionale calibrato sulle esigenze fisiologiche e metaboliche dell’individuo, tenendo conto di fattori quali obiettivi (dimagrimento, ipertrofia, performance), stato di salute, composizione corporea, abitudini alimentari, eventuali intolleranze o patologie, con l’obiettivo di ottimizzare l'apporto di macro e micronutrienti in modo funzionale e sostenibile,mentre La strutturazione di un piano di integrazione personalizzato implica la selezione e il dosaggio mirato di supplementi nutrizionali in funzione del profilo individuale, delle carenze riscontrate, del carico di allenamento e degli obiettivi specifici, nel rispetto delle evidenze scientifiche e delle normative vigenti, con l’intento di supportare le prestazioni, il recupero e il benessere generale.">⭕️ Alimentazione & integrazione</li>
+        <li data-desc="Le misurazioni antropometriche e la plicometria costituiscono strumenti fondamentali per la valutazione della composizione corporea, attraverso il rilevamento di dati quali peso, altezza, circonferenze corporee e spessore delle pliche cutanee. Tali analisi permettono di stimare con maggiore precisione la massa grassa e la massa magra, monitorare i progressi nel tempo e personalizzare in modo più efficace i protocolli di allenamento e nutrizione.">⭕️ Check metrici/plicometrici</li>
+        <li data-desc="LcFitnessTraining è un App app per l’allenamento , rappresenta uno strumento digitale avanzato progettato per offrire programmi personalizzati, monitoraggio dei progressi, supporto multimediale e gestione integrata di allenamento, alimentazione e integrazione, consentendo un approccio strutturato, flessibile e scientificamente validato all’ottimizzazione della performance e del benessere fisico.">⭕️ App L.C.Fitness Training per Workout</li>
+        <li data-desc="App Coach Plus è un app per l’alimentazione , uno strumento digitale progettato per la gestione personalizzata del piano nutrizionale, con funzionalità che includono il calcolo dei fabbisogni, il monitoraggio dei macronutrienti, la gestione dei pasti e delle intolleranze, e l’integrazione con obiettivi fisici o sportivi, offrendo un supporto pratico e scientificamente fondato per l’ottimizzazione della salute e della composizione corporea.">⭕️ App Coach Plus Per Piani Alimentari</li>
+        <li data-desc="Il supporto continuo del coach, disponibile H24 e 7 giorni su 7, garantisce un’assistenza personalizzata in tempo reale per l’adattamento dei programmi, la risoluzione di dubbi tecnici o nutrizionali e il monitoraggio costante del percorso, offrendo un punto di riferimento qualificato per massimizzare l’efficacia e la sostenibilità del piano individuale.">⭕️ Supporto del tuo Coach h24 7/7</li>
       </ul>
     </div>
+
     <div class="separator"></div>
     <div class="titoli">
-      <h2>Titoli e certificazion</h2>
+      <h2>Titoli e certificazioni</h2>
       <ul id="titoli-list">
         <li>🥈 Istruttore Fitness & Powerlifting specializzato nella ricomposizione corporea</li>
         <li>🏆 1° NAC ITALY Championship</li>
@@ -138,21 +192,21 @@
     </div>
   </div>
 
-  <!-- Audio background -->
+  <!-- Popup -->
+  <div class="popup" id="popup">
+    <div class="popup-content">
+      <span class="close-btn" onclick="closePopup()">&times;</span>
+      <h3 id="popup-title"></h3>
+      <p id="popup-text"></p>
+    </div>
+  </div>
+
+  <!-- Audio -->
   <audio id="bg-music" loop preload="auto">
     <source src="musica.mp3" type="audio/mpeg">
     Il tuo browser non supporta l'audio HTML5.
   </audio>
-
-  <!-- Overlay invisibile per abilitare l'audio -->
-  <div id="audio-overlay" style="
-    position: fixed;
-    top: 0; left: 0;
-    width: 100vw; height: 100vh;
-    z-index: 9999;
-    background: transparent;
-    cursor: pointer;
-  "></div>
+  <div id="audio-overlay" style="position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; z-index: 9999; background: transparent; cursor: pointer;"></div>
 
   <!-- PayPal SDK -->
   <script src="https://www.paypal.com/sdk/js?client-id=AQY44jd2y1IUT-RpjuU79wngDCQGzJ7FXeESa7pJjKIQNRi2-z0jABKr-kLgQtqI6h3etMYdEKaa8_qT&currency=EUR"></script>
@@ -174,6 +228,7 @@
     document.querySelectorAll('#servizi-list li, #titoli-list li, .contatti ul li')
       .forEach((item, i) => setTimeout(() => item.classList.add('visible'), 1000 + i * 300));
 
+    // Audio
     document.addEventListener("DOMContentLoaded", () => {
       const music = document.getElementById("bg-music");
       const overlay = document.getElementById("audio-overlay");
@@ -188,12 +243,37 @@
 
       const enableAudio = () => {
         music.play().then(fadeInMusic).catch(console.log);
-        overlay.remove(); // Rimuove l'overlay dopo il primo tocco
+        overlay.remove();
       };
 
       overlay.addEventListener("click", enableAudio, { once: true });
       overlay.addEventListener("touchstart", enableAudio, { once: true });
     });
+
+    // Popup
+    const items = document.querySelectorAll('#servizi-list li');
+    const popup = document.getElementById('popup');
+    const popupContent = popup.querySelector('.popup-content');
+    const popupTitle = document.getElementById('popup-title');
+    const popupText = document.getElementById('popup-text');
+
+    items.forEach(item => {
+      item.addEventListener('click', () => {
+        popupTitle.textContent = item.textContent;
+        popupText.textContent = item.getAttribute('data-desc');
+        popup.classList.add('animate');
+        popup.style.display = 'flex';
+      });
+    });
+
+    function closePopup() {
+      popup.classList.remove('animate');
+      popup.style.display = 'none';
+    }
+
+    window.onclick = function(event) {
+      if (event.target === popup) closePopup();
+    }
   </script>
 </body>
 </html>
