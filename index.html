@@ -143,6 +143,15 @@
   </style>
 </head>
 <body>
+  <button id="audio-toggle" style="
+  position: fixed; top: 20px; right: 20px; z-index: 10000;
+  background: rgba(0,0,0,0.6); border: 2px solid red;
+  color: white; padding: 10px 15px; border-radius: 8px;
+  font-weight: bold; cursor: pointer; box-shadow: 0 0 10px red;
+">
+  🔇 Audio
+</button>
+
   <div class="radial-glow"></div>
   <div class="fog-layer"></div>
   <div class="container">
@@ -236,25 +245,52 @@
 
     // Audio
      document.addEventListener("DOMContentLoaded", () => {
-      const music = document.getElementById("bg-music");
-      const overlay = document.getElementById("audio-overlay");
+  const music = document.getElementById("bg-music");
+  const overlay = document.getElementById("audio-overlay");
+  const toggleButton = document.getElementById("audio-toggle");
+  let isPlaying = false;
 
-      const fadeInMusic = () => {
-        let volume = 0, step = 0.01;
-        const fade = setInterval(() => {
-          if (volume < 1) music.volume = volume += step;
-          else clearInterval(fade);
-        }, 200);
-      };
+  const fadeInMusic = () => {
+    let volume = 0;
+    const fade = setInterval(() => {
+      if (volume < 1) {
+        volume = Math.min(volume + 0.01, 1);
+        music.volume = volume;
+      } else {
+        clearInterval(fade);
+      }
+    }, 100);
+  };
 
-      const enableAudio = () => {
-        music.play().then(fadeInMusic).catch(console.log);
-        overlay.remove();
-      };
+  const playMusic = () => {
+    music.volume = 0;
+    music.play().then(() => {
+      fadeInMusic();
+      isPlaying = true;
+      toggleButton.textContent = "🔊 Audio";
+    }).catch(console.error);
+  };
 
-      overlay.addEventListener("click", enableAudio, { once: true });
-      overlay.addEventListener("touchstart", enableAudio, { once: true });
-    });
+  const pauseMusic = () => {
+    music.pause();
+    isPlaying = false;
+    toggleButton.textContent = "🔇 Audio";
+  };
+
+  const enableAudio = () => {
+    playMusic();
+    overlay.remove();
+  };
+
+  toggleButton.addEventListener("click", () => {
+    if (isPlaying) pauseMusic();
+    else playMusic();
+  });
+
+  overlay.addEventListener("click", enableAudio, { once: true });
+  overlay.addEventListener("touchstart", enableAudio, { once: true });
+});
+
 
     // Popup
     const items = document.querySelectorAll('#servizi-list li');
