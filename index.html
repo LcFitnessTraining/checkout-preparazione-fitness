@@ -186,7 +186,7 @@
   color: white; padding: 10px 15px; border-radius: 8px;
   font-weight: bold; cursor: pointer; box-shadow: 0 0 10px red;
 ">
-  🔇 Audio
+  🔇 Off
 </button>
 
   <div class="radial-glow"></div>
@@ -326,7 +326,7 @@ particlesJS("particles-js", {
       audio.play();
       isPlaying = true;
       audioOverlay.style.display = "none";
-      audioToggle.textContent = "🔇 Disattiva Audio"; // Aggiorna bottone
+      audioToggle.textContent = "🔇 Off"; // Aggiorna bottone
     }
   });
 
@@ -334,10 +334,10 @@ particlesJS("particles-js", {
   audioToggle.addEventListener("click", () => {
     if (audio.paused) {
       audio.play();
-      audioToggle.textContent = "🔇 Disattiva Audio";
+      audioToggle.textContent = "🔇 Off";
     } else {
       audio.pause();
-      audioToggle.textContent = "🔊 Attiva Audio";
+      audioToggle.textContent = "🔊 On";
     }
   });
 
@@ -376,7 +376,8 @@ function closePopup() {
       document.querySelectorAll('#servizi-list li, #titoli-list li, .contatti ul li')
         .forEach((item, i) => setTimeout(() => item.classList.add('visible'), 1000 + i * 300));
     });
+
   </script>
-  <section class="parallax" data-speed="0.2">LcFitnessTraining</section>
 </body>
+   <section class="parallax" data-speed="0.1">&copy; 2025 LcFitnessTraining. Tutti i diritti riservati.</section>
 </html>
