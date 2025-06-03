@@ -16,16 +16,16 @@
       background: #000; color: #fff;
       scroll-behavior: smooth;
     }
-    #particles-js {
+   
+ #particles-js {
   position: fixed;
   top: 0; left: 0;
   width: 100%;
   height: 100%;
   z-index: 0;
   pointer-events: none;
-}
-
-
+ }
+ 
     .radial-glow {
   position: fixed; top: 0; left: 0; width: 100vw; height: 100vh;
   pointer-events: none; z-index: 0;
@@ -276,62 +276,34 @@
 
 particlesJS("particles-js", {
   "particles": {
-    "number": { "value": 80, "density": { "enable": true, "value_area": 800 } },
+    "number": { "value": 80 },
     "color": { "value": "#ff0000" },
-    "shape": {
-      "type": "circle",
-      "stroke": { "width": 0, "color": "#000000" },
-      "polygon": { "nb_sides": 5 }
-    },
-    "opacity": {
-      "value": 0.3,
-      "random": true,
-      "anim": { "enable": false }
-    },
-    "size": {
-      "value": 3,
-      "random": true,
-      "anim": { "enable": false }
-    },
-    "line_linked": {
-      "enable": true,
-      "distance": 150,
-      "color": "#ff0000",
-      "opacity": 0.2,
-      "width": 1
-    },
-    "move": {
-      "enable": true,
-      "speed": 2,
-      "direction": "none",
-      "random": false,
-      "straight": false,
-      "out_mode": "out",
-      "bounce": false
-    }
+    "shape": { "type": "circle" },
+    "opacity": { "value": 0.5 },
+    "size": { "value": 3 },
+    "move": { "enable": true, "speed": 2 }
   },
   "interactivity": {
-    "detect_on": "canvas",
     "events": {
-      "onhover": { "enable": true, "mode": "repulse" },
-      "onclick": { "enable": true, "mode": "push" },
-      "resize": true
-    },
-    "modes": {
-      "repulse": { "distance": 100 },
-      "push": { "particles_nb": 4 }
+      "onhover": { "enable": true, "mode": "repulse" }
     }
-  },
-  "retina_detect": true
+  }
 });
+
     let selectedPrice = document.getElementById('durata').value;
     document.getElementById('durata').addEventListener('change', e => selectedPrice = e.target.value);
 
     paypal.Buttons({
-      style: { color: 'gold', shape: 'rect', label: 'paypal' },
-      createOrder: (data, actions) => actions.order.create({
-        purchase_units: [{ amount: { value: selectedPrice } }]
-      }),
+  createOrder: function(data, actions) {
+    const amount = document.getElementById("durata").value;
+    return actions.order.create({
+      purchase_units: [{
+        amount: {
+          value: amount
+        }
+      }]
+    });
+  },
       onApprove: (data, actions) => actions.order.capture().then(details => {
         const name = details.payer.name.given_name;
         popupTitle.textContent = "✅ Pagamento completato";
