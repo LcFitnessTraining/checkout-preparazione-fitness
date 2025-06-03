@@ -12,20 +12,32 @@
       background: #000; color: #fff;
       scroll-behavior: smooth;
     }
+    #particles-js {
+  position: fixed;
+  top: 0; left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 0;
+  pointer-events: none;
+}
 
-    .radial-glow, .fog-layer {
-      position: fixed; top: 0; left: 0; width: 100vw; height: 100vh;
-      pointer-events: none; z-index: 0;
-      background: radial-gradient(circle at center, rgba(255, 0, 0, 0.2) 0%, transparent 60%),
-                  radial-gradient(circle at 30% 30%, rgba(255, 100, 0, 0.1) 0%, transparent 70%),
-                  radial-gradient(circle at 70% 70%, rgba(255, 50, 0, 0.15) 0%, transparent 60%);
-      animation: pulseRadial 10s ease-in-out infinite;
-    }
+
+    .radial-glow {
+  position: fixed; top: 0; left: 0; width: 100vw; height: 100vh;
+  pointer-events: none; z-index: 0;
+  background:
+    radial-gradient(circle at center, rgba(255, 255, 255, 0.2) 0%, transparent 60%),
+    radial-gradient(circle at 30% 30%, rgba(255, 255, 255, 0.1) 0%, transparent 70%),
+    radial-gradient(circle at 70% 70%, rgba(255, 255, 255, 0.15) 0%, transparent 60%);
+  animation: pulseRadial 10s ease-in-out infinite;
+}
+
 
     .fog-layer {
-      background: radial-gradient(circle, rgba(255,0,0,0.1) 0%, transparent 70%);
-      animation: moveFog 30s linear infinite;
-    }
+  background: radial-gradient(circle, rgba(255, 255, 255, 0.08) 0%, transparent 70%);
+  animation: moveFog 30s linear infinite;
+}
+
 
     @keyframes pulseRadial { 0%,100%{transform:scale(1);opacity:.5} 50%{transform:scale(1.1);opacity:.8} }
     @keyframes moveFog { 0%{transform:translateX(0)} 100%{transform:translateX(-200px)} }
@@ -167,7 +179,7 @@
 
   <div class="radial-glow"></div>
   <div class="fog-layer"></div>
-
+  <div id="particles-js"></div>
   <div class="container">
     <img src="logo.jpg" alt="Logo" class="logo">
     <h1 class="typing">Scegli il tuo piano</h1>
@@ -241,8 +253,58 @@
 
   <!-- PayPal SDK -->
   <script src="https://www.paypal.com/sdk/js?client-id=AQY44jd2y1IUT-RpjuU79wngDCQGzJ7FXeESa7pJjKIQNRi2-z0jABKr-kLgQtqI6h3etMYdEKaa8_qT&currency=EUR"></script>
-
+<script src="https://cdn.jsdelivr.net/npm/particles.js@2.0.0/particles.min.js"></script>
   <script>
+particlesJS("particles-js", {
+  "particles": {
+    "number": { "value": 80, "density": { "enable": true, "value_area": 800 } },
+    "color": { "value": "#ff0000" },
+    "shape": {
+      "type": "circle",
+      "stroke": { "width": 0, "color": "#000000" },
+      "polygon": { "nb_sides": 5 }
+    },
+    "opacity": {
+      "value": 0.3,
+      "random": true,
+      "anim": { "enable": false }
+    },
+    "size": {
+      "value": 3,
+      "random": true,
+      "anim": { "enable": false }
+    },
+    "line_linked": {
+      "enable": true,
+      "distance": 150,
+      "color": "#ff0000",
+      "opacity": 0.2,
+      "width": 1
+    },
+    "move": {
+      "enable": true,
+      "speed": 2,
+      "direction": "none",
+      "random": false,
+      "straight": false,
+      "out_mode": "out",
+      "bounce": false
+    }
+  },
+  "interactivity": {
+    "detect_on": "canvas",
+    "events": {
+      "onhover": { "enable": true, "mode": "repulse" },
+      "onclick": { "enable": true, "mode": "push" },
+      "resize": true
+    },
+    "modes": {
+      "repulse": { "distance": 100 },
+      "push": { "particles_nb": 4 }
+    }
+  },
+  "retina_detect": true
+});
     let selectedPrice = document.getElementById('durata').value;
     document.getElementById('durata').addEventListener('change', e => selectedPrice = e.target.value);
 
@@ -335,5 +397,6 @@
         .forEach((item, i) => setTimeout(() => item.classList.add('visible'), 1000 + i * 300));
     });
   </script>
+  <script src="https://cdn.jsdelivr.net/npm/particles.js@2.0.0/particles.min.js"></script>
 </body>
 </html>
