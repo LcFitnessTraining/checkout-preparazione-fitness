@@ -322,70 +322,54 @@ particlesJS("particles-js", {
     }).render('#paypal-button-container');
 
     // Audio
-    document.addEventListener("DOMContentLoaded", () => {
-  const music = document.getElementById("bg-music");
-  const overlay = document.getElementById("audio-overlay");
-  const toggleButton = document.getElementById("audio-toggle");
+   document.addEventListener("DOMContentLoaded", () => {
+  const audio = document.getElementById("bg-music");
+  const audioOverlay = document.getElementById("audio-overlay");
+  const audioToggle = document.getElementById("audio-toggle");
+
   let isPlaying = false;
 
-  const fadeInMusic = () => {
-    let volume = 0;
-    const fade = setInterval(() => {
-      if (volume < 1) {
-        volume = Math.min(volume + 0.01, 1);
-        music.volume = volume;
-      } else {
-        clearInterval(fade);
-      }
-    }, 100);
-  };
-
-  const playMusic = () => {
-    music.volume = 0;
-    music.play().then(() => {
-      fadeInMusic();
+  // Avvio musica al primo clic sull’overlay (per policy browser)
+  audioOverlay.addEventListener("click", () => {
+    if (!isPlaying) {
+      audio.play();
       isPlaying = true;
-      toggleButton.textContent = "🔊 Audio";
-    }).catch(console.error);
-  };
-
-  const pauseMusic = () => {
-    music.pause();
-    isPlaying = false;
-    toggleButton.textContent = "🔇 Audio";
-  };
-
-  const enableAudio = () => {
-    playMusic();
-    overlay.remove();
-  };
-
-  toggleButton.addEventListener("click", () => {
-    if (isPlaying) pauseMusic();
-    else playMusic();
+      audioOverlay.style.display = "none";
+      audioToggle.textContent = "🔇 Disattiva Audio"; // Aggiorna bottone
+    }
   });
 
-  overlay.addEventListener("click", enableAudio, { once: true });
-  overlay.addEventListener("touchstart", enableAudio, { once: true });
+  // Bottone ON/OFF Audio
+  audioToggle.addEventListener("click", () => {
+    if (audio.paused) {
+      audio.play();
+      audioToggle.textContent = "🔇 Disattiva Audio";
+    } else {
+      audio.pause();
+      audioToggle.textContent = "🔊 Attiva Audio";
+    }
+  });
+
+  // Popup Servizi
+  const items = document.querySelectorAll('#servizi-list li');
+  const popup = document.getElementById('popup');
+  const popupTitle = document.getElementById('popup-title');
+  const popupText = document.getElementById('popup-text');
+
+  items.forEach(item => {
+    item.addEventListener('click', () => {
+      popupTitle.textContent = item.textContent;
+      popupText.textContent = item.getAttribute('data-desc');
+      popup.style.display = 'flex';
+    });
+  });
 });
 
-    // Popup Servizi
-    const items = document.querySelectorAll('#servizi-list li');
-    const popup = document.getElementById('popup');
-    const popupTitle = document.getElementById('popup-title');
-    const popupText = document.getElementById('popup-text');
+// Funzione per chiudere il popup
+function closePopup() {
+  document.getElementById('popup').style.display = 'none';
+}
 
-    items.forEach(item => {
-      item.addEventListener('click', () => {
-        popupTitle.textContent = item.textContent;
-        popupText.textContent = item.getAttribute('data-desc');
-        popup.style.display = 'flex';
-      });
-    });
-
-    function closePopup() {
-      popup.style.display = 'none';
-    }
 
     window.onclick = function(event) {
       if (event.target === popup) closePopup();
