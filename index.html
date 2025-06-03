@@ -2,6 +2,8 @@
 <html lang="it">
 <head>
   <meta charset="UTF-8">
+  <meta name="description" content="Piani personalizzati di allenamento e coaching. Allenati con un professionista del fitness con titoli nazionali e internazionali.">
+<meta name="keywords" content="Fitness, Coaching, Allenamento, Alimentazione, Personal Trainer, Workout, App Allenamento, App Nutrizione">
   <title>Pagamento con PayPal</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap" rel="stylesheet">
@@ -139,7 +141,10 @@
     .popup.fade-out {
   animation: fadeOut 0.5s ease forwards;
 }
-
+@keyframes fadeOut {
+  from { opacity: 1; }
+  to { opacity: 0; }
+}
     @keyframes popupZoom {
       to { transform: scale(1) rotate(0); opacity: 1; }
     }
@@ -371,7 +376,12 @@ particlesJS("particles-js", {
 
 // Funzione per chiudere il popup
 function closePopup() {
-  document.getElementById('popup').style.display = 'none';
+  const popup = document.getElementById('popup');
+  popup.classList.add('fade-out');
+  setTimeout(() => {
+    popup.style.display = 'none';
+    popup.classList.remove('fade-out');
+  }, 500);
 }
 
 
