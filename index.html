@@ -17,6 +17,48 @@
   <link rel="icon" href="favicon.ico" type="image/x-icon">
   <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap" rel="stylesheet">
   <style>
+    .copyright-bar {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  width: 100vw;
+  height: 32px;
+  background: #111;
+  color: #fff;
+  text-align: center;
+  line-height: 32px;
+  font-size: 1rem;
+  z-index: 10000; /* sotto la barra feedback */
+  box-shadow: 0 -1px 6px rgba(255,0,0,0.09);
+}
+.fake-comments-marquee {
+  background: rgba(0,0,0,0.92);
+  color: #fff;
+  overflow: hidden;
+  height: 38px;
+  display: flex;
+  align-items: center;
+  border-top: 2px solid rgba(255, 0, 0, 0);
+  font-size: 1.05rem;
+  margin-bottom: 10px; /* per separarla dal copyright */
+  /* rimuovi: position, bottom, left, z-index, width, box-shadow */
+}
+.fake-comments-track {
+  display: inline-block;
+  white-space: nowrap;
+  animation: marquee-comments 45s linear infinite;
+}
+.fake-comments-track span {
+  display: inline-block;
+  margin: 0 45px;
+  font-weight: 600;
+  letter-spacing: 0.5px;
+  text-shadow: 0 0 6px #000;
+}
+@keyframes marquee-comments {
+  0% { transform: translateX(0);}
+  100% { transform: translateX(-100%);}
+}
     body {
       margin: 0; padding: 0; text-align: center;
       font-family: 'Montserrat', sans-serif;
@@ -31,6 +73,16 @@
       z-index: 0;
       pointer-events: none;
     }
+    .feedback h2 {
+  text-shadow: 0 0 8px rgba(255, 0, 0, 0.8);
+}
+.feedback input, .feedback textarea {
+  margin-bottom: 10px;
+  border: 2px solid #ff0000;
+  border-radius: 5px;
+  background: #1c1c1c;
+  color: #fff;
+}
     .radial-glow {
       position: fixed; top: 0; left: 0; width: 100vw; height: 100vh;
       pointer-events: none; z-index: 0;
@@ -54,6 +106,11 @@
       background: rgba(12,1,1,0.93); border-radius: 15px;
       box-shadow: 0 0 20px red; position: relative; z-index: 1;
     }
+    input,
+textarea {
+  width: 100%;
+  box-sizing: border-box;
+}
     .logo {
       max-width: 150px; margin-bottom: 20px; border-radius: 50%;
       animation: firePulse 2s infinite;
@@ -165,10 +222,33 @@
       select, label { font-size: 1.1rem; padding: 16px; }
       ul li { font-size: 0.95rem; padding: 8px; }
     }
+    @media (max-width:600px) {
+  #feedbackForm {
+    margin: 10px 0 !important;
+    max-width: 100% !important;
+  }
+  .feedback input, .feedback textarea {
+    font-size: 1.1rem;
+  }
+}
+  #audio-toggle {
+  position: fixed;
+  top: 20px;
+  right: 20px;
+  z-index: 12000; /* più alto di .fake-comments-marquee */
+  background: rgba(0,0,0,0.6);
+  border: 2px solid red;
+  color: white;
+  font-size: 0.8rem;
+  border-radius: 5px;
+  padding: 7px 12px;
+  cursor: pointer;
+}
   </style>
 </head>
 <body>
-  <button id="audio-toggle" aria-label="Attiva o disattiva audio" style="position: fixed; top: 20px; right: 20px; z-index: 10000; background: rgba(0,0,0,0.6); border: 2px solid red; color: white; padding: 7px 12px; border-radius: 5px;">
+  
+  <button id="audio-toggle" aria-label="Attiva o disattiva audio" style="position: fixed; top: 20px; right: 20px; z-index: 12000; background: rgba(0,0,0,0.6); border: 2px solid red; color: white; padding: 7px 12px; border-radius: 5px;">
     🔇 Off
   </button>
 
@@ -225,6 +305,7 @@
           <li><a href="https://www.facebook.com/luca.cupo.1232/" target="_blank" rel="noopener">📘 Facebook</a></li>
         </ul>
       </section>
+      
       <div class="separator"></div>
       <section class="presentazione" id="presentazione">
         <h2 class="typing">Chi sono</h2>
@@ -236,8 +317,18 @@
         </p>
       </section>
       <div class="separator"></div>
-      <section class="parallax" data-speed="0.1" aria-label="Copyright">&copy; 2025 LcFitnessTraining. Tutti i diritti riservati.</section>
-    </div>
+<section class="feedback" id="feedback">
+  <h2>Lascia un feedback per migliorare i nostri servizi!</h2>
+  <form id="feedbackForm" style="text-align:left;max-width:400px;margin:20px auto;">
+    <label for="nome">Nome:</label>
+    <input type="text" id="nome" name="nome" required style="width:100%;padding:8px;">
+    <label for="commento">Feedback:</label>
+    <textarea id="commento" name="commento" required style="width:100%;padding:8px;min-height:80px;"></textarea>
+    <button type="submit" style="padding:10px 30px;background:red;color:#fff;border:none;border-radius:6px;margin-top:10px;cursor:pointer;">Invia</button>
+    <div id="msg-feedback" style="margin-top:10px;"></div>
+  </form>
+</section>
+      
   </main>
 
   <!-- Popup -->
@@ -385,5 +476,42 @@
       if(e.key === "Escape" && popup.style.display === 'flex') closePopup();
     });
   </script>
+  <script>
+document.getElementById('feedbackForm').addEventListener('submit', function(e){
+  e.preventDefault();
+  var msgBox = document.getElementById('msg-feedback');
+  msgBox.textContent = 'Invio in corso...';
+  fetch('https://script.google.com/macros/s/AKfycbwlJaaj_Fg2Bw2Ilhfb9HCiid-xlKOTC2_TA0h2cHO5ROnC_MpmwKsuygY-rrt5UeLZgQ/exec', {
+    method: 'POST',
+    mode: 'no-cors',
+    headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+    body: new URLSearchParams({
+      nome: document.getElementById('nome').value,
+      commento: document.getElementById('commento').value
+    })
+  }).then(function(){
+    msgBox.textContent = 'Grazie per il tuo feedback!';
+    document.getElementById('feedbackForm').reset();
+  }).catch(function(){
+    msgBox.textContent = 'Errore nell\'invio. Riprova più tardi.';
+  });
+});
+</script>
+<div class="fake-comments-marquee">
+  <div class="fake-comments-track">
+    <span>Marco-Coach super disponibile e sempre presente in ogni momento della giornata</span>
+    <span>Laura-Grazie a Luka ho raggiunto i miei obiettivi in pochissimo tempo</span>
+    <span>Giovanni-Allenamenti personalizzati al TOP!Non ho mai raggiunto questi risultati prima d ora </span>
+    <span>Paolo-Professionalità e risultati garantiti! piani alimentari perfetti e calcolati nel dettaglio</span>
+    <span>Simona-Consigliatissimo, super preparato e sempre disponibile</span>
+    <span>Daniele-Un coach molto preprato dal punto di vista alimentare e di integrazione</span>
+    <span>Miky-Grande Coach ogni allenamento è sempre più devastante ahahah</span>
+    <span>Sery-é la prima volta che riesco a superare i miei limiti</span>
+    <span>Dany-Amo la spiegazione scientifica di ogni singolo piano  </span>
+  </div>
+  </div>
+      <section class="parallax" data-speed="0.02" aria-label="Copyright">&copy; 2025 LcFitnessTraining. Tutti i diritti riservati.</section>
+    </div>
+    
 </body>
 </html>
