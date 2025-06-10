@@ -18,23 +18,55 @@
   <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
   <style>
-    .instagram-icon {
-  color: #000000;
-  background: radial-gradient(circle at 30% 110%, #FDF497 0%, #FDF497 5%, #FD5949 45%, #D6249F 60%, #285AEB 90%);
-  border-radius: 20%;
-  padding: 3px;
-}
-.facebook-icon {
-  color: #1877F3;
-}
-.gmail-icon {
-  color: #D44638;
-}
-.contatti i {
-  margin-right: 8px;
-  font-size: 1.3em;
-  vertical-align: middle;
-}
+    /* --- Effetti grafici e layout --- */
+    body {
+      margin: 0; padding: 0; text-align: center;
+      font-family: 'Montserrat', sans-serif;
+      background: #000; color: #fff;
+      scroll-behavior: smooth;
+    }
+    .container {
+      max-width: 600px; margin: 60px auto; padding: 30px;
+      background: rgba(12,1,1,0.93); border-radius: 15px;
+      box-shadow: 0 0 20px red; position: relative; z-index: 1;
+    }
+    .logo {
+      max-width: 150px; margin-bottom: 20px; border-radius: 50%;
+      animation: firePulse 2s infinite;
+      width: 100%; height: auto;
+    }
+    @keyframes firePulse {
+      0%,100%{box-shadow:0 0 10px red,0 0 20px orange}
+      50%{box-shadow:0 0 20px red,0 0 30px orange}
+    }
+    .separator {
+      width: 100px; height: 4px; background: red;
+      margin: 30px auto; animation: pulse 2s infinite;
+    }
+    @keyframes pulse { 0%,100%{transform:scaleX(1)} 50%{transform:scaleX(1.5)} }
+    .radial-glow {
+      position: fixed; top: 0; left: 0; width: 100vw; height: 100vh;
+      pointer-events: none; z-index: 0;
+      background:
+        radial-gradient(circle at center, rgba(255, 255, 255, 0.2) 0%, transparent 60%),
+        radial-gradient(circle at 30% 30%, rgba(255, 255, 255, 0.1) 0%, transparent 70%),
+        radial-gradient(circle at 70% 70%, rgba(255, 255, 255, 0.15) 0%, transparent 60%);
+      animation: pulseRadial 10s ease-in-out infinite;
+    }
+    @keyframes pulseRadial { 0%,100%{transform:scale(1);opacity:.5} 50%{transform:scale(1.1);opacity:.8} }
+    .fog-layer {
+      background: radial-gradient(circle, rgba(255, 255, 255, 0.08) 0%, transparent 70%);
+      animation: moveFog 30s linear infinite;
+    }
+    @keyframes moveFog { 0%{transform:translateX(0)} 100%{transform:translateX(-200px)} }
+    #particles-js {
+      position: fixed;
+      top: 0; left: 0;
+      width: 100%;
+      height: 100%;
+      z-index: 0;
+      pointer-events: none;
+    }
     .copyright-bar {
       position: fixed;
       bottom: 0;
@@ -49,6 +81,127 @@
       z-index: 10000;
       box-shadow: 0 -1px 6px rgba(255,0,0,0.09);
     }
+    /* --- Tipografia e animazioni titoli --- */
+    h1.typing {
+      font-size: 1.8rem; margin: 0 auto 20px; white-space: nowrap;
+      overflow: hidden; width: 100%; letter-spacing: 1.2px;
+      animation: typing 3s steps(30,end), pulseGlow 2s alternate infinite;
+      text-shadow: 0 0 8px rgba(255,0,0,.8);
+    }
+    h2.typing {
+      font-size: 1.5rem; white-space: nowrap; overflow: hidden;
+      width: 100%; letter-spacing: 1.2px;
+      animation: typing 2.5s steps(25,end), pulseGlow 2s alternate infinite;
+      text-shadow: 0 0 8px rgba(255,0,0,.8);
+    }
+    @keyframes typing { from{width:0} to{width:100%} }
+    @keyframes pulseGlow { from{text-shadow:0 0 8px red} to{text-shadow:0 0 20px red} }
+    h2 { text-shadow: 0 0 8px rgba(255, 0, 0, 0.8); letter-spacing: 1.2px; font-size: 1.5rem; }
+    /* --- Form e Select --- */
+    select, label {
+      display: block; width: 100%;
+      font-size: 1rem; margin-bottom: 20px;
+      text-align: left;
+    }
+    select {
+      padding: 14px; background: #1c1c1c; color: #fff;
+      border: 2px solid red; border-radius: 8px;
+      box-shadow: 0 0 10px red;
+    }
+    input, textarea {
+      width: 100%;
+      box-sizing: border-box;
+    }
+    .feedback input, .feedback textarea {
+      margin-bottom: 10px;
+      border: 2px solid #ff0000;
+      border-radius: 5px;
+      background: #1c1c1c;
+      color: #fff;
+    }
+    /* --- Liste servizi, titoli, contatti --- */
+    ul { list-style: none; padding: 0; text-align: left; }
+    ul li {
+      opacity: 0; transition: 0.5s; padding: 10px;
+      transform: translateX(-20px); border-bottom: 1px solid #ccc;
+      position: relative; cursor: pointer;
+    }
+    ul li.visible { opacity: 1; transform: translateX(0); }
+    ul li:hover {
+      background: rgba(255, 0, 0, 0.1);
+      transition: background 0.3s ease;
+    }
+    ul#servizi-list li::after { display: none; }
+    .servizi small {
+      display: block;
+      font-size: 0.85rem;
+      color: #f88;
+      margin-top: -15px;
+      margin-bottom: 15px;
+      font-style: italic;
+    }
+    .contatti ul, .contatti ul li {
+      text-align: center; border: none; transform: none; opacity: 1;
+    }
+    .contatti a {
+      color: #faf7f7; text-decoration: none; font-weight: bold;
+      transition: color 0.3s ease;
+    }
+    .contatti a:hover { color: #ff0000; }
+    .contatti i {
+      margin-right: 8px;
+      font-size: 1.3em;
+      vertical-align: middle;
+    }
+    /* --- Icone --- */
+    .instagram-icon {
+      color: #000000;
+      background: radial-gradient(circle at 30% 110%, #FDF497 0%, #FDF497 5%, #FD5949 45%, #D6249F 60%, #285AEB 90%);
+      border-radius: 20%;
+      padding: 3px;
+    }
+    .facebook-icon {
+      color: #1877F3;
+    }
+    .gmail-icon {
+      color: #D44638;
+    }
+    /* --- Popup --- */
+    .popup {
+      display: none;
+      position: fixed;
+      z-index: 9999;
+      top: 0; left: 0;
+      width: 100vw; height: 100vh;
+      background: rgba(0, 0, 0, 0.85);
+      justify-content: center;
+      align-items: center;
+      animation: fadeIn 0.5s ease forwards;
+    }
+    .popup-content {
+      background: #111; padding: 30px;
+      border-radius: 15px; max-width: 500px;
+      text-align: center; color: #fff;
+      box-shadow: 0 0 20px red;
+      animation: popupZoom 0.8s ease forwards;
+      transform: scale(0.8) rotate(-3deg); opacity: 0;
+    }
+    .popup.fade-out {
+      animation: fadeOut 0.5s ease forwards;
+    }
+    .close-btn {
+      float: right; font-size: 1.3rem;
+      cursor: pointer; color: red;
+    }
+    @keyframes fadeOut {
+      from { opacity: 1; }
+      to { opacity: 0; }
+    }
+    @keyframes popupZoom {
+      to { transform: scale(1) rotate(0); opacity: 1; }
+    }
+    @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+    /* --- Fake comments/testimonials --- */
     .fake-comments-marquee {
       background: rgba(0,0,0,0.92);
       color: #fff;
@@ -76,162 +229,7 @@
       0% { transform: translateX(0);}
       100% { transform: translateX(-100%);}
     }
-    body {
-      margin: 0; padding: 0; text-align: center;
-      font-family: 'Montserrat', sans-serif;
-      background: #000; color: #fff;
-      scroll-behavior: smooth;
-    }
-    #particles-js {
-      position: fixed;
-      top: 0; left: 0;
-      width: 100%;
-      height: 100%;
-      z-index: 0;
-      pointer-events: none;
-    }
-    .feedback h2 {
-      text-shadow: 0 0 8px rgba(255, 0, 0, 0.8);
-    }
-    .feedback input, .feedback textarea {
-      margin-bottom: 10px;
-      border: 2px solid #ff0000;
-      border-radius: 5px;
-      background: #1c1c1c;
-      color: #fff;
-    }
-    .radial-glow {
-      position: fixed; top: 0; left: 0; width: 100vw; height: 100vh;
-      pointer-events: none; z-index: 0;
-      background:
-        radial-gradient(circle at center, rgba(255, 255, 255, 0.2) 0%, transparent 60%),
-        radial-gradient(circle at 30% 30%, rgba(255, 255, 255, 0.1) 0%, transparent 70%),
-        radial-gradient(circle at 70% 70%, rgba(255, 255, 255, 0.15) 0%, transparent 60%);
-      animation: pulseRadial 10s ease-in-out infinite;
-    }
-    .fog-layer {
-      background: radial-gradient(circle, rgba(255, 255, 255, 0.08) 0%, transparent 70%);
-      animation: moveFog 30s linear infinite;
-    }
-    @keyframes pulseRadial { 0%,100%{transform:scale(1);opacity:.5} 50%{transform:scale(1.1);opacity:.8} }
-    @keyframes moveFog { 0%{transform:translateX(0)} 100%{transform:translateX(-200px)} }
-    main {
-      display: block;
-    }
-    .container {
-      max-width: 600px; margin: 60px auto; padding: 30px;
-      background: rgba(12,1,1,0.93); border-radius: 15px;
-      box-shadow: 0 0 20px red; position: relative; z-index: 1;
-    }
-    input,
-    textarea {
-      width: 100%;
-      box-sizing: border-box;
-    }
-    .logo {
-      max-width: 150px; margin-bottom: 20px; border-radius: 50%;
-      animation: firePulse 2s infinite;
-      width: 100%; height: auto;
-    }
-    @keyframes firePulse {
-      0%,100%{box-shadow:0 0 10px red,0 0 20px orange}
-      50%{box-shadow:0 0 20px red,0 0 30px orange}
-    }
-    h1.typing {
-      font-size: 1.8rem; margin: 0 auto 20px; white-space: nowrap;
-      overflow: hidden; width: 100%; letter-spacing: 1.2px;
-      animation: typing 3s steps(30,end), pulseGlow 2s alternate infinite;
-      text-shadow: 0 0 8px rgba(255,0,0,.8);
-    }
-    h2.typing {
-      font-size: 1.5rem;
-      white-space: nowrap;
-      overflow: hidden;
-      width: 100%;
-      letter-spacing: 1.2px;
-      animation: typing 2.5s steps(25,end), pulseGlow 2s alternate infinite;
-      text-shadow: 0 0 8px rgba(255,0,0,.8);
-    }
-    @keyframes typing { from{width:0} to{width:100%} }
-    @keyframes pulseGlow { from{text-shadow:0 0 8px red} to{text-shadow:0 0 20px red} }
-    select, label {
-      display: block; width: 100%;
-      font-size: 1rem; margin-bottom: 20px;
-      text-align: left;
-    }
-    select {
-      padding: 14px; background: #1c1c1c; color: #fff;
-      border: 2px solid red; border-radius: 8px;
-      box-shadow: 0 0 10px red;
-    }
-    .separator {
-      width: 100px; height: 4px; background: red;
-      margin: 30px auto; animation: pulse 2s infinite;
-    }
-    @keyframes pulse { 0%,100%{transform:scaleX(1)} 50%{transform:scaleX(1.5)} }
-    h2 { text-shadow: 0 0 8px rgba(255, 0, 0, 0.8); letter-spacing: 1.2px; font-size: 1.5rem; }
-    ul { list-style: none; padding: 0; text-align: left; }
-    ul li {
-      opacity: 0; transition: 0.5s; padding: 10px;
-      transform: translateX(-20px); border-bottom: 1px solid #ccc;
-      position: relative; cursor: pointer;
-    }
-    ul li.visible { opacity: 1; transform: translateX(0); }
-    ul li:hover {
-      background: rgba(255, 0, 0, 0.1);
-      transition: background 0.3s ease;
-    }
-    ul#servizi-list li::after { display: none; }
-    .servizi small {
-      display: block;
-      font-size: 0.85rem;
-      color: #f88;
-      margin-top: -15px;
-      margin-bottom: 15px;
-      font-style: italic;
-    }
-    .popup {
-      display: none;
-      position: fixed;
-      z-index: 9999;
-      top: 0; left: 0;
-      width: 100vw; height: 100vh;
-      background: rgba(0, 0, 0, 0.85);
-      justify-content: center;
-      align-items: center;
-      animation: fadeIn 0.5s ease forwards;
-    }
-    .popup-content {
-      background: #111; padding: 30px;
-      border-radius: 15px; max-width: 500px;
-      text-align: center; color: #fff;
-      box-shadow: 0 0 20px red;
-      animation: popupZoom 0.8s ease forwards;
-      transform: scale(0.8) rotate(-3deg); opacity: 0;
-    }
-    .popup.fade-out {
-      animation: fadeOut 0.5s ease forwards;
-    }
-    @keyframes fadeOut {
-      from { opacity: 1; }
-      to { opacity: 0; }
-    }
-    @keyframes popupZoom {
-      to { transform: scale(1) rotate(0); opacity: 1; }
-    }
-    @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
-    .close-btn {
-      float: right; font-size: 1.3rem;
-      cursor: pointer; color: red;
-    }
-    .contatti ul, .contatti ul li {
-      text-align: center; border: none; transform: none; opacity: 1;
-    }
-    .contatti a {
-      color: #faf7f7; text-decoration: none; font-weight: bold;
-      transition: color 0.3s ease;
-    }
-    .contatti a:hover { color: #ff0000; }
+    /* --- Responsive --- */
     @media (max-width:600px) {
       .container { padding: 15px; margin: 20px; }
       .logo { max-width: 120px; }
@@ -246,6 +244,7 @@
         font-size: 1.1rem;
       }
     }
+    /* --- Audio toggle --- */
     #audio-toggle {
       position: fixed;
       top: 20px;
@@ -262,20 +261,23 @@
   </style>
 </head>
 <body>
+  <!-- Audio toggle -->
   <button id="audio-toggle" aria-label="Attiva o disattiva audio">
     🔇 Off
   </button>
-
+  <!-- Effetti grafici -->
   <div class="radial-glow"></div>
   <div class="fog-layer"></div>
   <div id="particles-js"></div>
   <main>
     <div class="container">
+      <!-- Logo e Titolo -->
       <img src="logo.jpg" alt="Logo di LcFitnessTraining" class="logo">
       <h1 class="typing">Scegli il tuo piano</h1>
       <p>Scegli i tuoi obiettivi e porta il tuo corpo sopra ogni limite.</p>
+      <!-- Selettore Durata e PayPal -->
       <label for="durata">Durata:</label>
-      <select id="durata" required aria-required="true">
+      <select id="durata" required>
         <option value="" disabled selected>Seleziona la durata</option>
         <option value="63">1 mese - €63</option>
         <option value="115">2 mesi - €115</option>
@@ -288,6 +290,7 @@
       </select>
       <div id="paypal-button-container"></div>
       <div class="separator"></div>
+      <!-- Servizi -->
       <section class="servizi" id="servizi">
         <h2>I miei servizi</h2>
         <small>clicca sul servizio per saperne di più</small>
@@ -302,46 +305,50 @@
         </ul>
       </section>
       <div class="separator"></div>
+      <!-- Titoli e certificazioni -->
       <section class="titoli" id="titoli">
         <h2>Titoli e certificazioni</h2>
         <ul id="titoli-list">
           <li>🥈 Istruttore Fitness & Powerlifting specializzato nella ricomposizione corporea</li>
           <li>🏆 1° NAC ITALY Championship</li>
           <li>🥇 8° NAC WORLD Championship</li>
-          </ul>
-          </section>
+        </ul>
+      </section>
       <div class="separator"></div>
+      <!-- Contatti -->
       <section class="contatti" id="contatti">
-  <h2>Contatti</h2>
-  <ul>
-    <li>
-      <a href="mailto:LcFitnessTrainingPt@gmail.com">
-        <i class="fa-solid fa-envelope gmail-icon"></i> Gmail
-      </a>
-    </li>
-    <li>
-      <a href="https://www.instagram.com/luka_cupo/" target="_blank" rel="noopener">
-        <i class="fab fa-instagram instagram-icon"></i> Instagram
-      </a>
-    </li>
-    <li>
-      <a href="https://www.facebook.com/luca.cupo.1232/" target="_blank" rel="noopener">
-        <i class="fab fa-facebook facebook-icon"></i> Facebook
-      </a>
-    </li>
-  </ul>
-</section>
-<div class="separator"></div>
+        <h2>Contatti</h2>
+        <ul>
+          <li>
+            <a href="mailto:LcFitnessTrainingPt@gmail.com">
+              <i class="fa-solid fa-envelope gmail-icon"></i> Gmail
+            </a>
+          </li>
+          <li>
+            <a href="https://www.instagram.com/luka_cupo/" target="_blank" rel="noopener">
+              <i class="fab fa-instagram instagram-icon"></i> Instagram
+            </a>
+          </li>
+          <li>
+            <a href="https://www.facebook.com/luca.cupo.1232/" target="_blank" rel="noopener">
+              <i class="fab fa-facebook facebook-icon"></i> Facebook
+            </a>
+          </li>
+        </ul>
+      </section>
+      <div class="separator"></div>
+      <!-- Presentazione -->
       <section class="presentazione" id="presentazione">
         <h2 class="typing">Chi sono</h2>
         <p style="line-height: 1.6; margin-top: 10px;">
-          Mi chiamo <strong>Luka</strong> e sono un <span style="color:red;">Coach Certificato</span> con anni di esperienza nel settore fitness e preparazione atletica. Il mio approccio unisce competenze scientifiche e pratiche per ottenere risultati concreti.
+          Mi chiamo <strong>Luka</strong> e sono un <span style="color:red;">Coach Certificato</span> con anni di esperienza nel settore fitness e preparazione atletica. Il mio approccio unisce competenze scientifiche e passione per il benessere.
         </p>
         <p style="line-height: 1.6; margin-top: 15px;">
-          Con titoli nazionali e internazionali, e centinaia di clienti soddisfatti, il mio obiettivo è offrirti un <span style="color:red;">percorso su misura</span> che ti permetta di raggiungere i tuoi traguardi personali.
+          Con titoli nazionali e internazionali, e centinaia di clienti soddisfatti, il mio obiettivo è offrirti un <span style="color:red;">percorso su misura</span> che ti permetta di raggiungere la tua miglior forma.
         </p>
       </section>
       <div class="separator"></div>
+      <!-- Feedback -->
       <section class="feedback" id="feedback">
         <h2>Lascia un feedback per migliorare i nostri servizi</h2>
         <form id="feedbackForm" style="text-align:left;max-width:400px;margin:20px auto;">
@@ -354,8 +361,27 @@
         </form>
       </section>
     </div>
+    <!-- Testimonianze -->
+    <div class="testimonials-section">
+      <h2>Testimonianze</h2>
+      <div class="feedback-carousel">
+        <div class="fake-comments-marquee">
+          <div class="fake-comments-track">
+            <span>Marco - Coach super disponibile e sempre presente in ogni momento della giornata</span>
+            <span>Laura - Grazie a Luka ho raggiunto i miei obiettivi in pochissimo tempo</span>
+            <span>Giovanni - Allenamenti personalizzati al TOP! Non ho mai raggiunto questi risultati prima d'ora</span>
+            <span>Paolo - Professionalità e risultati garantiti! piani alimentari perfetti e calcolati nel dettaglio</span>
+            <span>Simona - Consigliatissimo, super preparato e sempre disponibile</span>
+            <span>Daniele - Un coach molto preparato dal punto di vista alimentare e di integrazione</span>
+            <span>Miky - Grande Coach ogni allenamento è sempre più devastante ahahah</span>
+            <span>Sery - È la prima volta che riesco a superare i miei limiti</span>
+            <span>Dany - Amo la spiegazione scientifica di ogni singolo piano</span>
+          </div>
+        </div>
+      </div>
+    </div>
+    <section class="parallax" data-speed="0.02" aria-label="Copyright">&copy; 2025 LcFitnessTraining. Tutti i diritti riservati.</section>
   </main>
-
   <!-- Popup -->
   <div class="popup" id="popup" aria-modal="true" role="dialog">
     <div class="popup-content">
@@ -364,15 +390,13 @@
       <p id="popup-text"></p>
     </div>
   </div>
-
   <!-- Audio -->
   <audio id="bg-music" loop preload="auto">
     <source src="musica.mp3" type="audio/mpeg">
     Il tuo browser non supporta l'audio HTML5.
   </audio>
   <div id="audio-overlay" style="position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; z-index: 9999; background: transparent; cursor: pointer;" tabindex="0" aria-label="Attiva audio di sottofondo"></div>
-
-  <!-- PayPal SDK -->
+  <!-- PayPal SDK e librerie -->
   <script src="https://www.paypal.com/sdk/js?client-id=AQY44jd2y1IUT-RpjuU79wngDCQGzJ7FXeESa7pJjKIQNRi2-z0jABKr-kLgQtqI6h3etMYdEKaa8_qT&currency=EUR"></script>
   <script src="https://cdn.jsdelivr.net/npm/particles.js@2.0.0/particles.min.js"></script>
   <script>
@@ -412,11 +436,11 @@
       const audioToggle = document.getElementById("audio-toggle");
       let isPlaying = false;
       if (localStorage.getItem('paypalCancel') === '1') {
-  localStorage.removeItem('paypalCancel');
-  popupTitle.textContent = "❌ Pagamento annullato";
-  popupText.innerHTML = "Hai annullato il processo di pagamento. Se vuoi riprovare, seleziona il piano e clicca su Paga.";
-  popup.style.display = 'flex';
-}
+        localStorage.removeItem('paypalCancel');
+        popupTitle.textContent = "❌ Pagamento annullato";
+        popupText.innerHTML = "Hai annullato il processo di pagamento. Se vuoi riprovare, seleziona il piano e clicca su Paga.";
+        popup.style.display = 'flex';
+      }
 
       const startAudio = () => {
         if (!isPlaying) {
@@ -499,18 +523,18 @@
             }]
           });
         },
-         onApprove: (data, actions) => actions.order.capture().then(details => {
+        onApprove: (data, actions) => actions.order.capture().then(details => {
           const name = details.payer.name.given_name;
           popupTitle.textContent = "✅ Pagamento completato";
           popupText.innerHTML = `Grazie per il tuo acquisto, <strong>${name}</strong>!<br>Verrai contattato a breve per iniziare il tuo percorso. 💪🔥`;
           popup.style.display = 'flex';
         }),
         onCancel: function (data) {
-  try {
-    localStorage.setItem('paypalCancel', '1');
-  } catch(e) {}
-  location.reload();
-},
+          try {
+            localStorage.setItem('paypalCancel', '1');
+          } catch(e) {}
+          location.reload();
+        },
         onError: function (err) {
           popupTitle.textContent = "⚠️ Errore durante il pagamento";
           popupText.innerHTML = "Si è verificato un errore tecnico durante il pagamento. Ti consigliamo di riprovare tra qualche minuto.<br><br>Se il problema persiste, contattaci per assistenza.";
@@ -540,22 +564,5 @@
       });
     });
   </script>
-  <div class="testimonials-section">
-  <h2>Testimonianze</h2>
-  <div class="feedback-carousel">
-  <div class="fake-comments-marquee">
-    <div class="fake-comments-track">
-      <span>Marco - Coach super disponibile e sempre presente in ogni momento della giornata</span>
-      <span>Laura - Grazie a Luka ho raggiunto i miei obiettivi in pochissimo tempo</span>
-      <span>Giovanni - Allenamenti personalizzati al TOP! Non ho mai raggiunto questi risultati prima d'ora</span>
-      <span>Paolo - Professionalità e risultati garantiti! piani alimentari perfetti e calcolati nel dettaglio</span>
-      <span>Simona - Consigliatissimo, super preparato e sempre disponibile</span>
-      <span>Daniele - Un coach molto preparato dal punto di vista alimentare e di integrazione</span>
-      <span>Miky - Grande Coach ogni allenamento è sempre più devastante ahahah</span>
-      <span>Sery - È la prima volta che riesco a superare i miei limiti</span>
-      <span>Dany - Amo la spiegazione scientifica di ogni singolo piano</span>
-    </div>
-  </div>
-  <section class="parallax" data-speed="0.02" aria-label="Copyright">&copy; 2025 LcFitnessTraining. Tutti i diritti riservati.</section>
 </body>
 </html>
