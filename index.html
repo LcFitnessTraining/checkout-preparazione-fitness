@@ -17,6 +17,17 @@
   <link rel="icon" href="favicon.ico" type="image/x-icon">
   <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+  <div class="payment-logos animate-slide-down">
+
+  <img src="https://img.icons8.com/color/48/visa.png" alt="Visa">
+  <img src="https://img.icons8.com/color/48/mastercard-logo.png" alt="Mastercard">
+  <img src="https://img.icons8.com/color/48/maestro.png" alt="Maestro">
+  <img src="https://img.icons8.com/color/48/amex.png" alt="American Express">
+  <img src="https://img.icons8.com/color/48/paypal.png" alt="PayPal">
+  <img src="https://img.icons8.com/color/48/apple-pay.png" alt="Apple Pay">
+</div>
+
+
   <style>
     /* --- Effetti grafici e layout --- */
     body {
@@ -25,6 +36,96 @@
       background: #000; color: #fff;
       scroll-behavior: smooth;
     }
+
+.faq-section {
+  max-width: 800px;
+  margin: 60px auto;
+  padding: 20px;
+  background: rgba(0, 0, 0, 0.486);
+  border-radius: 16px;
+  box-shadow: 0 0 20px rgba(255, 0, 0, 0.2);
+  backdrop-filter: blur(8px);
+}
+
+.faq-title {
+  text-align: center;
+  font-size: 2rem;
+  margin-bottom: 30px;
+  color: #fff;
+  text-shadow: 0 0 8px #f00;
+}
+
+.faq-item {
+  margin-bottom: 15px;
+}
+
+.faq-question {
+  width: 100%;
+  padding: 15px;
+  font-size: 1.1rem;
+  background-color: #111;
+  color: #fff;
+  border: none;
+  border-radius: 8px;
+  text-align: left;
+  cursor: pointer;
+  position: relative;
+  transition: background 0.3s;
+}
+
+.faq-question:hover {
+  background-color: #222;
+}
+
+.faq-answer {
+  max-height: 0;
+  overflow: hidden;
+  background-color: #1a1a1a;
+  color: #ddd;
+  padding: 0 15px;
+  border-radius: 0 0 8px 8px;
+  transition: max-height 0.4s ease, padding 0.4s ease;
+}
+
+.faq-item.active .faq-answer {
+  padding: 15px;
+  max-height: 300px;
+}
+
+.payment-logos {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 20px;
+  padding: 2px 0;
+  background-color: rgb(0, 0, 0);
+  border-bottom: 1px solid #faf8f800;
+  animation: slideDown 1.2s ease-out;
+}
+
+.payment-logos img {
+  height: 28px;
+  opacity: 0.9;
+  transition: transform 0.3s ease;
+}
+
+.payment-logos img:hover {
+  transform: scale(1.1);
+}
+
+@keyframes slideDown {
+  from {
+    transform: translateY(-60px);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+
+
     .container {
       max-width: 600px; margin: 60px auto; padding: 30px;
       background: rgba(12,1,1,0.93); border-radius: 15px;
@@ -203,28 +304,30 @@
     @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
     /* --- Fake comments/testimonials --- */
     .fake-comments-marquee {
-      background: rgba(0,0,0,0.92);
-      color: #fff;
-      overflow: hidden;
-      height: 38px;
-      display: flex;
-      align-items: center;
-      border-top: 2px solid rgba(255, 0, 0, 0);
-      font-size: 1.05rem;
-      margin-bottom: 10px;
-    }
-    .fake-comments-track {
-      display: inline-block;
-      white-space: nowrap;
-      animation: marquee-comments 45s linear infinite;
-    }
-    .fake-comments-track span {
-      display: inline-block;
-      margin: 0 45px;
-      font-weight: 600;
-      letter-spacing: 0.5px;
-      text-shadow: 0 0 6px #000;
-    }
+  overflow: hidden;
+  position: relative;
+  height: 2.5em;
+}
+
+.fake-comments-track {
+  display: flex;
+  animation: scrollComments 10s linear infinite;
+  gap: 100px;
+}
+
+.fake-comments-track span {
+  white-space: nowrap;
+  font-size: 1rem;
+  color: #fff;
+}
+@keyframes scrollComments {
+  0% {
+    transform: translateX(100%);
+  }
+  100% {
+    transform: translateX(-200%);
+  }
+}
     @keyframes marquee-comments {
       0% { transform: translateX(0);}
       100% { transform: translateX(-100%);}
@@ -258,6 +361,22 @@
       padding: 7px 12px;
       cursor: pointer;
     }
+    #msg-feedback.loading::after {
+  content: '';
+  display: inline-block;
+  width: 14px;
+  height: 14px;
+  margin-left: 10px;
+  border: 2px solid #fff;
+  border-top-color: red;
+  border-radius: 50%;
+  animation: spin 0.6s linear infinite;
+  vertical-align: middle;
+}
+
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}
    </style>
 </head>
 <body>
@@ -302,7 +421,7 @@
         <li data-desc="La lezione di coaching individuale è un programma di allenamento personalizzato e mirato, che integra principi di fisiologia dell’esercizio e biomeccanica per ottimizzare la performance muscolare e la tecnica di sollevamento. Durante la sessione, il coach valuta e corregge in tempo reale la postura e l’esecuzione dei movimenti, pianificando progressioni di carico calibrate per favorire l’ipertrofia, la forza massimale e la resistenza muscolare, minimizzando il rischio di infortuni attraverso un controllo continuo della tecnica e un adattamento funzionale alle esigenze specifiche dell’atleta.">⭕️Lezione di coaching individuale</li>
         </ul>
       </section>
-      <div class="separator"></div>
+<div class="separator"></div>
       <!-- Titoli e certificazioni -->
       <section class="titoli" id="titoli">
         <h2>Titoli e certificazioni</h2>
@@ -317,22 +436,23 @@
       <section class="contatti" id="contatti">
         <h2>Contatti</h2>
         <ul>
-          <li>
-            <a href="mailto:LcFitnessTrainingPt@gmail.com">
-              <i class="fa-solid fa-envelope gmail-icon"></i> Gmail
-            </a>
-          </li>
-          <li>
-            <a href="https://www.instagram.com/luka_cupo/" target="_blank" rel="noopener">
-              <i class="fab fa-instagram instagram-icon"></i> Instagram
-            </a>
-          </li>
-          <li>
-            <a href="https://www.facebook.com/luca.cupo.1232/" target="_blank" rel="noopener">
-              <i class="fab fa-facebook facebook-icon"></i> Facebook
-            </a>
-          </li>
-        </ul>
+  <li>
+    <a href="mailto:LcFitnessTrainingPt@gmail.com" aria-label="Invia una mail a LcFitnessTrainingPt@gmail.com">
+      <i class="fa-solid fa-envelope gmail-icon"></i> Gmail
+    </a>
+  </li>
+  <li>
+    <a href="https://www.instagram.com/luka_cupo/" target="_blank" rel="noopener" aria-label="Profilo Instagram di Luka Cupo">
+      <i class="fab fa-instagram instagram-icon"></i> Instagram
+    </a>
+  </li>
+  <li>
+    <a href="https://www.facebook.com/luca.cupo.1232/" target="_blank" rel="noopener" aria-label="Profilo Facebook di Luka Cupo">
+      <i class="fab fa-facebook facebook-icon"></i> Facebook
+    </a>
+  </li>
+</ul>
+
       </section>
       <div class="separator"></div>
       <!-- Presentazione -->
@@ -356,8 +476,51 @@
           <textarea id="commento" name="commento" required style="width:100%;padding:8px;min-height:80px;"></textarea>
           <button type="submit" style="padding:10px 30px;background:red;color:#fff;border:none;border-radius:6px;margin-top:10px;cursor:pointer;">Invia</button>
           <div id="msg-feedback" style="margin-top:10px;"></div>
-        </form>
+          </form>
       </section>
+      <div class="separator"></div>
+      <section class="faq-section">
+  <h2 class="faq-title">Sezione FAQ</h2>
+
+  <div class="faq-item">
+    <button class="faq-question">Quanto dura ogni sessione di personal privato?</button>
+    <div class="faq-answer">
+      <p>Ogni sessione avverrà in un centro a tua scelta (previo appuntamento con il Coach) ed ha una durata media di 60 minuti, inclusa la parte di riscaldamento e defaticamento.Il tutto però varia in base alla programmazione in corso</p>
+    </div>
+  </div>
+  <div class="faq-item">
+    <button class="faq-question">Devo avere attrezzature a casa?</button>
+    <div class="faq-answer">
+      <p>No, i programmi sono adattabili anche a corpo libero. Se hai attrezzi,in casa o in una struttura, saranno integrati.</p>
+    </div>
+  </div>
+  <div class="faq-item">
+    <button class="faq-question">Come funziona dopo aver scelto il piano?</button>
+    <div class="faq-answer">
+      <p>Verrai contattato via email, nella quale riceverai un modulo anamnestico da compilare.</p>
+    </div>
+  </div>
+  <div class="faq-item">
+    <button class="faq-question">Come viene strutturato un piano di allenamento e/o alimentazione?</button>
+    <div class="faq-answer">
+      <p>Il piano alimentare e il programma di allenamento saranno formulati dopo aver compilato l anamnesi secondo metodologie consolidate e protocolli evidence-based, personalizzati in base alle tue esigenze specifiche.</p>
+    </div>
+  </div>
+  <div class="faq-item">
+    <button class="faq-question">Cos'è un piano di integrazione?</button>
+    <div class="faq-answer">
+      <p>L’integrazione sarà proposta in modo mirato, sulla base di eventuali carenze o necessità individuali emerse durante la valutazione.</p>
+    </div>
+  </div>
+  <div class="faq-item">
+    <button class="faq-question">Posso sospendere il mio piano?</button>
+    <div class="faq-answer">
+      <p>Certo,Hai la possibilità di sospendere il tuo piano a tua scelta ed in qualsiasi momento e di riattivarlo secondo le tue esigenze.</p>
+    </div>
+  </div>
+</section>
+
+    
     </div>
     <!-- Testimonianze -->
     <div class="testimonials-section">
@@ -365,15 +528,15 @@
       <div class="feedback-carousel">
         <div class="fake-comments-marquee">
           <div class="fake-comments-track">
-            <span>Marco - Coach super disponibile e sempre presente in ogni momento della giornata</span>
-            <span>Laura - Grazie a Luka ho raggiunto i miei obiettivi in pochissimo tempo</span>
-            <span>Giovanni - Allenamenti personalizzati al TOP! Non ho mai raggiunto questi risultati prima d'ora</span>
-            <span>Paolo - Professionalità e risultati garantiti! piani alimentari perfetti e calcolati nel dettaglio</span>
-            <span>Simona - Consigliatissimo, super preparato e sempre disponibile</span>
-            <span>Daniele - Un coach molto preparato dal punto di vista alimentare e di integrazione</span>
-            <span>Miky - Grande Coach ogni allenamento è sempre più devastante ahahah</span>
-            <span>Sery - È la prima volta che riesco a superare i miei limiti</span>
-            <span>Dany - Amo la spiegazione scientifica di ogni singolo piano</span>
+            <span>💬Marco - Coach super disponibile e sempre presente in ogni momento della giornata</span>
+            <span>💬Laura - Grazie a Luka ho raggiunto i miei obiettivi in pochissimo tempo</span>
+            <span>💬Giovanni - Allenamenti personalizzati al TOP! Non ho mai raggiunto questi risultati prima d'ora</span>
+            <span>💬Paolo - Professionalità e risultati garantiti! piani alimentari perfetti e calcolati nel dettaglio</span>
+            <span>💬Simona - Consigliatissimo, super preparato e sempre disponibile</span>
+            <span>💬Daniele - Un coach molto preparato dal punto di vista alimentare e di integrazione</span>
+            <span>💬Miky - Grande Coach ogni allenamento è sempre più devastante ahahah</span>
+            <span>💬Sery - È la prima volta che riesco a superare i miei limiti</span>
+            <span>💬Dany - Amo la spiegazione scientifica di ogni singolo piano</span>
           </div>
         </div>
       </div>
@@ -562,5 +725,19 @@
       });
     });
   </script>
+  <script>
+  const faqItems = document.querySelectorAll('.faq-item');
+
+  faqItems.forEach(item => {
+    const question = item.querySelector('.faq-question');
+    question.addEventListener('click', () => {
+      item.classList.toggle('active');
+      faqItems.forEach(other => {
+        if (other !== item) other.classList.remove('active');
+      });
+    });
+  });
+</script>
+
 </body>
 </html>
