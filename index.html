@@ -25,12 +25,12 @@
     body {
       margin: 0; padding: 0; text-align: center;
       font-family: 'Montserrat', sans-serif;
-      background: #000; color: #fff;
+      background: #000000; color: #fff;
       scroll-behavior: smooth;
     }
     .container {
       max-width: 600px; margin: 60px auto; padding: 30px;
-      background: rgba(12,1,1,0.93); border-radius: 15px;
+      background: rgba(12, 1, 1, 0.699); border-radius: 15px;
       box-shadow: 0 0 20px red; position: relative; z-index: 1;
     }
     .logo {
@@ -296,16 +296,20 @@
   width: 100%;
   overflow: hidden;
   background: rgba(0, 0, 0, 0.3);
-  border:none;
   padding: 10px 0;
-  white-space: nowrap; /* forza riga singola */
-   width: 100vw;
+  white-space: nowrap;
 }
+
 .feedback-marquee-track {
   display: inline-block;
-  animation: scrollFeedback 50s linear infinite;
-  animation-delay: 0s;
+  min-width: 200%;
+  animation: scrollFeedback 35s linear infinite;
   white-space: nowrap;
+}
+
+@keyframes scrollFeedback {
+  0%   { transform: translateX(0); }
+  100% { transform: translateX(-50%); }
 }
 
 .feedback-item {
@@ -313,18 +317,9 @@
   margin: 0 50px;
   font-size: 1.1rem;
   color: #fff;
-  text-shadow: 0 0 4px #ff5555;
+  text-shadow: none;
 }
 
-/* ANIMAZIONE SCORRIMENTO */
-@keyframes scrollFeedback {
-  0% {
-    transform: translateX(100%);
-  }
-  100% {
-    transform: translateX(-100%);
-  }
-}
 
 /* Responsive per mobile */
 @media (max-width: 768px) {
@@ -365,10 +360,11 @@
 @keyframes spin {
   to { transform: rotate(360deg); }
 }
+#audio-overlay { display: block; }
    </style>
 </head>
 <body>
-  <div class="payment-logos animate-slide-down">
+  <div class="payment-logos">
   <img src="https://img.icons8.com/color/48/visa.png" alt="Visa">
   <img src="https://img.icons8.com/color/48/mastercard-logo.png" alt="Mastercard">
   <img src="https://img.icons8.com/color/48/maestro.png" alt="Maestro">
