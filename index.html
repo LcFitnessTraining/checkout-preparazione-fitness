@@ -279,13 +279,14 @@
 .feedback-marquee-track {
   display: inline-block;
   min-width: 200%;
-  animation: scrollFeedback 35s linear infinite;
+  animation: scrollFeedback 60s linear infinite;
   white-space: nowrap;
 }
 @keyframes scrollFeedback {
-  0%   { transform: translateX(0); }
-  100% { transform: translateX(-50%); }
+  0%   { transform: translateX(50%); }
+  100% { transform: translateX(-100%); }
 }
+
 .feedback-item {
   display: inline-block;
   margin: 0 50px;
