@@ -1,4 +1,4 @@
-<div class="feedback-marquee-container"><!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="it">
 <head>
   <title>L.C.FitnessTraining - Coaching, Allenamento e Nutrizione</title>
@@ -35,6 +35,16 @@
       font-family: 'Montserrat', sans-serif;
       background: #000; color: #fff;
       scroll-behavior: smooth;
+    }
+    .container {
+      max-width: 600px; margin: 60px auto; padding: 30px;
+      background: rgba(12,1,1,0.93); border-radius: 15px;
+      box-shadow: 0 0 20px red; position: relative; z-index: 1;
+    }
+    .logo {
+      max-width: 150px; margin-bottom: 20px; border-radius: 50%;
+      animation: firePulse 2s infinite;
+      width: 100%; height: auto;
     }
 
 .faq-section {
@@ -123,19 +133,6 @@
     opacity: 1;
   }
 }
-
-
-
-    .container {
-      max-width: 600px; margin: 60px auto; padding: 30px;
-      background: rgba(12,1,1,0.93); border-radius: 15px;
-      box-shadow: 0 0 20px red; position: relative; z-index: 1;
-    }
-    .logo {
-      max-width: 150px; margin-bottom: 20px; border-radius: 50%;
-      animation: firePulse 2s infinite;
-      width: 100%; height: auto;
-    }
     @keyframes firePulse {
       0%,100%{box-shadow:0 0 10px red,0 0 20px orange}
       50%{box-shadow:0 0 20px red,0 0 30px orange}
@@ -541,7 +538,7 @@
         </div>
       </div>
     </div>
-    <section class="parallax" data-speed="0.02" aria-label="Copyright">&copy; 2025 LcFitnessTraining. Tutti i diritti riservati.</section>
+       <section class="parallax" data-speed="0.02" aria-label="Copyright">&copy; 2025 LcFitnessTraining. Tutti i diritti riservati.</section>
   </main>
   <!-- Popup -->
   <div class="popup" id="popup" aria-modal="true" role="dialog">
