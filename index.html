@@ -17,10 +17,7 @@
   <link rel="icon" href="favicon.ico" type="image/x-icon">
   <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
-  
-
-
-  <style>
+   <style>
     /* --- Effetti grafici e layout --- */
     body {
       margin: 0; padding: 0; text-align: center;
@@ -38,17 +35,6 @@
       animation: firePulse 2s infinite;
       width: 100%; height: auto;
     }
-
-.faq-section {
-  max-width: 800px;
-  margin: 60px auto;
-  padding: 20px;
-  background: rgba(0, 0, 0, 0.486);
-  border-radius: 16px;
-  box-shadow: 0 0 20px rgba(255, 0, 0, 0.2);
-  backdrop-filter: blur(8px);
-}
-
 .faq-title {
   text-align: center;
   font-size: 2rem;
@@ -56,11 +42,9 @@
   color: #fff;
   text-shadow: 0 0 8px #f00;
 }
-
 .faq-item {
   margin-bottom: 15px;
 }
-
 .faq-question {
   width: 100%;
   padding: 15px;
@@ -74,11 +58,9 @@
   position: relative;
   transition: background 0.3s;
 }
-
 .faq-question:hover {
   background-color: #222;
 }
-
 .faq-answer {
   max-height: 0;
   overflow: hidden;
@@ -88,12 +70,10 @@
   border-radius: 0 0 8px 8px;
   transition: max-height 0.4s ease, padding 0.4s ease;
 }
-
 .faq-item.active .faq-answer {
-  padding: 15px;
+  padding: 20px;
   max-height: 300px;
 }
-
 .payment-logos {
   display: flex;
   justify-content: center;
@@ -104,17 +84,14 @@
   border-bottom: 1px solid #faf8f800;
   animation: slideDown 1.2s ease-out;
 }
-
 .payment-logos img {
   height: 28px;
   opacity: 0.9;
   transition: transform 0.3s ease;
 }
-
 .payment-logos img:hover {
   transform: scale(1.1);
 }
-
 @keyframes slideDown {
   from {
     transform: translateY(-60px);
@@ -299,19 +276,16 @@
   padding: 10px 0;
   white-space: nowrap;
 }
-
 .feedback-marquee-track {
   display: inline-block;
   min-width: 200%;
   animation: scrollFeedback 35s linear infinite;
   white-space: nowrap;
 }
-
 @keyframes scrollFeedback {
   0%   { transform: translateX(0); }
   100% { transform: translateX(-50%); }
 }
-
 .feedback-item {
   display: inline-block;
   margin: 0 50px;
@@ -319,8 +293,6 @@
   color: #fff;
   text-shadow: none;
 }
-
-
 /* Responsive per mobile */
 @media (max-width: 768px) {
   .feedback-item {
@@ -328,9 +300,7 @@
     margin: 0 30px;
   }
 }
-
-
-    /* --- Audio toggle --- */
+   /* --- Audio toggle --- */
     #audio-toggle {
       position: fixed;
       top: 20px;
@@ -356,7 +326,6 @@
   animation: spin 0.6s linear infinite;
   vertical-align: middle;
 }
-
 @keyframes spin {
   to { transform: rotate(360deg); }
 }
@@ -444,7 +413,6 @@
     </a>
   </li>
 </ul>
-
       </section>
       <div class="separator"></div>
       <!-- Presentazione -->
@@ -473,7 +441,6 @@
       <div class="separator"></div>
       <section class="faq-section">
   <h2 class="faq-title">Sezione FAQ</h2>
-
   <div class="faq-item">
     <button class="faq-question">Quanto dura ogni sessione di personal privato?</button>
     <div class="faq-answer">
@@ -510,9 +477,7 @@
       <p>Certo,Hai la possibilità di sospendere il tuo piano a tua scelta ed in qualsiasi momento e di riattivarlo secondo le tue esigenze.</p>
     </div>
   </div>
-</section>
-
-    
+</section>   
     </div>
     <!-- Testimonianze -->
     <div class="feedback-marquee-container">
@@ -556,14 +521,12 @@
     const popupTitle = document.getElementById('popup-title');
     const popupText = document.getElementById('popup-text');
     const closeBtn = document.querySelector('.close-btn');
-
     window.addEventListener('scroll', () => {
       document.querySelectorAll('.parallax').forEach(el => {
         const speed = el.getAttribute('data-speed');
         el.style.transform = `translateY(${window.scrollY * speed}px)`;
       });
     });
-
     particlesJS("particles-js", {
       "particles": {
         "number": { "value": 80 },
@@ -579,7 +542,6 @@
         }
       }
     });
-
     document.addEventListener("DOMContentLoaded", () => {
       // Audio
        const faqItems = document.querySelectorAll('.faq-item');
@@ -602,7 +564,6 @@
       });
     });
   });
-
       const startAudio = () => {
         if (!isPlaying) {
           audio.play();
@@ -611,14 +572,12 @@
           audioToggle.textContent = "🔇 Off";
         }
       };
-
       audioOverlay.addEventListener("click", startAudio);
       audioOverlay.addEventListener("keydown", (e) => {
         if (e.key === "Enter" || e.key === " ") {
           startAudio();
         }
       });
-
       audioToggle.addEventListener("click", () => {
         if (audio.paused) {
           audio.play();
@@ -628,7 +587,6 @@
           audioToggle.textContent = "🔊 On";
         }
       });
-
       // Popup Servizi
       const items = document.querySelectorAll('#servizi-list li');
       items.forEach(item => {
@@ -638,11 +596,9 @@
           popup.style.display = 'flex';
         });
       });
-
       // Fade-in Animazioni
       document.querySelectorAll('#servizi-list li, #titoli-list li, .contatti ul li')
         .forEach((item, i) => setTimeout(() => item.classList.add('visible'), 1000 + i * 300));
-
       // Popup close logic
       function closePopup() {
         popup.classList.add('fade-out');
@@ -655,7 +611,6 @@
       closeBtn.addEventListener('keydown', function(e){
         if(e.key === "Enter" || e.key === " ") closePopup();
       });
-
       window.onclick = function(event) {
         if (event.target === popup) closePopup();
       };
@@ -663,13 +618,11 @@
         if(e.key === "Escape" && popup.style.display === 'flex') closePopup();
       });
     });
-
     // Validazione select per PayPal
     function isValidDurata() {
       const durata = document.getElementById("durata");
       return !!durata.value;
     }
-
     if(document.getElementById('paypal-button-container')) {
       paypal.Buttons({
         createOrder: function(data, actions) {
