@@ -225,5 +225,3 @@ document.getElementById('menu-toggle').addEventListener('click', function() {
     audioToggle.style.display = 'block';
   }
 });
-
-
