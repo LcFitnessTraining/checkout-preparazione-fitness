@@ -1,8 +1,8 @@
 // === ELEMENTI GLOBALI POPUP E CHIUSURA ===
 const popup = document.getElementById('popup'),
-popupTitle = document.getElementById('popup-title'),
-popupText = document.getElementById('popup-text'),
-closeBtn = document.querySelector('.close-btn');
+  popupTitle = document.getElementById('popup-title'),
+  popupText = document.getElementById('popup-text'),
+  closeBtn = document.querySelector('.close-btn');
 
 // === PARALLAX SU SCROLL ===
 window.addEventListener('scroll', () => {
@@ -34,10 +34,12 @@ document.addEventListener("DOMContentLoaded", () => {
   const faqItems = document.querySelectorAll('.faq-item'),
     audio = document.getElementById("bg-music"),
     audioOverlay = document.getElementById("audio-overlay"),
-    audioToggle = document.getElementById("audio-toggle");
+    audioToggle = document.getElementById("audio-toggle"),
+    serviziItems = document.querySelectorAll('#servizi-list li');
+
   let isPlaying = false;
 
-   // === MESSAGGIO SE PAGAMENTO PAYPAL È STATO ANNULLATO ===
+  // === MESSAGGIO SE PAGAMENTO PAYPAL È STATO ANNULLATO ===
   if (localStorage.getItem('paypalCancel') === '1') {
     localStorage.removeItem('paypalCancel');
     popupTitle.textContent = "❌ Pagamento annullato";
@@ -81,9 +83,8 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   });
 
-   // === POPUP SU CLICK SERVIZI ===
-  const items = document.querySelectorAll('#servizi-list li');
-  items.forEach(item => {
+  // === POPUP SU CLICK SERVIZI ===
+  serviziItems.forEach(item => {
     item.addEventListener('click', () => {
       popupTitle.textContent = item.textContent;
       popupText.textContent = item.getAttribute('data-desc');
@@ -97,20 +98,10 @@ document.addEventListener("DOMContentLoaded", () => {
   // === FUNZIONE CHIUSURA POPUP ===
   function closePopup() {
     popup.classList.add('fade-out');
-    setTimeout(() => {
-      popup.style.display = 'none';
-      popup.classList.remove('fade-out');
-    }, 500);
+    setTimeout(() => popup.style.display = 'none', 500);
   }
 
-  closeBtn.addEventListener('click', closePopup);
-  closeBtn.addEventListener('keydown', function(e) {
-    if (e.key === "Enter" || e.key === " ") closePopup();
-  });
-
-  window.onclick = function(event) {
-    if (event.target === popup) closePopup();
-  };
+  [closeBtn, popup].forEach(el => el.addEventListener('click', closePopup));
 
   document.addEventListener('keydown', function(e) {
     if (e.key === "Escape" && popup.style.display === 'flex') closePopup();
@@ -182,29 +173,24 @@ document.getElementById('feedbackForm').addEventListener('submit', function(e) {
       nome: document.getElementById('nome').value,
       commento: document.getElementById('commento').value
     })
-  }).then(function() {
+  }).then(response => response.ok ? response.json() : Promise.reject(response)).then(data => {
     msgBox.textContent = 'Grazie per il tuo feedback!';
     document.getElementById('feedbackForm').reset();
-  }).catch(function() {
-    msgBox.textContent = "Errore nell'invio. Riprova più tardi.";
-  });
+  }).catch(error => console.error(error));
 });
 
 // === GESTIONE COPYRIGHT POPUP ===
 function openCopyrightPopup() {
   document.getElementById("copyrightPopup").style.display = "flex";
 }
-
 function closeCopyrightPopup() {
   document.getElementById("copyrightPopup").style.display = "none";
 }
-
 function closeCopyrightPopupOnClick(event) {
   if (event.target.id === "copyrightPopup") {
     closeCopyrightPopup();
   }
 }
-
 // === MENU A TENDINA: TOGGLE E AUDIO ===
 document.querySelectorAll('#menu-list a').forEach(link => {
   link.addEventListener('click', () => {
@@ -212,13 +198,10 @@ document.querySelectorAll('#menu-list a').forEach(link => {
     document.getElementById('audio-toggle').style.display = 'block';
   });
 });
-
 document.getElementById('menu-toggle').addEventListener('click', function() {
   var menuList = document.getElementById('menu-list');
   var audioToggle = document.getElementById('audio-toggle');
-
   menuList.classList.toggle('show');
-
   if (menuList.classList.contains('show')) {
     audioToggle.style.display = 'none';
   } else {
