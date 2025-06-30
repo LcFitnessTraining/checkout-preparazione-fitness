@@ -1,6 +1,6 @@
 /* ----------------- LAYOUT BASE ----------------- */
 body {margin: 0;padding: 0;text-align: center;font-family: 'Montserrat', sans-serif;background: #000;color: #fff;scroll-behavior: smooth;}
-.container {margin: 0px auto;padding: 0px;background: rgba(0, 0, 0, 0);position: relative;z-index: 1;min-height: 550px;}
+.container {margin: 0px auto;padding: 10px;background: rgba(0, 0, 0, 0);position: relative;z-index: 1;min-height: 550px;}
 .separator {width: 100px;height: 4px;background: red;margin: 30px auto;animation: pulse 2s infinite;}
 select {width: 100%;padding: 12px;margin: 15px 0;font-size: 1rem;background: #1c1c1c;color: #fff;border: 2px solid #ff0000;border-radius: 8px;box-shadow: 0 0 10px rgba(255, 0, 0, 0.4);transition: all 0.3s ease; appearance: none;}
 select:focus {outline: none;box-shadow: 0 0 15px red;}
@@ -9,21 +9,17 @@ select:focus {outline: none;box-shadow: 0 0 15px red;}
 .select-wrapper {position: relative;display: inline-block;width: 100%;max-width: 300px;}
 .select-wrapper select {width: 100%;padding: 0.6rem 2.5rem 0.6rem 1rem;border: 2px solid #ff0033;border-radius: 8px;background-color: #111;color: white;font-size: 1rem;appearance: none;-webkit-appearance: none;-moz-appearance: none;cursor: pointer;transition: 0.3s ease;}
 .select-wrapper select:focus {outline: none;box-shadow: 0 0 10px #ff0033;}
-.select-wrapper::after {content: '▼';font-size: 1rem;color: #ff0033;position: absolute;right: 1rem;top: 50%;transform: translateY(-50%);pointer-events: none;}
 
 /* ----------------- LOGO E TIPOGRAFIA ----------------- */
-h2 {white-space: nowrap;overflow: hidden;width: 100%;letter-spacing: 1.2px;animation: typing 3s steps(30, end), pulseGlow 2s alternate infinite;text-shadow: 0 0 8px rgba(255, 0, 0, 0.8);}
 .feedback-title {white-space: normal;overflow: hidden;width: 100%;letter-spacing: 1.2px;animation: typing 3s steps(30, end), pulseGlow 2s alternate infinite;text-shadow: 0 0 8px rgba(255, 0, 0, 0.8);font-size: 1.2rem;}
 .logo {max-width: 150px;margin-bottom: 20px;border-radius: 50%;animation: firePulse 2s infinite;width: 100%;height: auto;}
 @keyframes firePulse {0%, 100% { box-shadow: 0 0 10px red, 0 0 20px orange; }50% { box-shadow: 0 0 20px red, 0 0 30px orange; }}
-h1.typing, h2.typing, h4.typing, h5.typing, h6.typing{white-space: nowrap;overflow: hidden;width: 100%;letter-spacing: 1.2px;animation: typing 3s steps(30,end), pulseGlow 2s alternate infinite;text-shadow: 0 0 8px rgba(255, 0, 0, .8);}
-h1.typing {font-size: 1.8rem;margin: 0 auto 20px;}
-h2.typing,  h4.typing, h5.typing, h6.typing {font-size: 1.5rem;}
+h1.typing, h2.typing, h3.typing, h4.typing, h5.typing {white-space: nowrap;overflow: hidden;width: 100%;letter-spacing: 1.2px;animation: typing 3s steps(30,end), pulseGlow 2s alternate infinite;text-shadow: 0 0 8px rgba(255, 0, 0, .8);font-size: 1.8rem;margin: 0 auto 20px;}
 @keyframes typing {from { width: 0; }to { width: 100%; }}
 @keyframes pulseGlow {from { text-shadow: 0 0 8px red; }to { text-shadow: 0 0 20px red; }}
 
 /* ----------------- FAQ ----------------- */
-.faq-title {text-align: center;font-size: 2rem;margin-bottom: 30px;color: #fff;text-shadow: 0 0 8px #f00;}
+
 .faq-item {margin-bottom: 15px;}
 .faq-question {width: 100%;padding: 15px;font-size: 1.1rem;background-color: #111;color: #fff;border: none;border-radius: 8px;text-align: left;cursor: pointer;transition: background .3s;}
 .faq-question:hover {background-color: #222;}
@@ -71,6 +67,7 @@ ul#servizi-list li::after {display: none;}
 
 /* ----------------- PARTICELLE, GLOW E NEBBIA ----------------- */
 #particles-js {position: fixed;top: 0;left: 0;width: 100%;height: 100%;z-index: 0;pointer-events: none;}
+
 
 /* ----------------- NAVBAR E AUDIO ----------------- */
 #audio-toggle,#menu-toggle {margin-left: auto;background: rgb(0, 0, 0);color: rgb(199, 12, 12);border: none;padding: 5px 15px;font-weight: bold;border-radius: 6px;cursor: pointer;margin-right:10px;}
