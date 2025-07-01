@@ -333,33 +333,13 @@ ul#servizi-list li::after {
   text-decoration: underline;
   transition: color 0.3s;
 }
-.copyright-bar {
-  position: fixed;
-  bottom: 0;
-  left: 0;
-  width: 100vw;
-  height: 32px;
-  background: #111;
-  color: #fff;
-  text-align: center;
-  line-height: 32px;
-  font-size: 1rem;
-  z-index: 10000;
-  box-shadow: 0 -1px 6px rgba(255,0,0,0.09);
+.copyright-bar {position: fixed;bottom: 0;left: 0;width: 100vw;height: 32px;background: #111;color: #fff;text-align: center;line-height: 32px;font-size: 1rem;z-index: 10000;box-shadow: 0 -1px 6px rgba(255,0,0,0.09);
 }
-@keyframes fadeInUp {
-  from { opacity: 0; transform: translateY(30px); }
-  to { opacity: 1; transform: translateY(0); }
+@keyframes fadeInUp {from { opacity: 0; transform: translateY(30px); }to { opacity: 1; transform: translateY(0); }
 }
 
 /* ----------------- PARTICELLE, GLOW E NEBBIA ----------------- */
-#particles-js {
-  position: fixed;
-  top: 0; left: 0;
-  width: 100%;
-  height: 100%;
-  z-index: 0;
-  pointer-events: none;
+#particles-js {position: fixed;top: 0; left: 0;width: 100%;height: 100%;z-index: 0;pointer-events: none;
 }
 
 /* ----------------- NAVBAR E AUDIO ----------------- */
