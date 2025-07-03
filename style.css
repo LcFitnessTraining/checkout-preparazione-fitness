@@ -622,6 +622,29 @@ h4, h5, h6 {
     background: #cc0000;
 }
 
+/* Badge */
+.central-badge {
+  position: relative;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 9999;
+  display: flex;
+  gap: 30px; /* distanza tra i due badge */
+  align-items: center;
+  justify-content: center;
+}
+
+.badge-small {
+  width: 100px;
+  height: 150px;
+}
+
+.badge-large {
+  width: 150px;
+  height: 150px;
+}
+
 /* Footer */
 footer {
     margin-top: 100px;
