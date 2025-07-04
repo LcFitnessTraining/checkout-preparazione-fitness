@@ -360,6 +360,24 @@
             }
         })();
     </script>
+    <script>
+document.getElementById('feedbackForm').addEventListener('submit', function(e){
+  e.preventDefault();
+  fetch(https://script.google.com/macros/s/AKfycbz4kbisaVpcwH1c5R_iyOwiwCV4tiTcNNNxrPMzvCeI3NzV6yWf2oj3bDhyc84aFhQH/exec, {
+    method: 'POST',
+    body: JSON.stringify({
+      nome: document.getElementById('nome').value,
+      email: document.getElementById('email').value,
+      feedback: document.getElementById('feedback').value
+    }),
+    headers: {
+      'Content-Type': 'application/json'
+    }
+  }).then(r => {
+    alert('Feedback inviato con successo!');
+  });
+});
+</script>
     <!-- PayPal Amount Update -->
     <script>
         document.getElementById('durata').addEventListener('change', function() {
