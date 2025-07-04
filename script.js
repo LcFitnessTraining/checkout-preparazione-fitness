@@ -357,35 +357,27 @@ function initializeFeedbackForm() {
     }
 }
 
-function handleFeedbackSubmit(event) {
-    event.preventDefault();
-    const nome = document.getElementById('nome').value.trim();
-    const commento = document.getElementById('commento').value.trim();
+   document.getElementById('feedbackForm').addEventListener('submit', async function(e) {
+  e.preventDefault();
+  const form = e.target;
+  const data = new FormData(form);
 
-    if (!nome || !commento) {
-        showFeedbackMessage('Per favore, compila tutti i campi.', 'error');
-        return;
+  const response = await fetch(form.action, {
+    method: form.method,
+    body: data,
+    headers: {
+      'Accept': 'application/json'
     }
+  });
 
-    showFeedbackMessage('Invio in corso...', 'info');
-
-    fetch('https://script.google.com/macros/s/AKfycbzX3A8XydDKewRly1ulijjgd_KUdWDMmpsUewMdlEPMTOFQVdPR2llOfOY3zQ3NPd1B/exec', {
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/json'
-        },
-        body: JSON.stringify({ nome: nome, feedback: commento })
-    })
-    .then(response => response.text())
-    .then(data => {
-        showFeedbackMessage('Grazie per il tuo feedback! È stato inviato con successo.', 'success');
-        feedbackForm.reset();
-    })
-    .catch(error => {
-        showFeedbackMessage('Errore durante l\'invio.', 'error');
-    });
-}
-
+if (response.ok) {
+    document.getElementById('msg-feedback').innerText = "Grazie per il tuo feedback!";
+    form.reset();
+  } else {
+    document.getElementById('msg-feedback').innerText = "Si è verificato un errore. Riprova più tardi.";
+  }
+});
+  
 function showFeedbackMessage(message, type) {
     if (msgFeedback) {
         msgFeedback.textContent = message;
