@@ -364,7 +364,7 @@
 document.getElementById('feedbackForm').addEventListener('submit', function(e) {
   e.preventDefault();
   const nome = this.nome.value;
-  const feedback = this.feedback.value;
+  const feedback = this.commento.value; // <-- qui uso commento, non feedback
 
   fetch('https://script.google.com/macros/s/AKfycbzX3A8XydDKewRly1ulijjgd_KUdWDMmpsUewMdlEPMTOFQVdPR2llOfOY3zQ3NPd1B/exec', {
     method: 'POST',
@@ -375,11 +375,11 @@ document.getElementById('feedbackForm').addEventListener('submit', function(e) {
   })
   .then(response => response.text())
   .then(data => {
-    document.getElementById('risposta').innerText = 'Grazie per il feedback!';
+    document.getElementById('msg-feedback').innerText = 'Grazie per il feedback!';
     this.reset();
   })
   .catch(error => {
-    document.getElementById('risposta').innerText = 'Errore durante l\'invio!';
+    document.getElementById('msg-feedback').innerText = 'Errore durante l\'invio!';
   });
 });
 </script>
