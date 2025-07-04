@@ -359,25 +359,31 @@ function initializeFeedbackForm() {
 
 function handleFeedbackSubmit(event) {
     event.preventDefault();
-    
     const nome = document.getElementById('nome').value.trim();
     const commento = document.getElementById('commento').value.trim();
-    
+
     if (!nome || !commento) {
         showFeedbackMessage('Per favore, compila tutti i campi.', 'error');
         return;
     }
-    
-    // Simulate form submission
+
     showFeedbackMessage('Invio in corso...', 'info');
-    
-    setTimeout(() => {
-        // In a real application, you would send this to your backend
-        console.log('Feedback submitted:', { nome, commento });
-        
+
+    fetch('https://script.google.com/macros/s/AKfycbzX3A8XydDKewRly1ulijjgd_KUdWDMmpsUewMdlEPMTOFQVdPR2llOfOY3zQ3NPd1B/exec', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({ nome: nome, feedback: commento })
+    })
+    .then(response => response.text())
+    .then(data => {
         showFeedbackMessage('Grazie per il tuo feedback! È stato inviato con successo.', 'success');
         feedbackForm.reset();
-    }, 1500);
+    })
+    .catch(error => {
+        showFeedbackMessage('Errore durante l\'invio.', 'error');
+    });
 }
 
 function showFeedbackMessage(message, type) {
