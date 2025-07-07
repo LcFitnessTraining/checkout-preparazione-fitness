@@ -42,7 +42,7 @@
                 <a href="#servizi">Servizi inclusi</a>
                 <a href="#tit">Titoli vinti e contatti</a>
                 <a href="#presentazione">Presentazione</a>
-                <a href="#feedbackclient">Lascia un feedback</a>
+                <a href="#Feedbackclient">Lascia un feedback</a>
                 <a href="#faqNEW">FAQ</a>
                 <a href="#fine-pagina">Testimonianze e percorsi reali</a>
             </div>
@@ -184,6 +184,7 @@
             </section>
 
             <!-- Feedback Section -->
+            <section class="Feedbackclient" id="Feedbackclient">
             <form id="feedbackForm" action="https://formspree.io/f/xwpbzggz" method="POST">
   <label for="nome">Nome:</label>
   <input type="text" id="nome" name="nome" required>
@@ -356,37 +357,6 @@
             }
         })();
     </script>
-<script>
-document.getElementById('feedbackForm').addEventListener('submit', function(e) {
-  e.preventDefault();
-  const nome = this.nome.value;
-  const feedback = this.commento.value; // <-- qui uso commento, non feedback
-
-  fetch('https://script.google.com/macros/s/AKfycbzX3A8XydDKewRly1ulijjgd_KUdWDMmpsUewMdlEPMTOFQVdPR2llOfOY3zQ3NPd1B/exec', {
-    method: 'POST',
-    headers: {
-      'Content-Type': 'application/json'
-    },
-    body: JSON.stringify({ nome: nome, feedback: feedback })
-  })
-  .then(response => response.text())
-  .then(data => {
-    document.getElementById('msg-feedback').innerText = 'Grazie per il feedback!';
-    this.reset();
-  })
-  .catch(error => {
-    document.getElementById('msg-feedback').innerText = 'Errore durante l\'invio!';
-  });
-});
-</script>
-    <!-- PayPal Amount Update -->
-    <script>
-        document.getElementById('durata').addEventListener('change', function() {
-            var amount = this.value;
-            document.getElementById('paypal-message').setAttribute('data-pp-amount', amount);
-        });
-    </script>
-
     <!-- Main JavaScript -->
     <script src="script.js?v=1.0" defer></script>
 </body>
