@@ -404,22 +404,6 @@ function closePopup(event) {
     }
 }
 
-// Typing effect
-function initializeTypingEffect() {
-    const typingElements = document.querySelectorAll('.typing');
-
-    typingElements.forEach(element => {
-        // Add typing animation class
-        element.style.animation = 'blink 1s infinite';
-
-        // Remove animation after 3 seconds
-        setTimeout(() => {
-            element.style.animation = 'none';
-            element.style.borderRight = 'none';
-        }, 3000);
-    });
-}
-
 // Utility functions
 function showSuccessMessage(message) {
     // Create and show success notification
