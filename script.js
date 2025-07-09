@@ -17,16 +17,15 @@ let menuOpen = false;
 
 // Initialize everything when DOM is loaded
 document.addEventListener('DOMContentLoaded', function() {
-    initializeParticles();
-    initializeMenu();
-    initializeAudio();
-    initializePayPal();
-    initializeServicePopups();
-    initializeFAQ();
-    initializeFeedbackForm();
-    initializeTypingEffect();
+initializeParticles();
+initializeMenu();
+initializeAudio();
+initializePayPal();
+initializeServicePopups();
+initializeFAQ();
+initializeFeedbackForm();
+initializeTypingEffect();
 });
-
 // Particles.js initialization
 function initializeParticles() {
     if (typeof particlesJS !== 'undefined') {
@@ -188,7 +187,6 @@ function updateAudioButton(isPaused) {
         audioToggle.textContent = isPaused ? '🔇 Off' : '🔊 On';
     }
 }
-
 function isMobileDevice() {
     return /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
 }
@@ -199,10 +197,8 @@ function initializePayPal() {
         durataSelect.addEventListener('change', handleDurationChange);
     }
 }
-
 function handleDurationChange() {
     const amount = durataSelect.value;
-
     if (amount) {
         showPayPalButton();
         updatePayPalMessage(amount);
@@ -211,26 +207,22 @@ function handleDurationChange() {
         hidePayPalButton();
     }
 }
-
 function showPayPalButton() {
     paypalButtonWrapper.style.display = 'block';
     setTimeout(() => {
         paypalButtonWrapper.classList.add('fade');
     }, 10);
 }
-
 function hidePayPalButton() {
     paypalButtonWrapper.style.display = 'none';
     paypalButtonWrapper.classList.remove('fade');
 }
-
 function updatePayPalMessage(amount) {
     const paypalMessage = document.getElementById('paypal-message');
     if (paypalMessage) {
         paypalMessage.setAttribute('data-pp-amount', amount);
     }
 }
-
 function renderPayPalButton(amount) {
     if (typeof paypal !== 'undefined') {
         // Clear existing PayPal buttons
@@ -238,7 +230,6 @@ function renderPayPalButton(amount) {
         if (container) {
             container.innerHTML = '';
         }
-
         paypal.Buttons({
             createOrder: function(data, actions) {
                 return actions.order.create({
@@ -263,31 +254,28 @@ function renderPayPalButton(amount) {
         }).render('#paypal-button-container');
     }
 }
-
 function sendOrderConfirmation(details) {
-    // Here you would typically send the order details to your backend
-    console.log('Order Details:', details);
+// Here you would typically send the order details to your backend
+console.log('Order Details:', details);
 
-    // For now, just show a success message
-    showSuccessMessage(`Grazie ${details.payer.name.given_name}! Il tuo ordine è stato processato.`);
+// For now, just show a success message
+showSuccessMessage(`Grazie ${details.payer.name.given_name}! Il tuo ordine è stato processato.`);
+showErrorMessage('Si è verificato un errore durante il pagamento.');
 }
 
 // Service popups
 function initializeServicePopups() {
     const servicesList = document.getElementById('servizi-list');
     const closeBtn = document.querySelector('.close-btn');
-
     if (servicesList) {
         const serviceItems = servicesList.querySelectorAll('li');
         serviceItems.forEach(item => {
             item.addEventListener('click', () => showServicePopup(item));
         });
     }
-
     if (closeBtn) {
         closeBtn.addEventListener('click', closeServicePopup);
     }
-
     if (popup) {
         popup.addEventListener('click', function(event) {
             if (event.target === popup) {
@@ -296,14 +284,11 @@ function initializeServicePopups() {
         });
     }
 }
-
 function showServicePopup(serviceItem) {
     const title = serviceItem.textContent;
     const description = serviceItem.getAttribute('data-desc');
-
     const popupTitle = document.getElementById('popup-title');
     const popupText = document.getElementById('popup-text');
-
     if (popupTitle && popupText && popup) {
         popupTitle.textContent = title;
         popupText.textContent = description;
@@ -315,7 +300,6 @@ function showServicePopup(serviceItem) {
         }, 10);
     }
 }
-
 function closeServicePopup() {
     if (popup) {
         popup.style.opacity = '0';
@@ -327,62 +311,52 @@ function closeServicePopup() {
 
 // FAQ functionality
 function initializeFAQ() {
-    const faqQuestions = document.querySelectorAll('.faq-question');
+const faqQuestions = document.querySelectorAll('.faq-question');
+faqQuestions.forEach(question => {
+question.addEventListener('click', function() {
+const answer = this.nextElementSibling;
+const isActive = this.classList.contains('active');
 
-    faqQuestions.forEach(question => {
-        question.addEventListener('click', function() {
-            const answer = this.nextElementSibling;
-            const isActive = this.classList.contains('active');
+// Close all FAQ items
+faqQuestions.forEach(q => {
+q.classList.remove('active');
+q.nextElementSibling.classList.remove('active');
+ });
 
-            // Close all FAQ items
-            faqQuestions.forEach(q => {
-                q.classList.remove('active');
-                q.nextElementSibling.classList.remove('active');
-            });
-
-            // Open clicked item if it wasn't active
-            if (!isActive) {
-                this.classList.add('active');
-                answer.classList.add('active');
-            }
-        });
-    });
+ // Open clicked item if it wasn't active
+if (!isActive) {
+this.classList.add('active');
+answer.classList.add('active');
+}
+});
+ });
 }
 
 // Feedback form
 function initializeFeedbackForm() {
-    if (feedbackForm) {
-        feedbackForm.addEventListener('submit', async function(e) {
-            e.preventDefault();
-            const form = e.target;
-            const data = new FormData(form);
-
-            try {
-                const response = await fetch(form.action, {
-                    method: form.method,
-                    body: data,
-                    headers: {
-                        'Accept': 'application/json'
-                    }
-                });
-
-                if (response.ok) {
-                    if (msgFeedback) {
-                        msgFeedback.innerText = "Grazie per il tuo feedback!";
-                    }
-                    form.reset();
-                } else {
-                    if (msgFeedback) {
-                        msgFeedback.innerText = "Si è verificato un errore. Riprova più tardi.";
-                    }
-                }
-            } catch (error) {
-                if (msgFeedback) {
-                    msgFeedback.innerText = "Errore di rete. Controlla la connessione.";
-                }
-            }
+  if (feedbackForm) {
+    feedbackForm.addEventListener('submit', async function(e) {
+      e.preventDefault();
+      const form = e.target;
+      const data = new FormData(form);
+try {
+        const response = await fetch(form.action, {
+          method: form.method,
+          body: data,
+          headers: { 'Accept': 'application/json' }
         });
-    }
+
+        if (response.ok) {
+          showSuccessMessage("Grazie per il tuo feedback!");
+          form.reset();
+        } else {
+          showErrorMessage("Si è verificato un errore. Riprova più tardi.");
+        }
+      } catch (error) {
+        showErrorMessage("Errore di rete. Controlla la connessione.");
+      }
+    });
+  }
 }
 
 // Copyright popup
@@ -505,24 +479,6 @@ document.addEventListener('keydown', function(event) {
             initializeAudioOnMobile();
         }
     }
-});
-
-// Performance optimization: Debounce scroll events
-let scrollTimeout;
-window.addEventListener('scroll', function() {
-    if (scrollTimeout) {
-        clearTimeout(scrollTimeout);
-    }
-
-    scrollTimeout = setTimeout(function() {
-        // Add any scroll-based functionality here if needed
-    }, 16); // ~60fps
-});
-
-// Global error handling
-window.addEventListener('error', function(event) {
-    console.error('JavaScript Error:', event.error);
-    // In production, you might want to send this to your error tracking service
 });
 
 // Global functions for inline event handlers (to maintain compatibility)
