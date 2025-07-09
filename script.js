@@ -107,7 +107,6 @@ function initializeMenu() {
         });
     }
 }
-
 function toggleMenu() {
     menuOpen = !menuOpen;
     if (menuOpen) {
@@ -118,7 +117,6 @@ function toggleMenu() {
         menuToggle.setAttribute('aria-expanded', 'false');
     }
 }
-
 function closeMenu() {
     menuOpen = false;
     menuList.classList.add('hidden');
@@ -137,7 +135,6 @@ function initializeAudio() {
         }
     }
 }
-
 function toggleAudio() {
     if (!audioInitialized) {
         initializeAudioPlayback();
@@ -149,12 +146,10 @@ function toggleAudio() {
         }
     }
 }
-
 function initializeAudioOnMobile() {
     initializeAudioPlayback();
     audioOverlay.style.display = 'none';
 }
-
 function initializeAudioPlayback() {
     bgMusic.play()
         .then(() => {
@@ -166,7 +161,6 @@ function initializeAudioPlayback() {
             updateAudioButton(true);
         });
 }
-
 function playAudio() {
     bgMusic.play()
         .then(() => {
@@ -176,12 +170,10 @@ function playAudio() {
             console.log('Audio play failed:', error);
         });
 }
-
 function pauseAudio() {
     bgMusic.pause();
     updateAudioButton(true);
 }
-
 function updateAudioButton(isPaused) {
     if (audioToggle) {
         audioToggle.textContent = isPaused ? '🔇 Off' : '🔊 On';
@@ -345,7 +337,6 @@ try {
           body: data,
           headers: { 'Accept': 'application/json' }
         });
-
         if (response.ok) {
           showSuccessMessage("Grazie per il tuo feedback!");
           form.reset();
@@ -365,13 +356,11 @@ function openCopyrightPopup() {
         copyrightPopup.style.display = 'block';
     }
 }
-
 function closeCopyrightPopup() {
     if (copyrightPopup) {
         copyrightPopup.style.display = 'none';
     }
 }
-
 function closePopup(event) {
     if (event.target === copyrightPopup) {
         closeCopyrightPopup();
@@ -388,22 +377,18 @@ function showSuccessMessage(message) {
         notification.remove();
     }, 5000);
 }
-
 function showErrorMessage(message) {
     // Create and show error notification
     const notification = createNotification(message, 'error');
     document.body.appendChild(notification);
-
     setTimeout(() => {
         notification.remove();
     }, 5000);
 }
-
     function createNotification(message, type) {
     const notification = document.createElement('div');
     notification.className = `notification ${type}`;
     notification.textContent = message;
-
     notification.style.cssText = `
         position: fixed;
         top: 20px;
@@ -418,7 +403,6 @@ function showErrorMessage(message) {
         transform: translateX(100%);
         transition: all 0.3s ease;
     `;
-
     if (type === 'success') {
         notification.style.background = '#28a745';
         notification.style.border = '2px solid #1e7e34';
@@ -437,7 +421,6 @@ function showErrorMessage(message) {
         notification.style.opacity = '0';
         notification.style.transform = 'translateX(100%)';
     }, 4500);
-
     return notification;
 }
 
