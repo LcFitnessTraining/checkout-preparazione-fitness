@@ -235,24 +235,19 @@ function renderPayPalButton(amount) {
             },
             onApprove: function(data, actions) {
                 return actions.order.capture().then(function(details) {
-                    showSuccessMessage('Pagamento completato con successo!');
+                    showPaymentPopup(`Grazie ${details.payer.name.given_name}! Il tuo ordine è stato processato.Sarai contattato a breve dal Coach per cominciare il tuo percorso!!!`, 'success');
                     sendOrderConfirmation(details);
                 });
             },
+            onCancel: function(data) {
+    showPaymentPopup('Il pagamento è stato annullato. Scegli il piano più adatto a te e riprova !!!', 'error');
+},
             onError: function(err) {
                 console.error('PayPal Error:', err);
-                showErrorMessage('Si è verificato un errore durante il pagamento.');
+                showPaymentPopup('Si è verificato un errore durante il pagamento. Utilizza un altro metodo o contattaci !!1', 'error');
             }
         }).render('#paypal-button-container');
     }
-}
-function sendOrderConfirmation(details) {
-// Here you would typically send the order details to your backend
-console.log('Order Details:', details);
-
-// For now, just show a success message
-showSuccessMessage(`Grazie ${details.payer.name.given_name}! Il tuo ordine è stato processato.`);
-showErrorMessage('Si è verificato un errore durante il pagamento.');
 }
 
 // Service popups
@@ -463,6 +458,31 @@ document.addEventListener('keydown', function(event) {
         }
     }
 });
+
+function showPaymentPopup(message, type) {
+    const popupTitle = document.getElementById('popup-title');
+    const popupText = document.getElementById('popup-text');
+    const popup = document.getElementById('popup');
+
+    if (popupTitle && popupText && popup) {
+        popupTitle.textContent = type === 'success' ? 'Pagamento completato' : 'Pagamento annullato';
+        popupText.textContent = message;
+        popup.style.display = 'block';
+
+        // Add animation
+        setTimeout(() => {
+            popup.style.opacity = '1';
+        }, 10);
+
+        // Close popup after 3 seconds
+        setTimeout(() => {
+            popup.style.opacity = '0';
+            setTimeout(() => {
+                popup.style.display = 'none';
+            }, 300);
+        }, 3000);
+    }
+}
 
 // Global functions for inline event handlers (to maintain compatibility)
 window.openCopyrightPopup = openCopyrightPopup;
