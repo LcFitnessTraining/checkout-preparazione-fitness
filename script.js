@@ -184,21 +184,33 @@ function isMobileDevice() {
 }
 
 // PayPal functionality
+
 function initializePayPal() {
-    if (durataSelect && paypalButtonWrapper) {
-        durataSelect.addEventListener('change', handleDurationChange);
-    }
+  if (durataSelect && paypalButtonWrapper) {
+    durataSelect.addEventListener('change', handleDurationChange);
+  }
 }
+
 function handleDurationChange() {
-    const amount = durataSelect.value;
-    if (amount) {
-        showPayPalButton();
-        updatePayPalMessage(amount);
-        renderPayPalButton(amount);
-    } else {
-        hidePayPalButton();
-    }
+  const amount = durataSelect.value;
+  if (amount) {
+    showPayPalButton();
+    updatePayPalMessage(amount);
+    loadPayPalScript(amount);
+  } else {
+    hidePayPalButton();
+  }
 }
+function loadPayPalScript(amount) {
+  const script = document.createElement('script');
+  script.src = 'https://www.paypal.com/sdk/js?client-id=AQY44jd2y1IUT-RpjuU79wngDCQGzJ7FXeESa7pJjKIQNRi2-z0jABKr-kLgQtqI6h3etMYdEKaa8_qT&currency=EUR&components=buttons,messages';
+  script.onload = function() {
+    renderPayPalButton(amount);
+  };
+  document.body.appendChild(script);
+}
+
+
 function showPayPalButton() {
     paypalButtonWrapper.style.display = 'block';
     setTimeout(() => {
@@ -488,3 +500,9 @@ function showPaymentPopup(message, type) {
 window.openCopyrightPopup = openCopyrightPopup;
 window.closeCopyrightPopup = closeCopyrightPopup;
 window.closePopup = closePopup;
+requestIdleCallback(function(deadline) {
+  // Codice da eseguire quando il browser è inattivo
+  while (deadline.timeRemaining() > 0) {
+    // Esegui il codice qui
+  }
+});
