@@ -43,7 +43,8 @@ function createNotification(message,type){const notification=document.createElem
         opacity: 0;
         transform: translateX(100%);
         transition: all 0.3s ease;
-    `;if(type==='success'){notification.style.background='#28a745';notification.style.border='2px solid #1e7e34'}else if(type==='error'){notification.style.background='#dc3545';notification.style.border='2px solid #bd2130'}
+ `;
+        if(type==='success'){notification.style.background='#28a745';notification.style.border='2px solid #1e7e34'}else if(type==='error'){notification.style.background='#dc3545';notification.style.border='2px solid #bd2130'}
 setTimeout(()=>{notification.style.opacity='1';notification.style.transform='translateX(0)'},10);setTimeout(()=>{notification.style.opacity='0';notification.style.transform='translateX(100%)'},4500);return notification}
 document.addEventListener('click',function(event){if(event.target.matches('a[href^="#"]')){event.preventDefault();const targetId=event.target.getAttribute('href').substring(1);const targetElement=document.getElementById(targetId);if(targetElement){const offsetTop=targetElement.offsetTop-80;window.scrollTo({top:offsetTop,behavior:'smooth'})}}});document.addEventListener('keydown',function(event){if(event.key==='Escape'){closeServicePopup();closeCopyrightPopup();closeMenu()}
 if(event.key==='Enter'){const focusedElement=document.activeElement;if(focusedElement.classList.contains('close-btn')){closeServicePopup()}
