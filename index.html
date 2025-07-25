@@ -19,6 +19,8 @@
     <!-- Twitter Meta Tags -->
 <meta name="twitter:image" content="https://lcfitnesstraining.github.io/checkout-preparazione-fitness/anteprima.jpg">  
     <!-- Favicon -->
+<link rel="manifest" href="manifest.json" />
+<meta name="theme-color" content="#ff0000" />
 <link rel="icon" href="favicon.ico" type="image/x-icon">  
     <!-- External Resources -->
 <link rel="preload" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" as="style" onload="this.rel='stylesheet'">
@@ -45,6 +47,7 @@
 <main>
 <div class="container">
 <section class="hero-section"><img src="logo.jpg" alt="Logo di LcFitnessTraining" class="logo" width="200" height="100"><h1 class="typing">Scegli il tuo piano</h1>
+    <button id="installBtn" style="display:none;">📲 Installa la pagina sul tuo smartphone</button>
 <div class="payment-logos">
 <img src="https://img.icons8.com/color/48/visa.png" alt="Pagamento disponibile con carta Visa" height="30">
 <img src="https://img.icons8.com/color/48/mastercard-logo.png" alt="Pagamento disponibile con carta Mastercard" height="30">
@@ -188,6 +191,18 @@ window.addEventListener("load", onLoad);
 })();
 </script>
 <!-- Main JavaScript -->
+ <script>
+  if ('serviceWorker' in navigator) {
+    window.addEventListener('load', () => {
+      navigator.serviceWorker.register('sw.js')
+        .then(reg => console.log('Service Worker registrato', reg))
+        .catch(err => console.error('Service Worker errore', err));
+    });
+  }
+</script>
+
+
+  
 <script src="script.js?v=1.0" defer></script>
 </body>
 </html>
