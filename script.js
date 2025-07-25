@@ -50,3 +50,24 @@ document.addEventListener('click',function(event){if(event.target.matches('a[hre
 if(event.key==='Enter'){const focusedElement=document.activeElement;if(focusedElement.classList.contains('close-btn')){closeServicePopup()}
 if(focusedElement.id==='audio-overlay'){initializeAudioOnMobile()}}});function showPaymentPopup(message,type){const popupTitle=document.getElementById('popup-title');const popupText=document.getElementById('popup-text');const popup=document.getElementById('popup');if(popupTitle&&popupText&&popup){popupTitle.textContent=type==='success'?'Pagamento completato':'Pagamento annullato';popupText.textContent=message;popup.style.display='block';setTimeout(()=>{popup.style.opacity='1'},10);setTimeout(()=>{popup.style.opacity='0';setTimeout(()=>{popup.style.display='none'},300)},15000)}}
 window.openCopyrightPopup=openCopyrightPopup;window.closeCopyrightPopup=closeCopyrightPopup;window.closePopup=closePopup;requestIdleCallback(function(deadline){while(deadline.timeRemaining()>0){}})
+    let deferredPrompt;
+const installBtn = document.getElementById('installBtn');
+
+ window.addEventListener('beforeinstallprompt', (e) => {
+    e.preventDefault();
+    deferredPrompt = e;
+    installBtn.style.display = 'inline-block';
+  });
+
+  installBtn.addEventListener('click', () => {
+    if (deferredPrompt) {
+      deferredPrompt.prompt();
+      deferredPrompt.userChoice.then(choice => {
+        if (choice.outcome === 'accepted') {
+          console.log('App installata!');
+        }
+        deferredPrompt = null;
+        installBtn.style.display = 'none';
+      });
+    }
+  });
