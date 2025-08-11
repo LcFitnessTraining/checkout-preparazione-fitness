@@ -20,19 +20,11 @@ function renderPayPalButton(amount){if(typeof paypal!=='undefined'){const contai
 paypal.Buttons({createOrder:function(data,actions){return actions.order.create({purchase_units:[{amount:{value:amount,currency_code:'EUR'}}]})},
   onApprove: function(data, actions){
   return actions.order.capture().then(function(details){
-    if (details.status === "COMPLETED") {
-      showPaymentPopup(`Grazie ${details.payer.name.given_name}! Il tuo ordine da ${amount}€ è stato processato. Sarai contattato a breve dal Coach per cominciare il tuo percorso!`, 'success');
-      sendOrderConfirmation(details);
-    } else {
-      showPaymentPopup('Pagamento ricevuto ma non completato. Ti consigliamo di controllare la tua email PayPal per conferma.', 'error');
-    }
-  }).catch(function(error){
-    console.error("Errore nella conferma del pagamento:", error);
-    showPaymentPopup('Si è verificato un errore durante la conferma del pagamento. Se hai ricevuto un’email da PayPal, il pagamento potrebbe essere andato a buon fine. Altrimenti riprova.', 'error');
-  });
-},
-                
-                onCancel:function(data){showPaymentPopup('Il pagamento è stato annullato. Controlla se hai ricevuto un’email di conferma da PayPal, il pagamento potrebbe essere comunque andato a buon fine. In caso contrario scegli il piano più adatto a te e riprova !!!','error')},onError:function(err){console.error('PayPal Error:',err);showPaymentPopup('Si è verificato un errore durante il pagamento. Controlla se hai ricevuto un’email di conferma da PayPal, il pagamento potrebbe essere comunque andato a buon fine. In caso contrario utilizza un altro metodo di pagamento o contattaci !!1','error')}}).render('#paypal-button-container')}}
+showPaymentPopup(`Grazie ${details.payer.name.given_name}! Il tuo ordine da ${amount}€ è stato processato. Sarai contattato a breve dal Coach per cominciare il tuo percorso!`, 'success');
+sendOrderConfirmation(details);
+} 
+)},
+onCancel:function(data){showPaymentPopup('Il pagamento è stato annullato. Controlla se hai ricevuto un’email di conferma da PayPal, il pagamento potrebbe essere comunque andato a buon fine. In caso contrario scegli il piano più adatto a te e riprova !!!','error')},onError:function(err){console.error('PayPal Error:',err);showPaymentPopup('Si è verificato un errore durante il pagamento. Controlla se hai ricevuto un’email di conferma da PayPal, il pagamento potrebbe essere comunque andato a buon fine. In caso contrario utilizza un altro metodo di pagamento o contattaci !!1','error')}}).render('#paypal-button-container')}}
 function initializeServicePopups(){const servicesList=document.getElementById('servizi-list');const closeBtn=document.querySelector('.close-btn');if(servicesList){const serviceItems=servicesList.querySelectorAll('li');serviceItems.forEach(item=>{item.addEventListener('click',()=>showServicePopup(item))})}
 if(closeBtn){closeBtn.addEventListener('click',closeServicePopup)}
 if(popup){popup.addEventListener('click',function(event){if(event.target===popup){closeServicePopup()}})}}
