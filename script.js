@@ -16,15 +16,35 @@ function loadPayPalScript(amount){const script=document.createElement('script');
 function showPayPalButton(){paypalButtonWrapper.style.display='block';setTimeout(()=>{paypalButtonWrapper.classList.add('fade')},10)}
 function hidePayPalButton(){paypalButtonWrapper.style.display='none';paypalButtonWrapper.classList.remove('fade')}
 function updatePayPalMessage(amount){const paypalMessage=document.getElementById('paypal-message');if(paypalMessage){paypalMessage.setAttribute('data-pp-amount',amount)}}
-function renderPayPalButton(amount){if(typeof paypal!=='undefined'){const container=document.getElementById('paypal-button-container');if(container){container.innerHTML=''}
-paypal.Buttons({createOrder:function(data,actions){return actions.order.create({purchase_units:[{amount:{value:amount,currency_code:'EUR'}}]})},
-  onApprove: function(data, actions){
-  return actions.order.capture().then(function(details){
-showPaymentPopup(`Grazie ${details.payer.name.given_name}! Il tuo ordine da ${amount}€ è stato processato. Sarai contattato a breve dal Coach per cominciare il tuo percorso!`, 'success');
-sendOrderConfirmation(details);
-} 
-)},
-onCancel:function(data){showPaymentPopup('Il pagamento è stato annullato. Controlla se hai ricevuto un’email di conferma da PayPal, il pagamento potrebbe essere comunque andato a buon fine. In caso contrario scegli il piano più adatto a te e riprova !!!','error')},onError:function(err){console.error('PayPal Error:',err);showPaymentPopup('Si è verificato un errore durante il pagamento. Controlla se hai ricevuto un’email di conferma da PayPal, il pagamento potrebbe essere comunque andato a buon fine. In caso contrario utilizza un altro metodo di pagamento o contattaci !!1','error')}}).render('#paypal-button-container')}}
+function renderPayPalButton(amount) {
+  if (typeof paypal !== 'undefined') {
+    const container = document.getElementById('paypal-button-container');
+    if (container) {
+      container.innerHTML = '';
+    }
+    paypal.Buttons({
+      createOrder: function(data, actions) {
+        return actions.order.create({
+          purchase_units: [{
+            amount: { value: amount, currency_code: 'EUR' }
+          }]
+        });
+      },
+      onApprove: function(data, actions) {
+        return actions.order.capture().then(function(details) {
+          showPaymentPopup(
+            `Grazie ${details.payer.name.given_name}! Il tuo ordine da ${amount}€ è stato processato. Sarai contattato a breve dal Coach per cominciare il tuo percorso!`,
+            'success'
+          );
+          sendOrderConfirmation(details);
+        });
+      },
+      onCancel: function(data) {
+        showPaymentPopup('Il pagamento è stato annullato.', 'error');
+      }
+    }).render('#paypal-button-container');
+  }
+}
 function initializeServicePopups(){const servicesList=document.getElementById('servizi-list');const closeBtn=document.querySelector('.close-btn');if(servicesList){const serviceItems=servicesList.querySelectorAll('li');serviceItems.forEach(item=>{item.addEventListener('click',()=>showServicePopup(item))})}
 if(closeBtn){closeBtn.addEventListener('click',closeServicePopup)}
 if(popup){popup.addEventListener('click',function(event){if(event.target===popup){closeServicePopup()}})}}
