@@ -12,7 +12,7 @@ function updateAudioButton(isPaused){if(audioToggle){audioToggle.textContent=isP
 function isMobileDevice(){return/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)}
 function initializePayPal(){if(durataSelect&&paypalButtonWrapper){durataSelect.addEventListener('change',handleDurationChange)}}
 function handleDurationChange(){const amount=durataSelect.value;if(amount){showPayPalButton();updatePayPalMessage(amount);loadPayPalScript(amount)}else{hidePayPalButton()}}
-function loadPayPalScript(amount){const script=document.createElement('script');script.src='https://www.paypal.com/sdk/js?client-id=AS8CPSj61814iAWG3wsGaQw7NwUpWnyl_DLbQSW6ZMqa9Br0wZ0xa4N0lQvQa3Qi6iYIfhe3UmfPGRpt&currency=EUR&components=buttons,messages';script.onload=function(){renderPayPalButton(amount)};document.body.appendChild(script)}
+function loadPayPalScript(amount){const script=document.createElement('script');script.src='https://www.paypal.com/sdk/js?client-id=AQY44jd2y1IUT-RpjuU79wngDCQGzJ7FXeESa7pJjKIQNRi2-z0jABKr-kLgQtqI6h3etMYdEKaa8_qT&currency=EUR&components=buttons,messages';script.onload=function(){renderPayPalButton(amount)};document.body.appendChild(script)}
 function showPayPalButton(){paypalButtonWrapper.style.display='block';setTimeout(()=>{paypalButtonWrapper.classList.add('fade')},10)}
 function hidePayPalButton(){paypalButtonWrapper.style.display='none';paypalButtonWrapper.classList.remove('fade')}
 function updatePayPalMessage(amount){const paypalMessage=document.getElementById('paypal-message');if(paypalMessage){paypalMessage.setAttribute('data-pp-amount',amount)}}
@@ -98,4 +98,5 @@ const installBtn = document.getElementById('installBtn');
       });
     }
   });
+
 
