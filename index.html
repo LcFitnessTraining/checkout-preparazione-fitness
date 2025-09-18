@@ -28,6 +28,19 @@
 <link rel="stylesheet" href="style.css?v=1.0">
 </head>
 <body id="top">
+    <!--privacy e policy-->
+    <div id="privacy-banner" class="privacy-banner">
+  <div class="privacy-content">
+    <h2>Privacy & Cookie Policy</h2>
+    <p>
+      Utilizziamo cookie e raccogliamo dati personali solo per garantire il corretto funzionamento del sito
+      e per i servizi di pagamento. Cliccando su <strong>Accetta</strong>, confermi di aver letto e accettato la nostra
+      <a href="privacy.html" target="_blank">Privacy Policy</a>.
+    </p>
+    <button id="accept-privacy">Accetta</button>
+  </div>
+</div>
+
     <!-- Menù a tendina -->
     <nav class="dropdown-nav"> <div class="menu-container"><button id="menu-toggle" aria-label="Apri menu tendina">☰ Menu</button><div id="menu-list" class="hidden">
 <a href="#top">Home</a>
@@ -200,11 +213,9 @@ window.addEventListener("load", onLoad);
         .catch(err => console.error('Service Worker errore', err));
     });
   }
-</script>
-
-
-  
+</script> 
 <script src="script.js?v=1.0" defer></script>
 </body>
 </html>
+
 
