@@ -98,6 +98,17 @@ const installBtn = document.getElementById('installBtn');
       });
     }
   });
+  document.addEventListener("DOMContentLoaded", function() {
+  const privacyBanner = document.getElementById("privacy-banner");
+  const acceptBtn = document.getElementById("accept-privacy");
 
+  // Controlla se l'utente ha già accettato
+  if (localStorage.getItem("privacyAccepted") === "true") {
+    privacyBanner.style.display = "none";
+  }
 
-
+  acceptBtn.addEventListener("click", () => {
+    localStorage.setItem("privacyAccepted", "true");
+    privacyBanner.style.display = "none";
+  });
+});
