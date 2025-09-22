@@ -253,7 +253,7 @@ border-radius: 10px;padding: 20px;margin-bottom: 15px;cursor: pointer;transition
 }
 
 .fixed-rating .fixed-title {
-  font-size: 16px;
+  font-size: 20px;
   font-weight: bold;
   margin-bottom: 6px;
   color: #ddd; /* cambia colore se hai tema chiaro */
@@ -280,5 +280,5 @@ border-radius: 10px;padding: 20px;margin-bottom: 15px;cursor: pointer;transition
 .fixed-rating .rating-text {
   font-size: 18px;
   font-weight: bold;
-  color: #fff; /* cambia se il tuo tema è chiaro */
+  color: #ddd; /* cambia se il tuo tema è chiaro */
 }
