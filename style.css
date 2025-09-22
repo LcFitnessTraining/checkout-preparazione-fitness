@@ -219,3 +219,66 @@ border-radius: 10px;padding: 20px;margin-bottom: 15px;cursor: pointer;transition
   font-weight: bold;
   font-size: 1rem; 
  }
+/* rating */
+.rating-container {
+  text-align: center;
+  margin: 30px auto;
+  font-family: Arial, sans-serif;
+}
+
+.stars {
+  display: inline-flex;
+  cursor: pointer;
+}
+
+.stars span {
+  font-size: 40px;
+  color: #ccc;
+  transition: color 0.2s;
+}
+
+.stars span.selected {
+  color: gold;
+}
+
+#ratingValue {
+  margin-top: 10px;
+  font-size: 18px;
+  font-weight: bold;
+}
+
+/* ⭐ Valutazione media fissa */
+.fixed-rating {
+  margin-top: 25px;
+}
+
+.fixed-rating .fixed-title {
+  font-size: 16px;
+  font-weight: bold;
+  margin-bottom: 6px;
+  color: #ddd; /* cambia colore se hai tema chiaro */
+}
+
+.fixed-rating .fixed-stars {
+  font-size: 28px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 6px;
+}
+
+.fixed-rating .star.full {
+  color: gold;
+}
+
+.fixed-rating .star.half {
+  background: linear-gradient(90deg, gold 50%, #ccc 50%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.fixed-rating .rating-text {
+  font-size: 18px;
+  font-weight: bold;
+  color: #fff; /* cambia se il tuo tema è chiaro */
+}
