@@ -4,9 +4,9 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">   
     <!-- SEO Meta Tags -->
-<title>L.C.FitnessTraining - Coaching, Nutrizione e Benessere</title>
+<title>L.C.FitnessTraining - Coaching e Nutrizione</title>
 <meta name="description" content="Piani personalizzati e coaching con LcFitnessTraining. Allenati con un professionista del fitness con titoli nazionali e internazionali">
-<meta name="keywords" content="Fitness, Coaching, Allenamento, Lcfitnesstraining, Alimentazione, Personal Trainer, Workout, App Allenamento, Bodybuilding">
+<meta name="keywords" content="Fitness, Coaching, Allenamento, Lcfitnesstraining, Alimentazione, Personal Trainer, Workout, App Allenamento">
 <meta name="robots" content="index, follow">
 <meta name="google-site-verification" content="6Yp9UjyQmrIC61l742Q3dNFu7TKtbgzwVgjvoXyhaKQ">
 <link rel="canonical" href="https://lcfitnesstraining.github.io/checkout-preparazione-fitness/"> 
@@ -26,14 +26,6 @@
 <link rel="preload" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" as="style" onload="this.rel='stylesheet'">
 <link rel="preload" href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap" as="style" onload="this.rel='stylesheet'">
 <link rel="stylesheet" href="style.css?v=1.0">
-    <script async src="https://www.googletagmanager.com/gtag/js?id=G-7607DXZ8MV"></script>
-<script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
-
-  gtag('config', 'G-7607DXZ8MV');
-</script>
 </head>
 <body id="top">
     <!--privacy e policy-->
@@ -42,7 +34,7 @@
     <h2>Privacy & Cookie Policy</h2>
     <p>
       Utilizziamo cookie e raccogliamo dati personali solo per garantire il corretto funzionamento del sito
-      e per i servizi di pagamento.Questo sito utilizza Google Analytics per monitorare il traffico. Cliccando su <strong>Accetta</strong>, confermi di aver letto e accettato la nostra
+      e per i servizi di pagamento. Cliccando su <strong>Accetta</strong>, confermi di aver letto e accettato la nostra
       <a href="privacy.html" target="_blank">Privacy Policy</a>.
     </p>
     <button id="accept-privacy">Accetta</button>
@@ -57,7 +49,8 @@
 <a href="#presentazione">Presentazione</a>
 <a href="#Feedbackclient">Lascia un feedback</a>
 <a href="#faqNEW">FAQ</a>
-<a href="#fine-pagina">Testimonianze e percorsi reali</a>
+<a href="#feedback">Testimonianze e percorsi reali</a>
+<a href="#fine-pagina">Lascia una valutazione</a>
 </div>
 </div>
 <button id="audio-toggle" aria-label="Attiva/disattiva musica di sottofondo">🔇 Off</button>
@@ -144,9 +137,10 @@ data-pp-amount="">
 <div class="faq-item"><button class="faq-question">In cosa consiste "Acquista ora, paga dopo"?</button><div class="faq-answer">
 <p>"Acquista ora, paga dopo" è un servizio offerto da L.C.FitnessTraining tramite tecnologia Paypal. Consente di suddividere l'importo totale dell'acquisto in tre comode rate mensili, senza applicazione di interessi o costi aggiuntivi. Un metodo semplice, sicuro e trasparente.</p></div></div></div>
 </section>
+<section class="testimonials-section" id="feedback">
 <div class="separator"></div>
 <!-- Testimonials -->
-<section class="testimonials-section"><h2 class="typing">Percorsi reali</h2><div class="feedback-marquee-container"><div class="feedback-marquee-track">
+<h2 class="typing">Percorsi reali</h2><div class="feedback-marquee-container"><div class="feedback-marquee-track">
 <span class="feedback-item">💬Gabriele C. - Volevo lasciare un ringraziamento sincero per questa applicazione: è uno strumento davvero utile e ben fatto. Mi ha aiutato a restare focalizzato, a monitorare i miei progressi e, soprattutto, a sentirmi seguito anche quando non ero in sessione. Si vede che c'è cura e attenzione dietro, proprio come nel lavoro del coach. Intuitiva, motivante e sempre pronta a darmi quel piccolo spunto in più. Complimenti!</span>
 <span class="feedback-item">💬William - Semplicemente fantastico, vieni seguito da una persona professionale ottenendo grandi risultati, miglior coach in Italia 💪🏽</span>
 <span class="feedback-item">💬Francesco - Luca il re</span>
@@ -160,8 +154,32 @@ data-pp-amount="">
 </div>
 </div>     
 </section>
-<div class="central-badge"><img src="https://i.imgur.com/346Ppq0.png" alt="Badge 100% soddisfatti" class="badge-large">
-</div>
+<div class="separator"></div>
+<!-- ⭐ Sezione Feedback con Stelle -->
+<div class="rating-container">
+  <h2>Lascia la tua valutazione</h2>
+  
+  <!-- ⭐ Stelle interattive -->
+  <div class="stars" id="starRating">
+    <span data-value="1">★</span>
+    <span data-value="2">★</span>
+    <span data-value="3">★</span>
+    <span data-value="4">★</span>
+    <span data-value="5">★</span>
+  </div>
+  <p id="ratingValue">Nessuna valutazione</p>
+<div class="separator"></div>
+  <!-- ⭐ Valutazione media fissa -->
+  <div class="fixed-rating">
+    <p class="fixed-title">Valutazione media clienti:</p>
+    <div class="fixed-stars">
+    <span class="star full">★</span>
+    <span class="star full">★</span>
+    <span class="star full">★</span>
+    <span class="star full">★</span>
+    <span class="star half">★</span>
+    <span class="rating-text">4,5/5</span>
+  </div>
 </div>
 </main>
 <!-- Copyright -->
@@ -221,11 +239,7 @@ window.addEventListener("load", onLoad);
         .catch(err => console.error('Service Worker errore', err));
     });
   }
-</script> 
+</script>
 <script src="script.js?v=1.0" defer></script>
 </body>
 </html>
-
-
-
-
