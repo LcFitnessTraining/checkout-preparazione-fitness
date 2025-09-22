@@ -112,3 +112,22 @@ const installBtn = document.getElementById('installBtn');
     privacyBanner.style.display = "none";
   });
 });
+   /* rating */
+const stars = document.querySelectorAll('#starRating span');
+const ratingValue = document.getElementById('ratingValue');
+
+stars.forEach((star, i) => {
+  star.addEventListener('click', () => {
+    const value = parseInt(star.getAttribute('data-value'));
+
+    // reset
+    stars.forEach(s => s.classList.remove('selected'));
+
+    // illumina fino al valore cliccato
+    for (let j = 0; j < value; j++) {
+      stars[j].classList.add('selected');
+    }
+
+    ratingValue.textContent = `Hai dato ${value}/5 stelle`;
+  });
+});
