@@ -50,7 +50,8 @@
 <a href="#Feedbackclient">Lascia un feedback</a>
 <a href="#faqNEW">FAQ</a>
 <a href="#feedback">Testimonianze e percorsi reali</a>
-<a href="#fine-pagina">Lascia una valutazione</a>
+<a href="#valutazione">Lascia una valutazione</a>
+<a href="#fine-pagina">Checkout</a>
 </div>
 </div>
 <button id="audio-toggle" aria-label="Attiva/disattiva musica di sottofondo">🔇 Off</button>
@@ -62,33 +63,6 @@
 <div class="container">
 <section class="hero-section"><img src="logo.jpg" alt="Logo di LcFitnessTraining" class="logo" width="200" height="100">
 <button id="installBtn" style="display:none;">📲 Installa la pagina sul tuo smartphone</button>
-<h1 class="typing">Scegli il tuo piano</h1>
-<div class="payment-logos">
-<img src="https://img.icons8.com/color/48/visa.png" alt="Pagamento disponibile con carta Visa" height="30">
-<img src="https://img.icons8.com/color/48/mastercard-logo.png" alt="Pagamento disponibile con carta Mastercard" height="30">
-<img src="https://img.icons8.com/color/48/maestro.png" alt="Pagamento disponibile con carta Maestro" height="30">
-<img src="https://img.icons8.com/color/48/amex.png" alt="Pagamento disponibile con American Express" height="30">
-<img src="https://img.icons8.com/color/48/paypal.png" alt="Pagamento disponibile con PayPal" height="30">
-<img src="https://img.icons8.com/color/48/apple-pay.png" alt="Pagamento disponibile con Apple Pay" height="30">
-</div>
-<p>Scegli i tuoi obiettivi e porta il tuo corpo sopra ogni limite !!</p>
-</section>
-<section class="payment-section"><div class="select-wrapper"><select id="durata" name="durata"><option value="" disabled selected>- Seleziona durata -</option>
-<option value="63">1 mese - €63</option><option value="115">2 mesi - €115</option><option value="160">3 mesi - €160</option><option value="270">6 mesi - €270</option>
-<option value="50">1 Individual Pt session - €50</option><option value="400">10 Individual Pt session - €400</option><option value="600">20 Individual Pt session - €600</option><option value="33.00">Workout - €33</option>
-</select>
-<div id="paypal-button-wrapper" class="fade" style="display: none;"><div id="paypal-button-container"></div>
-</div>
-</div>
-<div id="paypal-message" 
-data-pp-message 
-data-pp-style-layout="text" 
-data-pp-style-logo-type="inline" 
-data-pp-style-text-color="White" 
-data-pp-style-text-size="Large" 
-data-pp-amount="">
-</div>
-</section>
 <!-- Servizi -->
 <section class="servizi" id="servizi"><div class="separator"></div><h2 class="typing">I miei servizi</h2><small>clicca sul servizio per saperne di più</small>
 <ul id="servizi-list">
@@ -154,11 +128,11 @@ data-pp-amount="">
 </div>
 </div>     
 </section>
+<section class="rating" id="valutazione">
 <div class="separator"></div>
 <!-- ⭐ Sezione Feedback con Stelle -->
 <div class="rating-container">
   <h2>Lascia la tua valutazione</h2>
-  
   <!-- ⭐ Stelle interattive -->
   <div class="stars" id="starRating">
     <span data-value="1">★</span>
@@ -168,7 +142,6 @@ data-pp-amount="">
     <span data-value="5">★</span>
   </div>
   <p id="ratingValue">Nessuna valutazione</p>
-<div class="separator"></div>
   <!-- ⭐ Valutazione media fissa -->
   <div class="fixed-rating">
     <p class="fixed-title">Valutazione media clienti:</p>
@@ -181,6 +154,34 @@ data-pp-amount="">
     <span class="rating-text">4,5/5</span>
   </div>
 </div>
+<div class="separator"></div>
+<h1 class="typing">Scegli il tuo piano</h1>
+<div class="payment-logos">
+<img src="https://img.icons8.com/color/48/visa.png" alt="Pagamento disponibile con carta Visa" height="30">
+<img src="https://img.icons8.com/color/48/mastercard-logo.png" alt="Pagamento disponibile con carta Mastercard" height="30">
+<img src="https://img.icons8.com/color/48/maestro.png" alt="Pagamento disponibile con carta Maestro" height="30">
+<img src="https://img.icons8.com/color/48/amex.png" alt="Pagamento disponibile con American Express" height="30">
+<img src="https://img.icons8.com/color/48/paypal.png" alt="Pagamento disponibile con PayPal" height="30">
+<img src="https://img.icons8.com/color/48/apple-pay.png" alt="Pagamento disponibile con Apple Pay" height="30">
+</div>
+<p>Scegli i tuoi obiettivi e porta il tuo corpo sopra ogni limite !!</p>
+</section>
+<section class="payment-section"><div class="select-wrapper"><select id="durata" name="durata"><option value="" disabled selected>- Seleziona durata -</option>
+<option value="63">1 mese - €63</option><option value="115">2 mesi - €115</option><option value="160">3 mesi - €160</option><option value="270">6 mesi - €270</option>
+<option value="50">1 Individual Pt session - €50</option><option value="400">10 Individual Pt session - €400</option><option value="600">20 Individual Pt session - €600</option><option value="33.00">Workout - €33</option>
+</select>
+<div id="paypal-button-wrapper" class="fade" style="display: none;"><div id="paypal-button-container"></div>
+</div>
+</div>
+<div id="paypal-message" 
+data-pp-message 
+data-pp-style-layout="text" 
+data-pp-style-logo-type="inline" 
+data-pp-style-text-color="White" 
+data-pp-style-text-size="Large" 
+data-pp-amount="">
+</div>
+</section>
 </main>
 <!-- Copyright -->
 <footer><div id="copyright" class="parallax" onclick="openCopyrightPopup()"> © 2025 L.C.FitnessTraining. Tutti i diritti riservati. + info</div></footer>
