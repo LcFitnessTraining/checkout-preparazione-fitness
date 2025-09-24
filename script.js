@@ -98,19 +98,30 @@ const installBtn = document.getElementById('installBtn');
       });
     }
   });
-  document.addEventListener("DOMContentLoaded", function() {
+ document.addEventListener("DOMContentLoaded", function() {
   const privacyBanner = document.getElementById("privacy-banner");
   const acceptBtn = document.getElementById("accept-privacy");
 
-  // Controlla se l'utente ha già accettato
+  if (!privacyBanner || !acceptBtn) return;
+
+  // Controlla se già accettato
   if (localStorage.getItem("privacyAccepted") === "true") {
     privacyBanner.style.display = "none";
   }
 
-  acceptBtn.addEventListener("click", () => {
+  // Funzione di chiusura
+  function acceptPrivacy() {
     localStorage.setItem("privacyAccepted", "true");
     privacyBanner.style.display = "none";
-  });
+  }
+
+  // Eventi per compatibilità mobile/iPhone
+  acceptBtn.addEventListener("click", acceptPrivacy, false);
+  acceptBtn.addEventListener("touchend", function(e) {
+    // Evita doppio trigger su alcuni browser
+    e.preventDefault();
+    acceptPrivacy();
+  }, false);
 });
    /* rating */
 const stars = document.querySelectorAll('#starRating span');
@@ -131,3 +142,4 @@ stars.forEach((star, i) => {
     ratingValue.textContent = `Hai dato ${value}/5 stelle`;
   });
 });
+
