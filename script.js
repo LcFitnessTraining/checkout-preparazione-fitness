@@ -98,31 +98,22 @@ const installBtn = document.getElementById('installBtn');
       });
     }
   });
- document.addEventListener("DOMContentLoaded", function() {
+document.addEventListener("DOMContentLoaded", function() {
   const privacyBanner = document.getElementById("privacy-banner");
   const acceptBtn = document.getElementById("accept-privacy");
-
   if (!privacyBanner || !acceptBtn) return;
-
-  // Controlla se già accettato
   if (localStorage.getItem("privacyAccepted") === "true") {
     privacyBanner.style.display = "none";
   }
-
-  // Funzione di chiusura
-  function acceptPrivacy() {
+  function acceptPrivacy(e) {
+    // e.preventDefault(); // puoi anche non metterlo
     localStorage.setItem("privacyAccepted", "true");
     privacyBanner.style.display = "none";
   }
-
-  // Eventi per compatibilità mobile/iPhone
   acceptBtn.addEventListener("click", acceptPrivacy, false);
-  acceptBtn.addEventListener("touchend", function(e) {
-    // Evita doppio trigger su alcuni browser
-    e.preventDefault();
-    acceptPrivacy();
-  }, false);
 });
+
+
    /* rating */
 const stars = document.querySelectorAll('#starRating span');
 const ratingValue = document.getElementById('ratingValue');
@@ -142,4 +133,5 @@ stars.forEach((star, i) => {
     ratingValue.textContent = `Hai dato ${value}/5 stelle`;
   });
 });
+
 
