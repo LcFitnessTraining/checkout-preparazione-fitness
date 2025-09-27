@@ -158,52 +158,7 @@ h1 {font-size: 1.8rem;}
 .fade {opacity: 1;transition: opacity 1s ease;}
 .fade:not([style*="display: none"]) {opacity: 1;}
 
-/* privacy e policy */
-.privacy-banner {
-  position: fixed;
-  top: 0; left: 0;
-  width: 100%; height: 100%;
-  background: rgba(0,0,0,0.8);
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  z-index: 10000;
-}
 
-.privacy-content {
-  background: #000000;
-  color: #ffffff;
-  padding: 30px;
-  border-radius: 10px;
-  max-width: 500px;
-  text-align: center;
-  box-shadow: 0 20px 40px rgba(143, 4, 4, 0.795)
-}
-
-.privacy-content h2 {
-  margin-bottom: 15px;
-}
-
-.privacy-content p {
-  margin-bottom: 20px;
-  font-size: 15px;
-  line-height: 1.5;
-}
-
-.privacy-content button {
-  background: #9e0101;
-  color: #000000;
-  border: none;
-  padding: 12px 20px;
-  border-radius: 6px;
-  cursor: pointer;
-  font-size: 16px;
-  font-weight: bold;
-}
-
-.privacy-content button:hover {
-  background: #9e0101;
-}
 
 
 /* non lo so */
@@ -282,4 +237,5 @@ border-radius: 10px;padding: 20px;margin-bottom: 15px;cursor: pointer;transition
   font-weight: bold;
   color: #ddd; /* cambia se il tuo tema è chiaro */
 }
+
 
