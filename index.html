@@ -41,7 +41,7 @@
 <a href="#feedback">Testimonianze e percorsi reali</a>
 <a href="#valutazione">Lascia una valutazione</a>
 <a href="#fine-pagina">Checkout</a>
-<li><a href="privacy.html" target="_blank">Privacy Policy & Cookie</a></li>
+<li><a href="privacy.html" target="_blank">Privacy Policy</a></li>
 </div>
 </div>
 <button id="audio-toggle" aria-label="Attiva/disattiva musica di sottofondo">🔇 Off</button>
@@ -131,10 +131,15 @@
     <span data-value="5">★</span>
   </div>
   <p id="ratingValue">Nessuna valutazione</p>
-  <!-- ⭐ Valutazione media fissa -->
-  <div class="fixed-rating">
-    <p class="fixed-title">Valutazione media clienti:</p>
-    <div class="fixed-stars">
+
+  <p id="ratingValue"></p>
+  <button id="send-rating">Invia</button>
+</div>
+
+<!-- ⭐ Valutazione media fissa -->
+<div class="fixed-rating">
+  <p class="fixed-title">Valutazione media clienti:</p>
+  <div class="fixed-stars">
     <span class="star full">★</span>
     <span class="star full">★</span>
     <span class="star full">★</span>
@@ -143,6 +148,8 @@
     <span class="rating-text">4,5/5</span>
   </div>
 </div>
+
+
 <div class="separator"></div>
 <h1 class="typing">Scegli il tuo piano</h1>
 <div class="payment-logos">
@@ -232,9 +239,3 @@ window.addEventListener("load", onLoad);
 </script>
 </body>
 </html>
-
-
-
-
-
-
