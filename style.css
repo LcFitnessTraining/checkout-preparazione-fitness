@@ -174,7 +174,6 @@ border-radius: 10px;padding: 20px;margin-bottom: 15px;cursor: pointer;transition
   font-weight: bold;
   font-size: 1rem; 
  }
-/* rating */
 .rating-container {
   text-align: center;
   margin: 30px auto;
@@ -200,6 +199,22 @@ border-radius: 10px;padding: 20px;margin-bottom: 15px;cursor: pointer;transition
   margin-top: 10px;
   font-size: 18px;
   font-weight: bold;
+  color: #ddd;
+}
+
+#send-rating {
+  margin-top: 10px;
+  padding: 8px 16px;
+  border: none;
+  background: #007bff;
+  color: #fff;
+  font-size: 16px;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: 0.3s;
+}
+#send-rating:hover {
+  background: #0056b3;
 }
 
 /* ⭐ Valutazione media fissa */
@@ -237,5 +252,3 @@ border-radius: 10px;padding: 20px;margin-bottom: 15px;cursor: pointer;transition
   font-weight: bold;
   color: #ddd; /* cambia se il tuo tema è chiaro */
 }
-
-
