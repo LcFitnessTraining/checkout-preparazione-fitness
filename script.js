@@ -103,22 +103,38 @@ const installBtn = document.getElementById('installBtn');
    /* rating */
 const stars = document.querySelectorAll('#starRating span');
 const ratingValue = document.getElementById('ratingValue');
+const sendBtn = document.getElementById('send-rating');
 
+let selectedRating = 0;
+
+// ⭐ Selezione stelle
 stars.forEach((star, i) => {
   star.addEventListener('click', () => {
-    const value = parseInt(star.getAttribute('data-value'));
+    selectedRating = parseInt(star.getAttribute('data-value'));
 
     // reset
     stars.forEach(s => s.classList.remove('selected'));
 
     // illumina fino al valore cliccato
-    for (let j = 0; j < value; j++) {
+    for (let j = 0; j < selectedRating; j++) {
       stars[j].classList.add('selected');
     }
 
-    ratingValue.textContent = `Hai dato ${value}/5 stelle`;
+    ratingValue.textContent = `Hai dato ${selectedRating}/5 stelle`;
   });
 });
 
+// ⭐ Invio + reset
+sendBtn.addEventListener('click', () => {
+  if (selectedRating > 0) {
+    alert(`Hai inviato una valutazione di ${selectedRating} stelle!`);
+    console.log("Valutazione inviata:", selectedRating);
 
-
+    // reset stelle
+    stars.forEach(s => s.classList.remove('selected'));
+    ratingValue.textContent = "";
+    selectedRating = 0;
+  } else {
+    alert("Seleziona prima una valutazione!");
+  }
+});
