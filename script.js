@@ -111,8 +111,7 @@ let selectedRating = 0;
 stars.forEach((star, i) => {
   star.addEventListener('click', () => {
     selectedRating = parseInt(star.getAttribute('data-value'));
-
-    // reset
+  // reset
     stars.forEach(s => s.classList.remove('selected'));
 
     // illumina fino al valore cliccato
@@ -120,7 +119,7 @@ stars.forEach((star, i) => {
       stars[j].classList.add('selected');
     }
 
-    ratingValue.textContent = `Hai dato ${selectedRating}/5 stelle`;
+    ratingValue.textContent = `Hai dato ${selectedRating}/5 stelle. Grazie per il tuo supporto! La tua opinione ci aiuta a crescere!!`;
   });
 });
 
