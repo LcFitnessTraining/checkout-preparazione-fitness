@@ -30,7 +30,7 @@
 </head>
 <body id="top">
 
-    <!-- Menù a tendina -->
+    <!-- Menù Hambrurger -->
     <nav class="dropdown-nav"> <div class="menu-container"><button id="menu-toggle" aria-label="Apri menu tendina">☰ Menu</button><div id="menu-list" class="hidden">
 <a href="#top">Home</a>
 <a href="#servizi">Servizi inclusi</a>
@@ -46,12 +46,14 @@
 </div>
 <button id="audio-toggle" aria-label="Attiva/disattiva musica di sottofondo">🔇 Off</button>
 </nav>
+
 <!-- Particle Background -->
 <div id="particles-js"></div>
 <main>
 <div class="container">
 <section class="hero-section"><img src="logo.jpg" alt="Logo di LcFitnessTraining" class="logo" width="200" height="100">
 <button id="installBtn" style="display:none;">📲 Installa la pagina sul tuo smartphone</button>
+
 <!-- Servizi -->
 <section class="servizi" id="servizi"><div class="separator"></div><h2 class="typing">I miei servizi</h2><small>clicca sul servizio per saperne di più</small>
 <ul id="servizi-list">
@@ -65,23 +67,27 @@
 <li data-desc="Un Individual Pt session è una lezione di coaching individuale; un programma di allenamento personalizzato e mirato, che integra principi di fisiologia dell'esercizio e biomeccanica per ottimizzare la performance muscolare e la tecnica di sollevamento. Durante la sessione, il coach valuta e corregge in tempo reale la postura e l'esecuzione dei movimenti, pianificando progressioni di carico calibrate per favorire l'ipertrofia, la forza massimale e la resistenza muscolare, minimizzando il rischio di infortuni attraverso un controllo continuo della tecnica e un adattamento funzionale alle esigenze specifiche dell'atleta.">Individual Pt session</li>
 </ul>
 </section>
-<!-- Titoli  -->
+
+<!-- Title Win and certification  -->
 <section class="tit" id="tit"><div class="separator"></div><h3 class="typing">Titoli vinti</h3><ul id="titoli-list">
 <li>🥈 Istruttore Fitness & Powerlifting specializzato nella ricomposizione corporea</li>
 <li>🏆 1° NAC ITALY Championship</li>
 <li>🥇 8° NAC WORLD Championship</li>
 </ul>
 </section><div class="separator"></div>
-<!-- Contatti -->
+
+<!-- Contact -->
 <section class="contatti" id="contatti"><h4 class="typing">Contatti</h4><ul>
 <li><a href="mailto:LcFitnessTrainingPt@gmail.com" target="_blank" rel="noopener" aria-label="Invia una mail a LcFitnessTrainingPt@gmail.com"><i class="fa-solid fa-envelope gmail-icon"></i> Gmail</a></li>
 <li><a href="https://www.instagram.com/lcfitnesstraining?igsh=aXNINWI1MXp2amRn/" target="_blank" rel="noopener" aria-label="Profilo Instagram di Luka Cupo"><i class="fab fa-instagram instagram-icon"></i> Instagram</a></li>
 <li><a href="https://www.facebook.com/L.C.Fitness.Training.pt/" target="_blank" rel="noopener" aria-label="Profilo Facebook di Luka Cupo"><i class="fab fa-facebook facebook-icon"></i> Facebook</a></li>
 </ul></section>
-<!-- Presentazione -->
+
+<!-- Presentation -->
 <section class="presentazione" id="presentazione"><div class="separator"></div><h5 class="typing">Chi sono</h5><img src="luka-profilo.webp" alt="Luka, Personal Trainer" class="profilo-foto" loading="lazy">
 <p>Mi chiamo <strong>Luka</strong> e sono un <span class="highlight">Coach Certificato</span> con anni di esperienza nel settore fitness e preparazione atletica. Il mio approccio unisce competenza scientifica e passione per ottenere risultati concreti.</p><p>Con titoli nazionali e internazionali, e centinaia di clienti soddisfatti, il mio obiettivo è offrirti un <span class="highlight">percorso su misura</span> che ti permetta di raggiungere i tuoi traguardi in modo sicuro e duraturo.</p>
 </section>
+
 <!-- Feedback  -->
 <section class="Feedbackclient" id="Feedbackclient"><h6 class="typing">Feedback</h6><form id="feedbackForm" action="https://formspree.io/f/xwpbzggz" method="POST">
 <label for="nome">Nome:</label><input type="text" id="nome" name="nome" required>
@@ -89,6 +95,7 @@
 <button type="submit">Invia</button><div id="msg-feedback"></div>
 </form>
 </section>
+
 <!-- FAQ  -->
 <section class="faqNEW" id="faqNEW"><div class="separator"></div><h2 class="typing" id="faq">Sezione FAQ</h2><div class="faq-container"><div class="faq-item">
 <button class="faq-question">Quanto dura ogni sessione di personal privato?</button><div class="faq-answer"><p>Ogni sessione avverrà in un centro a tua scelta (previo appuntamento con il Coach) ed ha una durata media di 60 minuti, inclusa la parte di riscaldamento e defaticamento. Il tutto però varia in base alla programmazione in corso</p></div></div>
@@ -102,6 +109,7 @@
 </section>
 <section class="testimonials-section" id="feedback">
 <div class="separator"></div>
+
 <!-- Testimonials -->
 <h2 class="typing">Percorsi reali</h2><div class="feedback-marquee-container"><div class="feedback-marquee-track">
 <span class="feedback-item">💬Gabriele C. - Volevo lasciare un ringraziamento sincero per questa applicazione: è uno strumento davvero utile e ben fatto. Mi ha aiutato a restare focalizzato, a monitorare i miei progressi e, soprattutto, a sentirmi seguito anche quando non ero in sessione. Si vede che c'è cura e attenzione dietro, proprio come nel lavoro del coach. Intuitiva, motivante e sempre pronta a darmi quel piccolo spunto in più. Complimenti!</span>
@@ -119,10 +127,11 @@
 </section>
 <section class="rating" id="valutazione">
 <div class="separator"></div>
-<!-- ⭐ Sezione Feedback con Stelle -->
+
+<!-- ⭐ Rating -->
 <div class="rating-container">
   <h2>Lascia la tua valutazione</h2>
-  <!-- ⭐ Stelle interattive -->
+
   <div class="stars" id="starRating">
     <span data-value="1">★</span>
     <span data-value="2">★</span>
@@ -131,12 +140,11 @@
     <span data-value="5">★</span>
   </div>
   <p id="ratingValue">Nessuna valutazione</p>
-
   <p id="ratingValue"></p>
   <button id="send-rating">Invia</button>
 </div>
 
-<!-- ⭐ Valutazione media fissa -->
+<!-- ⭐ Rating Fixed -->
 <div class="fixed-rating">
   <p class="fixed-title">Valutazione media clienti:</p>
   <div class="fixed-stars">
@@ -148,9 +156,9 @@
     <span class="rating-text">4,5/5</span>
   </div>
 </div>
-
-
 <div class="separator"></div>
+
+<!-- Payment -->
 <h1 class="typing">Scegli il tuo piano</h1>
 <div class="payment-logos">
 <img src="https://img.icons8.com/color/48/visa.png" alt="Pagamento disponibile con carta Visa" height="30">
@@ -179,6 +187,7 @@ data-pp-amount="">
 </div>
 </section>
 </main>
+
 <!-- Copyright -->
 <footer><div id="copyright" class="parallax" onclick="openCopyrightPopup()"> © 2025 L.C.FitnessTraining. Tutti i diritti riservati. + info</div></footer>
 <!-- Popup  -->
@@ -193,7 +202,7 @@ Tutti i contenuti di questo sito, inclusi loghi, grafica, immagini, e codice, so
 <audio id="bg-music" loop preload="auto"><source src="musica.mp3" type="audio/mpeg">Il tuo browser non supporta l'audio HTML5.</audio>
 <!-- Audio Overlay for Mobile -->
 <div id="audio-overlay" tabindex="0" aria-label="Attiva audio di sottofondo"></div>
-<!-- sfondo e chat virtuale -->
+<!-- Background and ChatBase -->
 <script src="https://cdn.jsdelivr.net/npm/particles.js@2.0.0/particles.min.js"></script>
 <script>
 (function(){
@@ -227,6 +236,7 @@ window.addEventListener("load", onLoad);
 }
 })();
 </script>
+
 <!-- Main JavaScript -->
  <script>
   if ('serviceWorker' in navigator) {
@@ -239,3 +249,5 @@ window.addEventListener("load", onLoad);
 </script>
 </body>
 </html>
+
+<!-- I'm updating the site twice a month -->
