@@ -385,7 +385,7 @@ const sendBtn = document.getElementById('send-rating');
 
 let selectedRating = 0;
 
-/* ⭐ Rating + reset + send button */
+/* ⭐ Rating + reset */
 stars.forEach((star, i) => {
   star.addEventListener('click', () => {
     selectedRating = parseInt(star.getAttribute('data-value'));
@@ -398,19 +398,44 @@ stars.forEach((star, i) => {
       stars[j].classList.add('selected');
     }
 
-    ratingValue.textContent = `Hai dato ${selectedRating}/5 stelle. Grazie per il tuo supporto! La tua opinione ci aiuta a crescere!!`;
+    ratingValue.textContent = `Hai dato ${selectedRating}/5 stelle.`;
   });
 });
 
+/* send button */
 sendBtn.addEventListener('click', () => {
-  if (selectedRating > 0) {
-    alert(`Hai inviato una valutazione di ${selectedRating} stelle!`);
-    console.log("Valutazione inviata:", selectedRating);
+  const popupTitle = document.getElementById('popup-title');
+  const popupText = document.getElementById('popup-text');
+  const popup = document.getElementById('popup');
 
+  if (selectedRating > 0) {
+    if (popupTitle && popupText && popup) {
+      popupTitle.textContent = "Valutazione inviata!";
+      popupText.textContent = `Hai dato ${selectedRating} ⭐. Grazie per il tuo supporto! La tua opinione ci aiuta a crescere!!`;
+      popup.style.display = 'block';
+      setTimeout(() => { popup.style.opacity = '1' }, 10);
+
+      // Close Popup
+      setTimeout(() => {
+        popup.style.opacity = '0';
+        setTimeout(() => { popup.style.display = 'none' }, 300);
+      }, 8000);
+    }
+
+    // Reset stars
     stars.forEach(s => s.classList.remove('selected'));
     ratingValue.textContent = "";
     selectedRating = 0;
   } else {
-    alert("Seleziona prima una valutazione!");
+    if (popupTitle && popupText && popup) {
+      popupTitle.textContent = "Attenzione!";
+      popupText.textContent = "Seleziona prima una valutazione!";
+      popup.style.display = 'block';
+      setTimeout(() => { popup.style.opacity = '1' }, 10);
+      setTimeout(() => {
+        popup.style.opacity = '0';
+        setTimeout(() => { popup.style.display = 'none' }, 300);
+      }, 5000);
+    }
   }
 });
