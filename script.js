@@ -141,6 +141,14 @@ function handleDurationChange() {
 }
 
 function loadPayPalScript(amount) {
+  // Rimuovi eventuali script PayPal già presenti
+  const oldScript = document.querySelector('script[src*="paypal.com/sdk/js"]');
+  if (oldScript) oldScript.remove();
+
+  // Svuota il container PayPal
+  const container = document.getElementById('paypal-button-container');
+  if (container) container.innerHTML = '';
+
   const script = document.createElement('script');
   script.src = 'https://www.paypal.com/sdk/js?client-id=ASpd4SC2Ii_o-AQAWzj-s3VnmrxHIqz-CpXL4AfEpHvS8PtZXl4JJ3Hho3sI9eO-GjXxWj8oiTzDFenm&currency=EUR&components=buttons,messages';
   script.onload = function () { renderPayPalButton(amount) };
@@ -491,3 +499,4 @@ upsellBanner1.addEventListener('click', () => {
   durataSelect.dispatchEvent(new Event('change')); // trigger PayPal update
   upsellBanner1.classList.remove('show');
 });
+
