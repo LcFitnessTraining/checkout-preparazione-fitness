@@ -1,11 +1,11 @@
 {
-  "name": "L.C. Fitness Training",
-  "short_name": "LC Fitness Pay",
-  "start_url": "./",
+  "name": "L.C.FitnessTraining",
+  "short_name": "LCFitnessPay",
+  "start_url": ".",
   "display": "standalone",
-  "background_color": "#000000",
+  "background_color": "#ffffff",
   "theme_color": "#ff0000",
-  "orientation": "portrait",
+  "description": "Piani personalizzati e coaching con LcFitnessTraining.",
   "icons": [
     {
       "src": "icon-192.png",
@@ -17,5 +17,6 @@
       "sizes": "512x512",
       "type": "image/png"
     }
-  ]
+  ],
+  "orientation": "portrait"
 }
