@@ -150,7 +150,7 @@ function loadPayPalScript(amount) {
   if (container) container.innerHTML = '';
 
   const script = document.createElement('script');
-  script.src = 'https://www.paypal.com/sdk/js?client-id=ASpd4SC2Ii_o-AQAWzj-s3VnmrxHIqz-CpXL4AfEpHvS8PtZXl4JJ3Hho3sI9eO-GjXxWj8oiTzDFenm&currency=EUR&components=buttons,messages';
+  script.src = 'https://www.paypal.com/sdk/js?client-id=AbTBBct2Vk495loQAh7L-ud7YPKLhZg3r-SgoipFANdxEbLnZBcMoTwj3BKARmrfO650wfPoNb08JjPI&currency=EUR&components=buttons,messages';
   script.onload = function () { renderPayPalButton(amount) };
   document.body.appendChild(script);
 }
@@ -499,4 +499,5 @@ upsellBanner1.addEventListener('click', () => {
   durataSelect.dispatchEvent(new Event('change')); // trigger PayPal update
   upsellBanner1.classList.remove('show');
 });
+
 
