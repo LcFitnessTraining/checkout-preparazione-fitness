@@ -470,7 +470,6 @@ upsellBanner.addEventListener('click', () => {
   durataSelect.dispatchEvent(new Event('change')); // trigger PayPal update
   upsellBanner.classList.remove('show');
 });
-
 // 6 Months upsell //
 if (durataSelect) {
   durataSelect.addEventListener('change', () => {
@@ -486,7 +485,6 @@ if (durataSelect) {
     }
   });
 }
-
 upsellBanner1.addEventListener('click', () => {
   // Cambia la selezione al piano superiore
   durataSelect.value = '270'; // esempio: piano superiore 3 mesi
