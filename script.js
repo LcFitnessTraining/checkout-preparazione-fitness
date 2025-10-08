@@ -183,8 +183,12 @@ function renderPayPalButton(amount) {
         );
         sendOrderConfirmation(details);
       }),
-      onCancel: () => { showPaymentPopup('Il pagamento è stato annullato.', 'error') }
-    }).render('#paypal-button-container');
+          onCancel: () => { showPaymentPopup('Il pagamento è stato annullato.', 'error') },
+onError: function(err) {
+    console.error("PayPal Error:", err);
+    showPaymentPopup("Si è verificato un errore durante il pagamento. Riprova o contattaci.");
+  }
+}).render('#paypal-button-container');
   }
 }
 
@@ -499,5 +503,6 @@ upsellBanner1.addEventListener('click', () => {
   durataSelect.dispatchEvent(new Event('change')); // trigger PayPal update
   upsellBanner1.classList.remove('show');
 });
+
 
 
