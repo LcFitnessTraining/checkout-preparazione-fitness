@@ -182,7 +182,6 @@ function renderPayPalButton(amount) {
           'success'
         );
       }),
-          onCancel: () => { showPaymentPopup('Il pagamento è stato annullato.', 'error') },
 }).render('#paypal-button-container');
   }
 }
@@ -498,4 +497,5 @@ upsellBanner1.addEventListener('click', () => {
   durataSelect.dispatchEvent(new Event('change')); // trigger PayPal update
   upsellBanner1.classList.remove('show');
 });
+
 
