@@ -181,7 +181,6 @@ function renderPayPalButton(amount) {
           `Grazie ${details.payer.name.given_name}! Il tuo ordine da ${amount}€ è stato processato. Sarai contattato a breve dal Coach per cominciare il tuo percorso!`,
           'success'
         );
-        sendOrderConfirmation(details);
       }),
           onCancel: () => { showPaymentPopup('Il pagamento è stato annullato.', 'error') },
 }).render('#paypal-button-container');
@@ -499,3 +498,4 @@ upsellBanner1.addEventListener('click', () => {
   durataSelect.dispatchEvent(new Event('change')); // trigger PayPal update
   upsellBanner1.classList.remove('show');
 });
+
