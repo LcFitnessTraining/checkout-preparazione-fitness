@@ -169,9 +169,12 @@
 <img src="https://img.icons8.com/color/48/apple-pay.png" alt="Pagamento disponibile con Apple Pay" height="30">
 </div>
 <p>Scegli i tuoi obiettivi e porta il tuo corpo sopra ogni limite !!</p>
+<div id="promo-countdown" class="promo-countdown">
+    PROMO ANNUALE — Scade in: <span id="promo-timer"></span>
+</div>
 </section>
 <section class="payment-section"><div class="select-wrapper"><select id="durata" name="durata"><option value="" disabled selected>- Seleziona durata -</option>
-<option value="63">1 mese - €63</option><option value="115">2 mesi - €115</option><option value="160">3 mesi - €160</option><option value="270">6 mesi - €270</option>
+<option value="63">1 mese - €63</option><option value="115">2 mesi - €115</option><option value="160">3 mesi - €160</option><option value="270">6 mesi - €270</option><option value="510">12 mesi - €510</option>
 <option value="50">1 Individual Pt session - €50</option><option value="400">10 Individual Pt session - €400</option><option value="600">20 Individual Pt session - €600</option><option value="33.00">Workout - €33</option>
 </select>
 <!-- Bottone PayPal -->
@@ -248,12 +251,7 @@ window.addEventListener("load", onLoad);
         .catch(err => console.error('Service Worker errore', err));
     });
   }
-</script>   
+</script> 
 </body>
 </html>
 <!-- I'm updating the site twice a month -->
-
-
-
-
-
