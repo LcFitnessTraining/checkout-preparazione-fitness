@@ -498,9 +498,11 @@ upsellBanner1.addEventListener('click', () => {
   upsellBanner1.classList.remove('show');
 });
 
+
 /* COUNTDOWN PROMO FINO AL 25 DICEMBRE */
+
 function startPromoCountdown() {
-  const promoEndDate = new Date("2025-12-25T23:59:59");
+  const promoEndDate = new Date(2025, 11, 25, 23, 59, 59);
   const timerEl = document.getElementById("promo-timer");
   const countdownBox = document.getElementById("promo-countdown");
 
@@ -523,7 +525,27 @@ function startPromoCountdown() {
 
     timerEl.textContent = `${days}g ${hours}h ${mins}m ${secs}s`;
   }
+
   updateCountdown();
   setInterval(updateCountdown, 1000);
 }
+
 startPromoCountdown();
+const oldPrice = document.getElementById('oldPrice');
+
+const prices = {
+  "60": "80€",
+  "160": "200€",
+  "270": "350€",
+  "500": "700€"
+};
+
+durataSelect.addEventListener('change', () => {
+  const value = durataSelect.value;
+  if (prices[value]) {
+    oldPrice.textContent = prices[value];
+  } else {
+    oldPrice.textContent = '';
+  }
+});
+
