@@ -186,6 +186,3 @@ h1 {font-size: 1.8rem;}
 #upsell-banner.show,#upsell-banner1.show {display: block;opacity: 1;transform: translateY(0);}
 #upsell-banner:hover,#upsell-banner1:hover {transform: translateY(-5px);box-shadow: 0 8px 20px rgba(255, 0, 0, 0.7);}
 
-/* COUNTDOWN PROMO ANNUAL */
-.promo-countdown {margin-top: 15px;font-size: 18px;font-weight: 600;color: #ff3b3b;text-shadow: 0 0 10px #ff0000;text-align: center;animation: pulsePromo 2s infinite;}
-@keyframes pulsePromo {0%, 100% { opacity: 1; }50% { opacity: 0.55; }}
