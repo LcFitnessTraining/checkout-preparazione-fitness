@@ -493,18 +493,10 @@ if (durataSelect) {
 }
 upsellBanner1.addEventListener('click', () => {
   // Cambia la selezione al piano superiore
-  durataSelect.value = '270'; // esempio: piano superiore 3 mesi
+  durataSelect.value = '285'; // esempio: piano superiore 3 mesi
   durataSelect.dispatchEvent(new Event('change')); // trigger PayPal update
   upsellBanner1.classList.remove('show');
 });
 
-durataSelect.addEventListener('change', () => {
-  const value = durataSelect.value;
-  if (prices[value]) {
-    oldPrice.textContent = prices[value];
-  } else {
-    oldPrice.textContent = '';
-  }
-});
 
 
